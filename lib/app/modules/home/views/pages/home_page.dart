@@ -53,15 +53,10 @@ class _HomePageState extends ConsumerState<HomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // CircleAvatar(
-            //   radius: 60,
-            //   backgroundImage: AssetImage(image),
-            // ),
-            //const Space.x2(),
             ButtonWidget(
               title: 'Ver histórico',
               onTap: () {
-                Navigator.pushNamed(context, '/historic-page');
+                Navigator.pushNamed(context, '/history-page');
               },
             ),
             const Space.x5(),
@@ -73,9 +68,10 @@ class _HomePageState extends ConsumerState<HomePage> {
             ),
             const Space.x5(),
             ButtonWidget(
-              title: 'Alterar item',
+              title: 'Editar histórico',
               onTap: () {
-                Navigator.of(context).pushReplacementNamed('/add-item-page');
+                Navigator.of(context)
+                    .pushReplacementNamed('/edit-history-page');
               },
             ),
           ],

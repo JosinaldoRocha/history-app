@@ -21,8 +21,12 @@ class HistoryRepository {
     await item.delete();
   }
 
+  // static Future<void> chanceStateTask(int position, TaskModel task) async {
+  //   final box = Hive.box<TaskModel>('tasks');
+  //   await box.put(position, task);
+  // }
+
   Future<List<String>> getCivilStatusList() async {
-    //await Future.delayed(const Duration(seconds: 1));
     return [
       'Solteira',
       'Casada',
@@ -33,12 +37,10 @@ class HistoryRepository {
   }
 
   Future<List<String>> getRelationshipList() async {
-    // await Future.delayed(const Duration(seconds: 1));
     return ['Paqueramos', 'Ficamos', 'Namoramos'];
   }
 
   Future<List<String>> getListWhatHappened() async {
-    // await Future.delayed(const Duration(seconds: 1));
     return [
       'Selinho(s)',
       'Beijo(s)',
@@ -52,12 +54,16 @@ class HistoryRepository {
   }
 
   Future<List<String>> getListOfTimes() async {
-    //await Future.delayed(const Duration(seconds: 1));
     return ['1 vez', '2 vezes', '3 vezes', 'Acima de 3 vezes', 'Não lembro'];
   }
 
   Future<List<String>> getPeriodList() async {
-    //await Future.delayed(const Duration(seconds: 1));
-    return ['1 período', '2 períodos', 'Acima de 2 períodos', 'Não lembro'];
+    return [
+      '1 período',
+      '2 períodos',
+      '3 períodos',
+      'Acima de 3 períodos',
+      'Não lembro'
+    ];
   }
 }
