@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:my_history_app/app/modules/history/views/pages/add_item_page.dart';
-import 'package:my_history_app/app/modules/history/views/pages/edit_history_page.dart';
 import 'package:my_history_app/app/modules/history/views/pages/historic_page.dart';
 import 'package:my_history_app/app/modules/login/views/pages/login_page.dart';
 import 'package:my_history_app/app/modules/authentication/views/pages/splash_page.dart';
@@ -28,7 +27,6 @@ class MyApp extends StatelessWidget {
           '/home': (context) => const HomePage(),
           '/history-page': (context) => const HistoricPage(),
           '/add-item-page': (context) => const AddItemPage(),
-          '/edit-history-page': (context) => const EditHistoryPage(),
         },
       ),
     );

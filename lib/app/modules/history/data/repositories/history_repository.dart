@@ -3,6 +3,7 @@ import 'package:my_history_app/app/modules/history/data/models/history_model.dar
 
 class HistoryRepository {
   final box = Hive.box<HistoryModel>('history');
+  final boxInt = Hive.box<int>('index');
 
   Future<List<HistoryModel>> getAll() async {
     await Future.delayed(const Duration(seconds: 1));
@@ -13,18 +14,26 @@ class HistoryRepository {
     return values;
   }
 
-  Future<void> addItem(HistoryModel item) async {
-    await box.add(item);
+  Future<void> addItem(int key, HistoryModel item) async {
+    await box.put(key, item);
   }
 
   Future<void> deleteItem(HistoryModel item) async {
     await item.delete();
   }
 
-  // static Future<void> chanceStateTask(int position, TaskModel task) async {
-  //   final box = Hive.box<TaskModel>('tasks');
-  //   await box.put(position, task);
-  // }
+  Future<void> editHistory(int index, HistoryModel history) async {
+    await box.putAt(index, history);
+  }
+
+  List<int> getIndex() {
+    final values = boxInt.values.toList();
+    return values;
+  }
+
+  void addIndex(int index) async {
+    await boxInt.add(index);
+  }
 
   Future<List<String>> getCivilStatusList() async {
     return [
@@ -32,6 +41,7 @@ class HistoryRepository {
       'Casada',
       'Namorando',
       'Saindo com alguém',
+      'Mais de um estado',
       'Não fui informado'
     ];
   }
@@ -46,9 +56,9 @@ class HistoryRepository {
       'Beijo(s)',
       'Beijos e amassos',
       'Beijos e sexo oral',
-      'Beijos e sexo vaginal',
-      'Beijos, sexo oral e vaginal',
-      'Sexo vaginal',
+      'Beijos e transa',
+      'Beijos, sexo oral e transa',
+      'Transa',
       'Sexo oral'
     ];
   }

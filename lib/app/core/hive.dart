@@ -9,5 +9,6 @@ class HiveInit {
     Hive.registerAdapter(HistoryModelAdapter());
     await Hive.openBox<UserModel>('users');
     await Hive.openBox<HistoryModel>('history');
+    await Hive.openBox<int>('index');
   }
 }

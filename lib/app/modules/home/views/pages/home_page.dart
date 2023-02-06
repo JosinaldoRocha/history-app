@@ -37,7 +37,6 @@ class _HomePageState extends ConsumerState<HomePage> {
   }
 
   Widget _buildContext() {
-    //String image = 'assets/images/logo.png';
     final homeState = ref.watch(homeProvider);
 
     if (homeState is LoadingHomeState) {
