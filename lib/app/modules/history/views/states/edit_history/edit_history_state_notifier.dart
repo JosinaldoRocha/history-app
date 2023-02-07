@@ -8,10 +8,10 @@ class EditHistoryStateNotifier extends StateNotifier<EditHistoryState> {
       : super(InitialEditHistoryState());
   final HistoryRepository historyRepository;
 
-  void editHistory(int index, HistoryModel history) async {
+  void editHistory(HistoryModel history) async {
     state = LoadingEditHistoryState();
     try {
-      await historyRepository.editHistory(index, history);
+      await historyRepository.editHistory(history);
       state = SuccessEditHistoryState();
     } catch (e) {
       state = FailureEditHistoryState(errorMessage: 'Erro ao editar dados.');

@@ -14,14 +14,13 @@ class HistoricPage extends ConsumerStatefulWidget {
 }
 
 class _HistoricPageState extends ConsumerState<HistoricPage> {
-  void _listen() {
+  void _listenAddHistory() {
     ref.listen<DeleteItemState>(
       deleteItemProvider,
       (previous, next) {
         if (next is SuccessDeleteItemState) {
           ref.read(historyProvider.notifier).load();
         }
-
         if (next is FailureDeleteItemState) {
           showDialog(
             context: context,
@@ -34,19 +33,13 @@ class _HistoricPageState extends ConsumerState<HistoricPage> {
     );
   }
 
-  void _listenEdit() {
+  void _listenEditHistory() {
     ref.listen<EditHistoryState>(
       editHistoryProvider,
       (previous, next) {
         if (next is SuccessEditHistoryState) {
-          showDialog(
-            context: context,
-            builder: (context) => AlertDialog(
-              content: BoxText.body('Ta dando certo'),
-            ),
-          );
+          ref.read(historyProvider.notifier).load();
         }
-
         if (next is FailureEditHistoryState) {
           showDialog(
             context: context,
@@ -67,18 +60,21 @@ class _HistoricPageState extends ConsumerState<HistoricPage> {
 
   @override
   Widget build(BuildContext context) {
-    _listen();
-    _listenEdit();
+    _listenAddHistory();
+    _listenEditHistory();
     return Scaffold(
       appBar: AppBar(
         title: BoxText.body(
-          'Histórico!',
+          'Histórico',
           color: Colors.white,
         ),
       ),
-      body: const Padding(
-        padding: EdgeInsets.all(30),
-        child: HistoryListWidget(),
+      body: Container(
+        color: const Color.fromARGB(255, 181, 214, 181),
+        child: const Padding(
+          padding: EdgeInsets.all(20),
+          child: HistoryListWidget(),
+        ),
       ),
     );
   }

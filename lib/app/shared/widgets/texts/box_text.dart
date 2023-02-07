@@ -3,8 +3,8 @@ import 'package:my_history_app/app/shared/widgets/texts/text_styles.dart';
 
 class BoxText extends StatelessWidget {
   BoxText.body(this.text,
-      {Key? key, Color color = Colors.black, this.textAlign})
-      : style = bodyStyle.copyWith(color: color),
+      {Key? key, Color color = Colors.black, this.textAlign, double size = 16})
+      : style = bodyStyle.copyWith(color: color, fontSize: size),
         super(key: key);
 
   BoxText.smallBody(this.text,
@@ -31,8 +31,8 @@ class BoxText extends StatelessWidget {
   final TextAlign? textAlign;
 
   BoxText.bodyBold(this.text,
-      {Key? key, Color color = Colors.black, this.textAlign})
-      : style = bodyBoldStyle.copyWith(color: color),
+      {Key? key, Color color = Colors.black, this.textAlign, double size = 16})
+      : style = bodyBoldStyle.copyWith(color: color, fontSize: size),
         super(key: key);
 
   BoxText.largeCaptionBold(this.text,

@@ -90,9 +90,10 @@ class ButtonWidget extends StatelessWidget {
   Widget _buildText() {
     return Builder(
       builder: (context) {
-        return BoxText.bodyLight(
+        return BoxText.body(
           title,
           color: textColor,
+          size: 17,
         );
       },
     );

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:my_history_app/app/modules/history/widgets/history/history_item_button_widget.dart';
+import '../../../../shared/widgets/spacing/space_widget.dart';
 import '../../../../shared/widgets/texts/box_text.dart';
 import '../../dependencies/dependencies.dart';
 import '../../views/states/history-list-state/history_state.dart';
@@ -27,19 +28,41 @@ class _HistoryListWidgetState extends ConsumerState<HistoryListWidget> {
         content: BoxText.body(state.errorMessage),
       );
     } else if (state is SuccessHistoryState) {
-      return state.data.isEmpty
+      final history = state.data;
+      return history.isEmpty
           ? const Center(
-              child: Text('Lista vazia!'),
+              child: Text(
+                'Seu histórico está vazio!',
+                style: TextStyle(
+                  fontSize: 28,
+                ),
+              ),
             )
           : Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
               children: [
+                BoxText.bodyBold(
+                  'Toque para ver detalhes ou pressione para editar um item do histórico',
+                  textAlign: TextAlign.center,
+                ),
+                const Space.x4(),
                 Flexible(
                   child: ListView.separated(
                     itemBuilder: (context, index) => HistoryItemButtonWidget(
-                        index: index, history: state.data[index]),
-                    separatorBuilder: (context, index) => const Divider(),
-                    itemCount: state.data.length,
+                      index: index,
+                      history: history[index],
+                    ),
+                    separatorBuilder: (context, index) => const Divider(
+                      color: Color.fromARGB(255, 60, 114, 78),
+                      thickness: 1,
+                      height: 20,
+                    ),
+                    itemCount: history.length,
                   ),
+                ),
+                BoxText.body(
+                  '${history.length}',
+                  size: 14,
                 ),
               ],
             );

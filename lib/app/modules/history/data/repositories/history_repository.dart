@@ -3,7 +3,6 @@ import 'package:my_history_app/app/modules/history/data/models/history_model.dar
 
 class HistoryRepository {
   final box = Hive.box<HistoryModel>('history');
-  final boxInt = Hive.box<int>('index');
 
   Future<List<HistoryModel>> getAll() async {
     await Future.delayed(const Duration(seconds: 1));
@@ -14,25 +13,16 @@ class HistoryRepository {
     return values;
   }
 
-  Future<void> addItem(int key, HistoryModel item) async {
-    await box.put(key, item);
+  Future<void> addItem(HistoryModel history) async {
+    await box.add(history);
   }
 
-  Future<void> deleteItem(HistoryModel item) async {
-    await item.delete();
+  Future<void> deleteItem(HistoryModel history) async {
+    await history.delete();
   }
 
-  Future<void> editHistory(int index, HistoryModel history) async {
-    await box.putAt(index, history);
-  }
-
-  List<int> getIndex() {
-    final values = boxInt.values.toList();
-    return values;
-  }
-
-  void addIndex(int index) async {
-    await boxInt.add(index);
+  Future<void> editHistory(HistoryModel history) async {
+    history.save();
   }
 
   Future<List<String>> getCivilStatusList() async {
@@ -41,8 +31,8 @@ class HistoryRepository {
       'Casada',
       'Namorando',
       'Saindo com alguém',
-      'Mais de um estado',
-      'Não fui informado'
+      'Mais de um estado civil',
+      'Não fui informado',
     ];
   }
 
@@ -56,15 +46,27 @@ class HistoryRepository {
       'Beijo(s)',
       'Beijos e amassos',
       'Beijos e sexo oral',
-      'Beijos e transa',
-      'Beijos, sexo oral e transa',
-      'Transa',
-      'Sexo oral'
+      'Beijos e sexo vaginal',
+      'Beijos e sexo anal',
+      'Beijos, sexo vaginal e oral',
+      'Beijos, sexo vaginal e anal',
+      'Beijos, sexo oral e anal',
+      'Beijos, sexo vaginal, anal e oral',
+      'Sexo vaginal e oral',
+      'Sexo vaginal e anal',
+      'Sexo vaginal, anal e oral',
     ];
   }
 
   Future<List<String>> getListOfTimes() async {
-    return ['1 vez', '2 vezes', '3 vezes', 'Acima de 3 vezes', 'Não lembro'];
+    return [
+      '1 vez',
+      '2 vezes',
+      '3 vezes',
+      'Acima de 3 vezes',
+      'Inúmeras vezes',
+      'Não lembro',
+    ];
   }
 
   Future<List<String>> getPeriodList() async {
@@ -73,7 +75,7 @@ class HistoryRepository {
       '2 períodos',
       '3 períodos',
       'Acima de 3 períodos',
-      'Não lembro'
+      'Não lembro',
     ];
   }
 }

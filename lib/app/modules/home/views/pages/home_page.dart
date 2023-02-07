@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:my_history_app/app/modules/home/dependencies/dependencies.dart';
 import 'package:my_history_app/app/modules/home/views/states/home_state.dart';
-import 'package:my_history_app/app/shared/widgets/button/button_widget.dart';
+import 'package:my_history_app/app/modules/home/widgets/home_button_widget.dart';
 import 'package:my_history_app/app/shared/widgets/spacing/space_widget.dart';
 import 'package:my_history_app/app/shared/widgets/texts/box_text.dart';
 
@@ -25,13 +25,16 @@ class _HomePageState extends ConsumerState<HomePage> {
     return Scaffold(
       appBar: AppBar(
         title: BoxText.body(
-          'Histórico',
+          'Olá, \$usuário!',
           color: Colors.white,
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(30),
-        child: _buildContext(),
+      body: Container(
+        color: const Color.fromARGB(255, 181, 214, 181),
+        child: Padding(
+          padding: const EdgeInsets.all(30),
+          child: _buildContext(),
+        ),
       ),
     );
   }
@@ -52,25 +55,19 @@ class _HomePageState extends ConsumerState<HomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            ButtonWidget(
-              title: 'Ver histórico',
+            HomeButtonWidget(
+              title: 'Histórico',
+              icon: Icons.history,
               onTap: () {
                 Navigator.pushNamed(context, '/history-page');
               },
             ),
             const Space.x5(),
-            ButtonWidget(
-              title: 'Adicionar item',
+            HomeButtonWidget(
+              title: 'Adicionar',
+              icon: Icons.add,
               onTap: () {
                 Navigator.of(context).pushReplacementNamed('/add-item-page');
-              },
-            ),
-            const Space.x5(),
-            ButtonWidget(
-              title: 'Editar histórico',
-              onTap: () {
-                Navigator.of(context)
-                    .pushReplacementNamed('/edit-history-page');
               },
             ),
           ],
