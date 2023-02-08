@@ -3,14 +3,29 @@ import 'package:my_history_app/app/modules/register/data/models/register_model.d
 
 class AuthenticationRepository {
   final box = Hive.box<UserModel>('users');
+  final boxCurrentUser = Hive.box<String>('currentUser');
 
-  Future<bool> loginVirification(String login, String password) async {
-    await Future.delayed(const Duration(seconds: 2));
+  Future<bool> loginVirification(String userName, String password) async {
+    await Future.delayed(const Duration(seconds: 1));
     final userList = box.values.toList();
-    if (!userList.any(
-        (element) => element.eMail == login && element.password == password)) {
-      return false;
+    if (userList.any((element) =>
+        element.userName == userName && element.password == password)) {
+      boxCurrentUser.add(userName);
+      return true;
     }
-    return true;
+    return false;
+  }
+
+  Future<bool> userVerification() async {
+    await Future.delayed(const Duration(seconds: 1));
+    if (boxCurrentUser.isEmpty) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  Future<String> getCurrenUser() async {
+    return boxCurrentUser.values.toString();
   }
 }

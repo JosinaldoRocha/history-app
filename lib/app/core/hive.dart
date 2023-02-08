@@ -7,6 +7,7 @@ class HiveInit {
     await Hive.initFlutter();
     Hive.registerAdapter(UserModelAdapter());
     Hive.registerAdapter(HistoryModelAdapter());
+    await Hive.openBox<String>('currentUser');
     await Hive.openBox<UserModel>('users');
     await Hive.openBox<HistoryModel>('history');
   }

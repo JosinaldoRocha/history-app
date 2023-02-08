@@ -11,16 +11,27 @@ class SplashPage extends ConsumerStatefulWidget {
 }
 
 class _SplashPageState extends ConsumerState<SplashPage> {
-  void _listen() {
+  _listen() {
     ref.listen<AuthenticationState>(authenticationProvider, (previous, next) {
       if (next is Authenticated) {
-        Navigator.pushNamed(context, '/home');
+        Navigator.pushNamed(
+          context,
+          '/home',
+          arguments: next.data,
+        );
       }
 
       if (next is UnAuthenticated) {
-        Navigator.pushNamed(context, '/');
+        Navigator.pushNamed(context, '/login');
       }
     });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    Future.microtask(
+        () => ref.read(authenticationProvider.notifier).authentication());
   }
 
   @override

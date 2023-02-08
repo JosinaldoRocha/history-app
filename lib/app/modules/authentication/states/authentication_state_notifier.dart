@@ -7,14 +7,30 @@ class AuthenticationStateNotifier extends StateNotifier<AuthenticationState> {
       : super(InitialAuthenticationState());
   final AuthenticationRepository authenticationRepository;
 
-  void authentication(String login, String password) async {
+  void authentication() async {
     state = LoadingAuthenticationState();
 
-    final authentication =
-        await authenticationRepository.loginVirification(login, password);
-    if (authentication) {
-      state = Authenticated();
-    } else {
+    try {
+      final result = await authenticationRepository.userVerification();
+      if (result) {
+        final user = await authenticationRepository.getCurrenUser();
+        state = Authenticated(data: user);
+      } else {
+        state = UnAuthenticated(errorMessage: 'Login ou senha inválido');
+      }
+    } catch (e) {
+      state = UnAuthenticated(errorMessage: 'Login ou senha inválido');
+    }
+  }
+
+  void loginVirification(String userName, String password) async {
+    state = LoadingAuthenticationState();
+
+    try {
+      await authenticationRepository.loginVirification(userName, password);
+      final user = await authenticationRepository.getCurrenUser();
+      state = Authenticated(data: user);
+    } catch (e) {
       state = UnAuthenticated(errorMessage: 'Login ou senha inválido');
     }
   }

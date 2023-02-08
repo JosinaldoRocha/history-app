@@ -22,10 +22,11 @@ class _HomePageState extends ConsumerState<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final args = ModalRoute.of(context)!.settings.arguments as String;
     return Scaffold(
       appBar: AppBar(
         title: BoxText.body(
-          'Olá, \$usuário!',
+          'Olá, $args!',
           color: Colors.white,
         ),
       ),

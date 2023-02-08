@@ -3,8 +3,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:my_history_app/app/modules/authentication/dependencies/dependencies.dart';
 import 'package:my_history_app/app/modules/login/dependencies/dependencies.dart';
 import 'package:my_history_app/app/modules/login/views/states/login_state.dart';
+import 'package:my_history_app/app/modules/register/views/pages/register_page.dart';
 import 'package:my_history_app/app/shared/widgets/button/button_widget.dart';
 import 'package:my_history_app/app/shared/widgets/input/info_text_field_widget.dart';
+import 'package:my_history_app/app/shared/widgets/spacing/space_widget.dart';
 import 'package:my_history_app/app/shared/widgets/texts/box_text.dart';
 
 class LoginPage extends ConsumerStatefulWidget {
@@ -25,17 +27,18 @@ class _LoginPageState extends ConsumerState<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.all(20),
+        padding: const EdgeInsets.all(30),
         child: _buildContext(),
       ),
     );
   }
 
   Widget _buildContext() {
-    String image = 'assets/images/h.png';
-    final loginController = TextEditingController();
+    String image = 'assets/images/logo.png';
+    final userNameController = TextEditingController();
     final passwordController = TextEditingController();
     final loginState = ref.watch(loginProvider);
+    final formKey = GlobalKey<FormState>();
 
     if (loginState is LoadingLoginState) {
       return const Center(
@@ -46,33 +49,67 @@ class _LoginPageState extends ConsumerState<LoginPage> {
         content: BoxText.body(loginState.errorMessage),
       );
     } else if (loginState is SuccessLoginState) {
-      return Center(
+      return Form(
+        key: formKey,
         child: ListView(
           children: [
-            CircleAvatar(
-              radius: 50,
-              backgroundImage: AssetImage(image),
-            ),
-            const SizedBox(height: 30),
-            _buildTextRow(context),
-            const SizedBox(height: 20),
-            TextFieldWidget(
-              controller: loginController,
-              label: 'Login:',
-              hintText: 'digite seu e-mail:',
-            ),
-            TextFieldWidget(
-              controller: passwordController,
-              label: 'Senha:',
-              hintText: 'digite sua senha:',
-            ),
-            ButtonWidget(
-              title: 'Entrar',
-              onTap: () {
-                ref.read(authenticationProvider.notifier).authentication(
-                    loginController.text, passwordController.text);
-                Navigator.of(context).pushReplacementNamed('/splash-page');
-              },
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Space.x10(),
+                CircleAvatar(
+                  radius: 60,
+                  backgroundImage: AssetImage(image),
+                ),
+                BoxText.bodyBold(
+                  'Login',
+                  size: 35,
+                ),
+                const Space.x7(),
+                TextFieldWidget(
+                  controller: userNameController,
+                  label: 'Nome de usuário:',
+                  hintText: 'Ex: Usuario123',
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Este campo não pode ser vazio';
+                    } else if (value.length < 11) {
+                      return 'Quantidade de caracteres insuficiente';
+                    }
+                    return null;
+                  },
+                ),
+                TextFieldWidget(
+                  controller: passwordController,
+                  label: 'Senha:',
+                  hintText: 'Digite a senha:',
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Este campo não pode ser vazio';
+                    } else if (value.length < 6) {
+                      return 'Quantidade de caracteres insuficiente';
+                    }
+                    return null;
+                  },
+                ),
+                const Space.x2(),
+                ButtonWidget(
+                  title: 'Entrar',
+                  onTap: () {
+                    final validadeForm = formKey.currentState?.validate();
+                    if (validadeForm!) {
+                      ref
+                          .read(authenticationProvider.notifier)
+                          .loginVirification(
+                            userNameController.text,
+                            passwordController.text,
+                          );
+                      Navigator.of(context).pushReplacementNamed('/');
+                    }
+                  },
+                ),
+                _buildTextRow(context),
+              ],
             ),
           ],
         ),
@@ -86,13 +123,13 @@ class _LoginPageState extends ConsumerState<LoginPage> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        BoxText.body('Faça login ou '),
-        GestureDetector(
+        BoxText.body('Não possui uma conta?'),
+        TextButton(
           child: BoxText.body(
-            'cadastre-se.',
+            'cadastre-se!',
             color: const Color.fromARGB(255, 3, 90, 240),
           ),
-          onTap: () {
+          onPressed: () {
             Navigator.of(context).pushReplacementNamed('/register-page');
           },
         ),

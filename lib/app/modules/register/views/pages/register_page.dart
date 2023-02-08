@@ -14,7 +14,7 @@ class RegisterPage extends ConsumerStatefulWidget {
 }
 
 final nameController = TextEditingController();
-final ageController = TextEditingController();
+final userNameController = TextEditingController();
 final eMailController = TextEditingController();
 final passwordController = TextEditingController();
 final confirmPasswordController = TextEditingController();
@@ -47,7 +47,7 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
                 ),
                 TextFieldWidget(
                   keyboardType: TextInputType.number,
-                  controller: ageController,
+                  controller: userNameController,
                   label: 'idade:',
                   hintText: 'Digite sua idade:',
                 ),
@@ -69,10 +69,10 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
                 ButtonWidget(
                   title: 'Cadastrar',
                   onTap: () {
-                    double age = double.tryParse(ageController.text) ?? 0;
+                    //double age = double.tryParse(ageController.text) ?? 0;
                     final item = UserModel(
-                      name: nameController.text,
-                      age: age,
+                      fullName: nameController.text,
+                      userName: userNameController.text,
                       eMail: eMailController.text,
                       password: passwordController.text,
                       confirmPassword: confirmPasswordController.text,
@@ -83,7 +83,7 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
                     //   );
                     // }
                     ref.read(registerProvider.notifier).addRegister(item);
-                    Navigator.pushNamed(context, '/');
+                    Navigator.pushNamed(context, '/login');
                   },
                 ),
               ],
