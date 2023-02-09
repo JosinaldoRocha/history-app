@@ -36,14 +36,17 @@ class _SplashPageState extends ConsumerState<SplashPage> {
 
   @override
   Widget build(BuildContext context) {
-    String image = 'assets/images/logo.png';
+    String image = 'assets/images/logo1.png';
     _listen();
 
     return Scaffold(
-      body: Center(
-        child: CircleAvatar(
-          radius: 100,
-          backgroundImage: AssetImage(image),
+      body: Container(
+        color: const Color.fromARGB(255, 181, 214, 181),
+        child: Center(
+          child: CircleAvatar(
+            radius: 100,
+            backgroundImage: AssetImage(image),
+          ),
         ),
       ),
     );

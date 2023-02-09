@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:my_history_app/app/modules/authentication/dependencies/dependencies.dart';
 import 'package:my_history_app/app/modules/login/dependencies/dependencies.dart';
 import 'package:my_history_app/app/modules/login/views/states/login_state.dart';
-import 'package:my_history_app/app/modules/register/views/pages/register_page.dart';
 import 'package:my_history_app/app/shared/widgets/button/button_widget.dart';
 import 'package:my_history_app/app/shared/widgets/input/info_text_field_widget.dart';
 import 'package:my_history_app/app/shared/widgets/spacing/space_widget.dart';
@@ -73,7 +72,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Este campo não pode ser vazio';
-                    } else if (value.length < 11) {
+                    } else if (value.length < 8) {
                       return 'Quantidade de caracteres insuficiente';
                     }
                     return null;

@@ -1,5 +1,5 @@
 import 'package:hive/hive.dart';
-part 'register_model.g.dart';
+part 'user_model.g.dart';
 
 @HiveType(typeId: 0)
 class UserModel extends HiveObject {

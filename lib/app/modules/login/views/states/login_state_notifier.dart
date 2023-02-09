@@ -7,7 +7,7 @@ class LoginStateNotifier extends StateNotifier<LoginState> {
   void load() async {
     state = LoadingLoginState();
     try {
-      await Future.delayed(const Duration(seconds: 2));
+      await Future.delayed(const Duration(seconds: 1));
       state = SuccessLoginState();
     } catch (e) {
       state = FailureLoginState(errorMessage: 'Erro ao carregar dados.');

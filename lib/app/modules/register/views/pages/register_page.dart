@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:my_history_app/app/modules/register/data/models/register_model.dart';
+import 'package:my_history_app/app/modules/register/data/models/user_model.dart';
 import 'package:my_history_app/app/modules/register/dependencies/dependencies.dart';
 import 'package:my_history_app/app/shared/widgets/button/button_widget.dart';
 
@@ -13,7 +13,7 @@ class RegisterPage extends ConsumerStatefulWidget {
   ConsumerState<ConsumerStatefulWidget> createState() => _RegisterPageState();
 }
 
-final nameController = TextEditingController();
+final fullNameController = TextEditingController();
 final userNameController = TextEditingController();
 final eMailController = TextEditingController();
 final passwordController = TextEditingController();
@@ -35,55 +35,87 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
             child: ListView(
               children: [
                 TextFieldWidget(
-                  // validator: (value) {
-                  //   if (value == null || value.isEmpty) {
-                  //     return 'Informe o valor';
-                  //   }
-                  //   return null;
-                  // },
-                  controller: nameController,
-                  label: 'Nome:',
-                  hintText: 'nome de usuário:',
+                  controller: fullNameController,
+                  label: 'Nome completo:',
+                  hintText: 'Ex: Nome Sobrenome',
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Este campo não pode ser vazio';
+                    }
+                    return null;
+                  },
                 ),
                 TextFieldWidget(
-                  keyboardType: TextInputType.number,
                   controller: userNameController,
-                  label: 'idade:',
-                  hintText: 'Digite sua idade:',
+                  label: 'Nome de usuário:',
+                  hintText: 'Ex: Usuario123',
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Este campo não pode ser vazio';
+                    } else if (value.length < 8) {
+                      return 'Deve conter, pelo menos 8 caracteres';
+                    }
+                    return null;
+                  },
                 ),
                 TextFieldWidget(
                   controller: eMailController,
                   label: 'E-mail:',
-                  hintText: 'digite seu e-mail:',
+                  hintText: 'Ex: seuemail@.com',
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Este campo não pode ser vazio';
+                    } else if (value.length < 11) {
+                      return 'Deve conter, pelo menos 11 caracteres';
+                    } else if (!value.contains('@')) {
+                      return 'Formato de e-mail inválido';
+                    }
+                    return null;
+                  },
                 ),
                 TextFieldWidget(
                   controller: passwordController,
                   label: 'Senha:',
-                  hintText: 'digite sua senha:',
+                  hintText: 'Crie uma senha para sua conta:',
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Este campo não pode ser vazio';
+                    } else if (value.length < 6) {
+                      return 'Deve conter, pelo menos 6 caracteres';
+                    }
+                    return null;
+                  },
                 ),
                 TextFieldWidget(
                   controller: confirmPasswordController,
-                  label: 'Confirme\na senha',
-                  hintText: 'confirme a senha:',
+                  label: 'Confirme\na senha:',
+                  hintText: 'Repita a senha:',
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Este campo não pode ser vazio';
+                    } else if (value.length < 6) {
+                      return 'Deve conter, pelo menos 6 caracteres';
+                    } else if (value != passwordController.text) {
+                      return 'Senhas diferentes';
+                    }
+                    return null;
+                  },
                 ),
                 ButtonWidget(
                   title: 'Cadastrar',
                   onTap: () {
-                    //double age = double.tryParse(ageController.text) ?? 0;
-                    final item = UserModel(
-                      fullName: nameController.text,
-                      userName: userNameController.text,
-                      eMail: eMailController.text,
-                      password: passwordController.text,
-                      confirmPassword: confirmPasswordController.text,
-                    );
-                    // if (_formKey.currentState!.validate()) {
-                    //   ScaffoldMessenger.of(context).showSnackBar(
-                    //     const SnackBar(content: Text('Processing Data')),
-                    //   );
-                    // }
-                    ref.read(registerProvider.notifier).addRegister(item);
-                    Navigator.pushNamed(context, '/login');
+                    final validadeForm = _formKey.currentState?.validate();
+                    if (validadeForm!) {
+                      final item = UserModel(
+                        fullName: fullNameController.text,
+                        userName: userNameController.text,
+                        eMail: eMailController.text,
+                        password: passwordController.text,
+                        confirmPassword: confirmPasswordController.text,
+                      );
+                      ref.read(addRegisterProvider.notifier).addRegister(item);
+                      Navigator.pushNamed(context, '/login');
+                    }
                   },
                 ),
               ],
