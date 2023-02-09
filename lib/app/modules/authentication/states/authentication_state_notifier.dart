@@ -14,7 +14,7 @@ class AuthenticationStateNotifier extends StateNotifier<AuthenticationState> {
       final result = await authenticationRepository.userVerification();
       if (result) {
         final user = await authenticationRepository.getCurrenUser();
-        state = Authenticated(data: user);
+        state = Authenticated(data: user!);
       } else {
         state = UnAuthenticated(errorMessage: 'Login ou senha inválido');
       }
@@ -29,7 +29,7 @@ class AuthenticationStateNotifier extends StateNotifier<AuthenticationState> {
     try {
       await authenticationRepository.loginVirification(userName, password);
       final user = await authenticationRepository.getCurrenUser();
-      state = Authenticated(data: user);
+      state = Authenticated(data: user!);
     } catch (e) {
       state = UnAuthenticated(errorMessage: 'Login ou senha inválido');
     }
