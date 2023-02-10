@@ -111,8 +111,8 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
                 ButtonWidget(
                   title: 'Cadastrar',
                   onTap: () {
-                    final validadeForm = _formKey.currentState?.validate();
-                    if (validadeForm!) {
+                    final validadeForm = _formKey.currentState!.validate();
+                    if (validadeForm) {
                       final item = UserModel(
                         fullName: fullNameController.text,
                         userName: userNameController.text,

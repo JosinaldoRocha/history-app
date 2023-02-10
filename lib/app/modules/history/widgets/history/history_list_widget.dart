@@ -42,10 +42,10 @@ class _HistoryListWidgetState extends ConsumerState<HistoryListWidget> {
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 BoxText.bodyBold(
-                  'Toque para ver detalhes ou pressione para editar um item do histórico',
+                  'Toque para ver detalhes ou pressione para editar as informações',
                   textAlign: TextAlign.center,
                 ),
-                const Space.x4(),
+                const Space.x8(),
                 Flexible(
                   child: ListView.separated(
                     itemBuilder: (context, index) => HistoryItemButtonWidget(
@@ -54,8 +54,7 @@ class _HistoryListWidgetState extends ConsumerState<HistoryListWidget> {
                     ),
                     separatorBuilder: (context, index) => const Divider(
                       color: Color.fromARGB(255, 60, 114, 78),
-                      thickness: 1,
-                      height: 20,
+                      height: 5,
                     ),
                     itemCount: history.length,
                   ),

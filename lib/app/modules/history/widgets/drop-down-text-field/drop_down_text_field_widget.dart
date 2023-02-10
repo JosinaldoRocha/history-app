@@ -38,10 +38,7 @@ class _DropDownTextFieldWidgetState extends State<DropDownTextFieldWidget> {
           const SizedBox(height: 10),
           DropDownTextField(
             validator: (value) {
-              if (value == null) {
-                return 'Selecione um valor';
-              }
-              if (value.isEmpty) {
+              if (value == null || value.isEmpty) {
                 return 'Selecione um valor';
               }
               return null;

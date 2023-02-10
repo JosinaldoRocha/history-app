@@ -86,6 +86,8 @@ class _AddItemPageState extends ConsumerState<AddItemPage> {
     });
   }
 
+  final _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     _listen();
@@ -101,6 +103,7 @@ class _AddItemPageState extends ConsumerState<AddItemPage> {
 
   Widget _buildContext() {
     return Form(
+      key: _formKey,
       child: Column(
         children: [
           Flexible(
@@ -110,11 +113,23 @@ class _AddItemPageState extends ConsumerState<AddItemPage> {
                   controller: nameController,
                   label: 'Nome:',
                   hintText: 'Digite o nome da garota',
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Este campo não pode ser vazio';
+                    }
+                    return null;
+                  },
                 ),
                 TextFieldWidget(
                   controller: referenceController,
                   label: 'Referência:',
                   hintText: 'Ex: apelido, cor, tamanho...',
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Este campo não pode ser vazio';
+                    }
+                    return null;
+                  },
                 ),
                 CivilStatusListWidget(controller: civilStatusTypeController),
                 RelationshipListWidget(controller: relationshipController),
@@ -128,16 +143,19 @@ class _AddItemPageState extends ConsumerState<AddItemPage> {
           ButtonWidget(
             title: 'Confirmar',
             onTap: () {
-              final history = HistoryModel(
-                name: nameController.text,
-                reference: referenceController.text,
-                civilStatus: civilStatusTypeController.dropDownValue!.name,
-                relationship: relationshipController.dropDownValue!.name,
-                whatHappened: whatHappenedController.dropDownValue!.name,
-                amountTimes: amountTimesController.dropDownValue!.name,
-                amountPeriod: amountPeriodsController.dropDownValue!.name,
-              );
-              ref.read(addItemProvider.notifier).addItem(history);
+              final validadeForm = _formKey.currentState!.validate();
+              if (validadeForm) {
+                final history = HistoryModel(
+                  name: nameController.text,
+                  reference: referenceController.text,
+                  civilStatus: civilStatusTypeController.dropDownValue!.name,
+                  relationship: relationshipController.dropDownValue!.name,
+                  whatHappened: whatHappenedController.dropDownValue!.name,
+                  amountTimes: amountTimesController.dropDownValue!.name,
+                  amountPeriod: amountPeriodsController.dropDownValue!.name,
+                );
+                ref.read(addItemProvider.notifier).addItem(history);
+              }
             },
           ),
         ],

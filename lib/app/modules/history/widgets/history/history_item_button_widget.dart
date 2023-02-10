@@ -19,20 +19,16 @@ class HistoryItemButtonWidget extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Container(
       decoration: BoxDecoration(
-        color: const Color.fromARGB(255, 60, 114, 78),
         borderRadius: BorderRadius.circular(30),
       ),
       child: ListTile(
-        leading: CircleAvatar(
-          child: BoxText.body(
-            '${index + 1}',
-            color: Colors.white,
-          ),
+        leading: BoxText.bodyBold(
+          '${index + 1}',
         ),
         title: ElevatedButton(
           style: ElevatedButton.styleFrom(
             elevation: 0,
-            backgroundColor: const Color.fromARGB(255, 60, 114, 78),
+            backgroundColor: const Color.fromARGB(255, 181, 214, 181),
           ),
           onPressed: () {
             showModalBottomSheet(
@@ -49,24 +45,24 @@ class HistoryItemButtonWidget extends ConsumerWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              BoxText.body(
+              BoxText.bodyBold(
                 history.name,
-                color: Colors.white,
                 size: 18,
               ),
               BoxText.body(
                 history.reference,
-                color: const Color.fromARGB(255, 177, 172, 172),
+                color: const Color.fromARGB(255, 153, 149, 149),
               ),
             ],
           ),
         ),
-        trailing: CircleAvatar(
-          child: IconButton(
-            onPressed: () {
-              ref.read(deleteItemProvider.notifier).deleteItem(history);
-            },
-            icon: const Icon(Icons.delete),
+        trailing: IconButton(
+          onPressed: () {
+            ref.read(deleteItemProvider.notifier).deleteItem(history);
+          },
+          icon: Icon(
+            Icons.delete,
+            color: Theme.of(context).primaryColor,
           ),
         ),
       ),
