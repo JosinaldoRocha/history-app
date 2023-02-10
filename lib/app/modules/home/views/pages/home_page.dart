@@ -7,6 +7,7 @@ import 'package:my_history_app/app/modules/home/views/states/home_state.dart';
 import 'package:my_history_app/app/modules/home/widgets/drawer_widget.dart';
 import 'package:my_history_app/app/modules/home/widgets/home_button_widget.dart';
 import 'package:my_history_app/app/modules/home/widgets/icon_button_widget.dart';
+import 'package:my_history_app/app/modules/register/data/models/user_model.dart';
 import 'package:my_history_app/app/modules/register/views/states/clear_register/clear_register_stete.dart';
 import 'package:my_history_app/app/shared/widgets/spacing/space_widget.dart';
 import 'package:my_history_app/app/shared/widgets/texts/box_text.dart';
@@ -66,7 +67,8 @@ class _HomePageState extends ConsumerState<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final args = ModalRoute.of(context)!.settings.arguments as String;
+    final args = ModalRoute.of(context)?.settings.arguments as UserModel;
+
     final clearState = ref.watch(clearRegisterProvider);
     logoutListen();
     clearRegisterListen();
@@ -82,7 +84,7 @@ class _HomePageState extends ConsumerState<HomePage> {
           : const DrawerWidget(),
       appBar: AppBar(
         title: BoxText.body(
-          'Olá, $args!',
+          'Olá, ${args.userName}!',
           color: Colors.white,
         ),
       ),
@@ -131,7 +133,7 @@ class _HomePageState extends ConsumerState<HomePage> {
               title: 'Adicionar',
               icon: Icons.add,
               onTap: () {
-                Navigator.of(context).pushReplacementNamed('/add-item-page');
+                Navigator.pushNamed(context, '/add-item-page');
               },
             ),
           ],

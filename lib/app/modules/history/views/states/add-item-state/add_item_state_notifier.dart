@@ -8,10 +8,19 @@ class AddItemStateNotifier extends StateNotifier<AddItemState> {
       : super(InitialAddItemState());
   final HistoryRepository historyRepository;
 
-  void addItem(HistoryModel history) {
+  void load() async {
     state = LoadingAddItemState();
     try {
-      historyRepository.addItem(history);
+      state = SuccessAddItemState();
+    } catch (e) {
+      state = FailureAddItemState(errorMessage: 'Erro ao carregar dados');
+    }
+  }
+
+  void addItem(HistoryModel history) async {
+    state = LoadingAddItemState();
+    try {
+      await historyRepository.addItem(history);
       state = SuccessAddItemState();
     } catch (e) {
       state = FailureAddItemState(errorMessage: 'Erro ao carregar dados');

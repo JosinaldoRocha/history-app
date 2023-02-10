@@ -1,6 +1,7 @@
 import 'package:dropdown_textfield/dropdown_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:my_history_app/app/shared/widgets/spacing/space_widget.dart';
 import '../../data/models/history_model.dart';
 import '../../dependencies/dependencies.dart';
 import '../../views/states/add-item-state/add_item_state.dart';
@@ -34,8 +35,32 @@ class _AddItemPageState extends ConsumerState<AddItemPage> {
     ref.listen<AddItemState>(
       addItemProvider,
       (previous, next) {
+        if (next is LoadingAddItemState) {
+          showDialog(
+            context: context,
+            builder: (context) => AlertDialog(
+              backgroundColor: const Color.fromARGB(255, 181, 214, 181),
+              content: Container(
+                height: 200,
+                width: 300,
+                color: const Color.fromARGB(255, 181, 214, 181),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Center(child: Image.asset('assets/images/logo1.png')),
+                    const Space.x4(),
+                    const Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          );
+        }
         if (next is SuccessAddItemState) {
-          Navigator.pushNamed(context, '/home');
+          Navigator.pop(context);
+          Navigator.pop(context);
         }
         if (next is FailureAddItemState) {
           showDialog(

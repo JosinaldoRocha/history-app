@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:my_history_app/app/modules/register/data/models/user_model.dart';
 import 'package:my_history_app/app/modules/register/dependencies/dependencies.dart';
 import 'package:my_history_app/app/shared/widgets/button/button_widget.dart';
-
 import '../../../../shared/widgets/input/info_text_field_widget.dart';
 
 class RegisterPage extends ConsumerStatefulWidget {
@@ -19,6 +18,14 @@ final eMailController = TextEditingController();
 final passwordController = TextEditingController();
 final confirmPasswordController = TextEditingController();
 final _formKey = GlobalKey<FormState>();
+
+_clearTexts() {
+  fullNameController.clear();
+  userNameController.clear();
+  eMailController.clear();
+  passwordController.clear();
+  confirmPasswordController.clear();
+}
 
 class _RegisterPageState extends ConsumerState<RegisterPage> {
   @override
@@ -113,8 +120,9 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
                         password: passwordController.text,
                         confirmPassword: confirmPasswordController.text,
                       );
+                      _clearTexts();
                       ref.read(addRegisterProvider.notifier).addRegister(item);
-                      Navigator.pushNamed(context, '/login');
+                      Navigator.pushReplacementNamed(context, '/login');
                     }
                   },
                 ),

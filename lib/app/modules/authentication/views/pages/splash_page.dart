@@ -14,7 +14,7 @@ class _SplashPageState extends ConsumerState<SplashPage> {
   _listen() {
     ref.listen<AuthenticationState>(authenticationProvider, (previous, next) {
       if (next is Authenticated) {
-        Navigator.pushNamed(
+        Navigator.pushReplacementNamed(
           context,
           '/home',
           arguments: next.data,
@@ -22,7 +22,7 @@ class _SplashPageState extends ConsumerState<SplashPage> {
       }
 
       if (next is UnAuthenticated) {
-        Navigator.pushNamed(context, '/login');
+        Navigator.pushReplacementNamed(context, '/login');
       }
     });
   }

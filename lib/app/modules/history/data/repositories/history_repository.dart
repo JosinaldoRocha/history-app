@@ -14,6 +14,7 @@ class HistoryRepository {
   }
 
   Future<void> addItem(HistoryModel history) async {
+    await Future.delayed(const Duration(seconds: 1));
     await box.add(history);
   }
 
