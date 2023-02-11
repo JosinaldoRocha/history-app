@@ -20,14 +20,14 @@ class HistoryModel extends HiveObject {
   @HiveField(7)
   int id;
 
-  int generateId(List<HistoryModel> list, int newId) {
-    if (list.length == 1) {
-      id = 1;
-    } else {
-      id = newId;
-    }
-    return id;
-  }
+  // int generateId(List<HistoryModel> list, int newId) {
+  //   if (list.length == 1) {
+  //     id = 1;
+  //   } else {
+  //     id = newId;
+  //   }
+  //   return id;
+  // }
 
   HistoryModel({
     required this.name,
@@ -37,6 +37,6 @@ class HistoryModel extends HiveObject {
     required this.whatHappened,
     required this.amountTimes,
     required this.amountPeriod,
-    this.id = 0,
+    required this.id,
   });
 }

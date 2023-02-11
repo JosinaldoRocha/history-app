@@ -5,9 +5,14 @@ import 'package:my_history_app/app/modules/history/views/states/delete-item-stat
 import 'package:my_history_app/app/modules/history/views/states/edit_history/edit_history_state.dart';
 import 'package:my_history_app/app/modules/history/widgets/history/history_list_widget.dart';
 import 'package:my_history_app/app/shared/widgets/texts/box_text.dart';
+import '../../../register/data/models/user_model.dart';
 
 class HistoricPage extends ConsumerStatefulWidget {
-  const HistoricPage({super.key});
+  const HistoricPage({
+    required this.args,
+    super.key,
+  });
+  final UserModel args;
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() => _HistoricPageState();
@@ -19,7 +24,7 @@ class _HistoricPageState extends ConsumerState<HistoricPage> {
       deleteItemProvider,
       (previous, next) {
         if (next is SuccessDeleteItemState) {
-          ref.read(historyProvider.notifier).load();
+          ref.read(historyProvider.notifier).load(widget.args.id);
         }
         if (next is FailureDeleteItemState) {
           showDialog(
@@ -38,7 +43,7 @@ class _HistoricPageState extends ConsumerState<HistoricPage> {
       editHistoryProvider,
       (previous, next) {
         if (next is SuccessEditHistoryState) {
-          ref.read(historyProvider.notifier).load();
+          ref.read(historyProvider.notifier).load(widget.args.id);
         }
         if (next is FailureEditHistoryState) {
           showDialog(
@@ -55,7 +60,8 @@ class _HistoricPageState extends ConsumerState<HistoricPage> {
   @override
   void initState() {
     super.initState();
-    Future.microtask(() => ref.read(historyProvider.notifier).load());
+    Future.microtask(
+        () => ref.read(historyProvider.notifier).load(widget.args.id));
   }
 
   @override

@@ -125,7 +125,11 @@ class _HomePageState extends ConsumerState<HomePage> {
               title: 'Histórico',
               icon: Icons.history,
               onTap: () {
-                Navigator.pushNamed(context, '/history-page');
+                Navigator.pushNamed(
+                  context,
+                  '/history-page',
+                  arguments: user,
+                );
               },
             ),
             const Space.x5(),

@@ -1,6 +1,7 @@
 import 'package:dropdown_textfield/dropdown_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:my_history_app/app/modules/register/data/models/user_model.dart';
 import 'package:my_history_app/app/shared/widgets/spacing/space_widget.dart';
 import '../../data/models/history_model.dart';
 import '../../dependencies/dependencies.dart';
@@ -90,18 +91,19 @@ class _AddItemPageState extends ConsumerState<AddItemPage> {
 
   @override
   Widget build(BuildContext context) {
+    final args = ModalRoute.of(context)!.settings.arguments as UserModel;
     _listen();
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(30),
         child: Center(
-          child: _buildContext(),
+          child: _buildContext(args),
         ),
       ),
     );
   }
 
-  Widget _buildContext() {
+  Widget _buildContext(UserModel user) {
     return Form(
       key: _formKey,
       child: Column(
@@ -153,6 +155,7 @@ class _AddItemPageState extends ConsumerState<AddItemPage> {
                   whatHappened: whatHappenedController.dropDownValue!.name,
                   amountTimes: amountTimesController.dropDownValue!.name,
                   amountPeriod: amountPeriodsController.dropDownValue!.name,
+                  id: user.id,
                 );
                 ref.read(addItemProvider.notifier).addItem(history);
               }

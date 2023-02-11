@@ -30,6 +30,7 @@ class HistoryReportWidget extends StatelessWidget {
               child: ListView(
                 padding: const EdgeInsets.all(20),
                 children: [
+                  BoxText.body('${item.id}'),
                   BoxText.bodyBold('Nome:'),
                   BoxText.body(item.name),
                   const Divider(height: 5, thickness: 1),

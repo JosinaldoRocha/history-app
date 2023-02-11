@@ -4,9 +4,10 @@ import 'package:my_history_app/app/modules/history/data/models/history_model.dar
 class HistoryRepository {
   final box = Hive.box<HistoryModel>('history');
 
-  Future<List<HistoryModel>> getAll() async {
+  Future<List<HistoryModel>> getAll(int id) async {
     await Future.delayed(const Duration(seconds: 1));
     final values = box.values.toList();
+    values.retainWhere((element) => element.id == id);
     values.sort(
       (a, b) => a.name.compareTo(b.name),
     );
