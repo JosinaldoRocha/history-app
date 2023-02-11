@@ -13,6 +13,7 @@ class TextFieldWidget extends StatelessWidget {
     this.isEnable = true,
     this.validator,
     this.keyboardType = TextInputType.text,
+    this.onTap,
   }) : super(key: key);
 
   final TextEditingController controller;
@@ -23,6 +24,7 @@ class TextFieldWidget extends StatelessWidget {
   final bool isEnable;
   final String? Function(String?)? validator;
   final TextInputType keyboardType;
+  final Function(String)? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -36,6 +38,7 @@ class TextFieldWidget extends StatelessWidget {
             height: 10,
           ),
           InputWidget(
+            onChanged: onTap,
             keyboardType: keyboardType,
             sufix: !hasQRread
                 ? sufix
