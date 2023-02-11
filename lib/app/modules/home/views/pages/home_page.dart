@@ -84,7 +84,7 @@ class _HomePageState extends ConsumerState<HomePage> {
           : const DrawerWidget(),
       appBar: AppBar(
         title: BoxText.body(
-          'Olá, ${args.userName}!',
+          'Olá, ${args.id}!',
           color: Colors.white,
         ),
       ),
@@ -92,7 +92,7 @@ class _HomePageState extends ConsumerState<HomePage> {
         color: const Color.fromARGB(255, 181, 214, 181),
         child: Padding(
           padding: const EdgeInsets.all(30),
-          child: _buildContext(),
+          child: _buildContext(args),
         ),
       ),
       floatingActionButton: IconButtonWidget(
@@ -105,7 +105,7 @@ class _HomePageState extends ConsumerState<HomePage> {
     );
   }
 
-  Widget _buildContext() {
+  Widget _buildContext(UserModel user) {
     final homeState = ref.watch(homeProvider);
 
     if (homeState is LoadingHomeState) {
@@ -133,7 +133,11 @@ class _HomePageState extends ConsumerState<HomePage> {
               title: 'Adicionar',
               icon: Icons.add,
               onTap: () {
-                Navigator.pushNamed(context, '/add-item-page');
+                Navigator.pushNamed(
+                  context,
+                  '/add-item-page',
+                  arguments: user,
+                );
               },
             ),
           ],

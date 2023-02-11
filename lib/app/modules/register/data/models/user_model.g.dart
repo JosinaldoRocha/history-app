@@ -22,7 +22,7 @@ class UserModelAdapter extends TypeAdapter<UserModel> {
       eMail: fields[2] as String,
       password: fields[3] as String,
       confirmPassword: fields[4] as String,
-      id: fields[5] as double,
+      id: fields[5] as int,
     );
   }
 
