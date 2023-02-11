@@ -40,6 +40,8 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     final addState = ref.watch(addRegisterProvider);
+    double id = double.parse(idController.text);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Cadastre-se'),
@@ -128,7 +130,6 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
                           label: 'Id de usuário:',
                           hintText: 'Ex: 1',
                           validator: (value) {
-                            final id = double.tryParse(idController.text) ?? 0;
                             if (value == null || value.isEmpty) {
                               return 'Este campo não pode ser vazio';
                             }
@@ -136,6 +137,7 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
                                 .any((element) => element.id == id)) {
                               return 'Id existente. Tente um id diferente';
                             }
+
                             return null;
                           },
                         ),
@@ -145,7 +147,6 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
                           final validadeForm =
                               _formKey.currentState!.validate();
                           if (validadeForm) {
-                            double id = double.parse(idController.text);
                             UserModel item = UserModel(
                               fullName: fullNameController.text,
                               userName: userNameController.text,

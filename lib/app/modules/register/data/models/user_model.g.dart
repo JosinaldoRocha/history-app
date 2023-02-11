@@ -29,7 +29,7 @@ class UserModelAdapter extends TypeAdapter<UserModel> {
   @override
   void write(BinaryWriter writer, UserModel obj) {
     writer
-      ..writeByte(5)
+      ..writeByte(6)
       ..writeByte(0)
       ..write(obj.fullName)
       ..writeByte(1)
@@ -40,6 +40,7 @@ class UserModelAdapter extends TypeAdapter<UserModel> {
       ..write(obj.password)
       ..writeByte(4)
       ..write(obj.confirmPassword)
+      ..writeByte(5)
       ..write(obj.id);
   }
 
