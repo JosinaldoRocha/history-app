@@ -13,6 +13,8 @@ class UserModel extends HiveObject {
   String password;
   @HiveField(4)
   String confirmPassword;
+  @HiveField(5)
+  double id;
 
   UserModel({
     required this.fullName,
@@ -20,5 +22,6 @@ class UserModel extends HiveObject {
     required this.eMail,
     required this.password,
     required this.confirmPassword,
+    required this.id,
   });
 }

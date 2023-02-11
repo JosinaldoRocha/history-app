@@ -34,7 +34,7 @@ class _HistoryListWidgetState extends ConsumerState<HistoryListWidget> {
               child: Text(
                 'Seu histórico está vazio!',
                 style: TextStyle(
-                  fontSize: 28,
+                  fontSize: 25,
                 ),
               ),
             )

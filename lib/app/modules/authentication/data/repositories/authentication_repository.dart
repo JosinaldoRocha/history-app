@@ -19,9 +19,9 @@ class AuthenticationRepository {
         eMail: currentUser.eMail,
         password: currentUser.password,
         confirmPassword: currentUser.confirmPassword,
+        id: currentUser.id,
       );
       boxCurrentUser.add(user);
-      //boxCurrentUser.put(0, user);
       return true;
     }
     return false;

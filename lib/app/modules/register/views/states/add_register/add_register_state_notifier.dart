@@ -8,11 +8,22 @@ class AddRegisterStateNotifier extends StateNotifier<AddRegisterState> {
       : super(InitialAddRegisterState());
   final RegisterRepository registerRepository;
 
+  void load() async {
+    state = LoadingAddRegisterState();
+    try {
+      final result = await registerRepository.getAll();
+      state = SuccessAddRegisterState(data: result);
+    } catch (e) {
+      FailureAddRegisterState(errorMessage: 'Erro ao carregar dados');
+    }
+  }
+
   void addRegister(UserModel item) async {
     state = LoadingAddRegisterState();
     try {
-      state = SuccessAddRegisterState();
       await registerRepository.addRegister(item);
+      final result = await registerRepository.getAll();
+      state = SuccessAddRegisterState(data: result);
     } catch (e) {
       FailureAddRegisterState(errorMessage: 'Erro ao carregar dados');
     }
