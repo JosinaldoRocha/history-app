@@ -4,7 +4,6 @@ import 'package:my_history_app/app/modules/authentication/dependencies/dependenc
 import 'package:my_history_app/app/modules/login/dependencies/dependencies.dart';
 import 'package:my_history_app/app/modules/login/views/states/login_state.dart';
 import 'package:my_history_app/app/shared/widgets/button/button_widget.dart';
-import 'package:my_history_app/app/shared/widgets/input/info_text_field_widget.dart';
 import 'package:my_history_app/app/shared/widgets/spacing/space_widget.dart';
 import 'package:my_history_app/app/shared/widgets/texts/box_text.dart';
 
@@ -22,6 +21,9 @@ class _LoginPageState extends ConsumerState<LoginPage> {
     Future.microtask(() => ref.read(loginProvider.notifier).load());
   }
 
+  final _userNameController = TextEditingController();
+  final _passwordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,8 +36,6 @@ class _LoginPageState extends ConsumerState<LoginPage> {
 
   Widget _buildContext() {
     String image = 'assets/images/logo.png';
-    final userNameController = TextEditingController();
-    final passwordController = TextEditingController();
     final loginState = ref.watch(loginProvider);
     final formKey = GlobalKey<FormState>();
 
@@ -56,6 +56,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const Space.x10(),
+                const Space.x10(),
                 CircleAvatar(
                   radius: 60,
                   backgroundImage: AssetImage(image),
@@ -65,33 +66,80 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                   size: 35,
                 ),
                 const Space.x7(),
-                TextFieldWidget(
-                  controller: userNameController,
-                  label: 'Nome de usuário:',
-                  hintText: 'Ex: Usuario123',
+                TextFormField(
+                  controller: _userNameController,
+                  decoration: InputDecoration(
+                    label: BoxText.body('Usuário:'),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: const BorderSide(
+                        color: Color.fromARGB(255, 148, 146, 146),
+                      ),
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: const BorderSide(
+                        color: Color.fromARGB(255, 148, 146, 146),
+                      ),
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                  ),
+                  onChanged: (p0) {
+                    _userNameController.text;
+                  },
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Este campo não pode ser vazio';
                     } else if (value.length < 8) {
                       return 'Quantidade de caracteres insuficiente';
                     }
-                    return null;
-                  },
-                ),
-                TextFieldWidget(
-                  controller: passwordController,
-                  label: 'Senha:',
-                  hintText: 'Digite a senha:',
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Este campo não pode ser vazio';
-                    } else if (value.length < 6) {
-                      return 'Quantidade de caracteres insuficiente';
+                    if (!loginState.data.any((element) =>
+                        element.userName == _userNameController.text)) {
+                      return 'Usuário não cadastrado';
                     }
                     return null;
                   },
                 ),
-                const Space.x2(),
+                const Space.x4(),
+                TextFormField(
+                  obscureText: true,
+                  controller: _passwordController,
+                  decoration: InputDecoration(
+                    label: BoxText.body('Senha:'),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: const BorderSide(
+                        color: Color.fromARGB(255, 148, 146, 146),
+                      ),
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: const BorderSide(
+                        color: Color.fromARGB(255, 148, 146, 146),
+                      ),
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                    suffixIcon: IconButton(
+                      icon: const Icon(Icons.remove_red_eye_outlined),
+                      onPressed: () {},
+                    ),
+                  ),
+                  onChanged: (p0) {
+                    _passwordController.text;
+                  },
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Este campo não pode ser vazio';
+                    } else if (value.length < 6) {
+                      return 'Sua senha deve contar, pelo menos 6 dígitos';
+                    }
+                    if (!loginState.data.any((element) =>
+                        element.userName == _userNameController.text &&
+                        element.password == _passwordController.text)) {
+                      return 'Senha inválida';
+                    }
+                    return null;
+                  },
+                ),
+                const Space.x8(),
                 ButtonWidget(
                   title: 'Entrar',
                   onTap: () {
@@ -100,8 +148,8 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                       ref
                           .read(authenticationProvider.notifier)
                           .loginVirification(
-                            userNameController.text,
-                            passwordController.text,
+                            _userNameController.text,
+                            _passwordController.text,
                           );
                       Navigator.of(context).pushReplacementNamed('/');
                     }

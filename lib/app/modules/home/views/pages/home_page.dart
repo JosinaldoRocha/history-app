@@ -84,7 +84,7 @@ class _HomePageState extends ConsumerState<HomePage> {
           : const DrawerWidget(),
       appBar: AppBar(
         title: BoxText.body(
-          'Olá, ${args.id}!',
+          'Olá, ${args.userName}!',
           color: Colors.white,
         ),
       ),

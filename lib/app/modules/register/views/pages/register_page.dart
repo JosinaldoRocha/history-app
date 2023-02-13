@@ -4,6 +4,7 @@ import 'package:my_history_app/app/modules/register/data/models/user_model.dart'
 import 'package:my_history_app/app/modules/register/dependencies/dependencies.dart';
 import 'package:my_history_app/app/modules/register/views/states/add_register/add_register_state.dart';
 import 'package:my_history_app/app/shared/widgets/button/button_widget.dart';
+import 'package:my_history_app/app/shared/widgets/texts/box_text.dart';
 import '../../../../shared/widgets/input/info_text_field_widget.dart';
 
 class RegisterPage extends ConsumerStatefulWidget {
@@ -41,137 +42,145 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
   Widget build(BuildContext context) {
     final addState = ref.watch(addRegisterProvider);
 
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Cadastre-se'),
-      ),
-      body: (addState is LoadingAddRegisterState)
-          ? const Center(
-              child: CircularProgressIndicator(),
-            )
-          : Padding(
-              padding: const EdgeInsets.all(20),
-              child: Center(
-                child: Form(
-                  key: _formKey,
-                  child: ListView(
-                    children: [
-                      TextFieldWidget(
-                        controller: fullNameController,
-                        label: 'Nome completo:',
-                        hintText: 'Ex: Nome Sobrenome',
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Este campo não pode ser vazio';
-                          }
-                          return null;
-                        },
-                      ),
-                      TextFieldWidget(
-                        controller: userNameController,
-                        label: 'Nome de usuário:',
-                        hintText: 'Ex: Usuario123',
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Este campo não pode ser vazio';
-                          } else if (value.length < 8) {
-                            return 'Deve conter, pelo menos 8 caracteres';
-                          }
-                          return null;
-                        },
-                      ),
-                      TextFieldWidget(
-                        controller: eMailController,
-                        label: 'E-mail:',
-                        hintText: 'Ex: seuemail@.com',
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Este campo não pode ser vazio';
-                          } else if (value.length < 11) {
-                            return 'Deve conter, pelo menos 11 caracteres';
-                          } else if (!value.contains('@')) {
-                            return 'Formato de e-mail inválido';
-                          }
-                          return null;
-                        },
-                      ),
-                      TextFieldWidget(
-                        controller: passwordController,
-                        label: 'Senha:',
-                        hintText: 'Crie uma senha para sua conta:',
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Este campo não pode ser vazio';
-                          } else if (value.length < 6) {
-                            return 'Deve conter, pelo menos 6 caracteres';
-                          }
-                          return null;
-                        },
-                      ),
-                      TextFieldWidget(
-                        controller: confirmPasswordController,
-                        label: 'Confirme\na senha:',
-                        hintText: 'Repita a senha:',
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Este campo não pode ser vazio';
-                          } else if (value.length < 6) {
-                            return 'Deve conter, pelo menos 6 caracteres';
-                          } else if (value != passwordController.text) {
-                            return 'Senhas diferentes';
-                          }
-                          return null;
-                        },
-                      ),
-                      if (addState is SuccessAddRegisterState)
-                        TextFieldWidget(
-                          controller: idController,
-                          label: 'Id de usuário:',
-                          hintText: 'Ex: 1',
-                          onTap: (p0) {
-                            idController.text;
-                          },
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Este campo não pode ser vazio';
-                            }
-                            int id = int.parse(idController.text);
-                            if (addState.data
-                                .any((element) => element.id == id)) {
-                              return 'Id existente. Tente um id diferente';
-                            }
-
-                            return null;
-                          },
-                        ),
-                      ButtonWidget(
-                        title: 'Cadastrar',
-                        onTap: () {
-                          final validadeForm =
-                              _formKey.currentState!.validate();
-                          if (validadeForm) {
-                            int id = int.parse(idController.text);
-                            UserModel item = UserModel(
-                              fullName: fullNameController.text,
-                              userName: userNameController.text,
-                              eMail: eMailController.text,
-                              password: passwordController.text,
-                              confirmPassword: confirmPasswordController.text,
-                              id: id,
-                            );
-                            _clearTexts();
-                            ref
-                                .read(addRegisterProvider.notifier)
-                                .addRegister(item);
-                            Navigator.pushReplacementNamed(context, '/');
-                          }
-                        },
-                      ),
-                    ],
+    if (addState is LoadingAddRegisterState) {
+      return Container(
+        color: Colors.white,
+        child: const Center(
+          child: CircularProgressIndicator(),
+        ),
+      );
+    } else if (addState is FailureAddRegisterState) {
+      return Center(
+        child: BoxText.body(addState.errorMessage),
+      );
+    } else if (addState is SuccessAddRegisterState) {
+      return Scaffold(
+        appBar: AppBar(
+          title: const Text('Cadastre-se'),
+        ),
+        body: Padding(
+          padding: const EdgeInsets.all(20),
+          child: Center(
+            child: Form(
+              key: _formKey,
+              child: ListView(
+                children: [
+                  TextFieldWidget(
+                    controller: fullNameController,
+                    label: 'Nome completo:',
+                    hintText: 'Ex: Nome Sobrenome',
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Este campo não pode ser vazio';
+                      }
+                      return null;
+                    },
                   ),
-                ),
+                  TextFieldWidget(
+                    controller: userNameController,
+                    label: 'Nome de usuário:',
+                    hintText: 'Ex: Usuario123',
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Este campo não pode ser vazio';
+                      } else if (value.length < 8) {
+                        return 'Deve conter, pelo menos 8 caracteres';
+                      }
+                      return null;
+                    },
+                  ),
+                  TextFieldWidget(
+                    controller: eMailController,
+                    label: 'E-mail:',
+                    hintText: 'Ex: seuemail@.com',
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Este campo não pode ser vazio';
+                      } else if (value.length < 11) {
+                        return 'Deve conter, pelo menos 11 caracteres';
+                      } else if (!value.contains('@')) {
+                        return 'Formato de e-mail inválido';
+                      }
+                      return null;
+                    },
+                  ),
+                  TextFieldWidget(
+                    controller: passwordController,
+                    label: 'Senha:',
+                    hintText: 'Crie uma senha para sua conta:',
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Este campo não pode ser vazio';
+                      } else if (value.length < 6) {
+                        return 'Deve conter, pelo menos 6 caracteres';
+                      }
+                      return null;
+                    },
+                  ),
+                  TextFieldWidget(
+                    controller: confirmPasswordController,
+                    label: 'Confirme\na senha:',
+                    hintText: 'Repita a senha:',
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Este campo não pode ser vazio';
+                      } else if (value.length < 6) {
+                        return 'Deve conter, pelo menos 6 caracteres';
+                      } else if (value != passwordController.text) {
+                        return 'Senhas diferentes';
+                      }
+                      return null;
+                    },
+                  ),
+                  TextFieldWidget(
+                    controller: idController,
+                    label: 'Id de usuário:',
+                    hintText: 'Ex: 1',
+                    onTap: (p0) {
+                      idController.text;
+                    },
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Este campo não pode ser vazio';
+                      }
+                      int id = int.parse(idController.text);
+                      if (addState.data.any((element) => element.id == id)) {
+                        return 'Id existente. Tente um id diferente';
+                      }
+
+                      return null;
+                    },
+                  ),
+                  ButtonWidget(
+                    title: 'Cadastrar',
+                    onTap: () {
+                      final validadeForm = _formKey.currentState!.validate();
+                      if (validadeForm) {
+                        int id = int.parse(idController.text);
+                        UserModel item = UserModel(
+                          fullName: fullNameController.text,
+                          userName: userNameController.text,
+                          eMail: eMailController.text,
+                          password: passwordController.text,
+                          confirmPassword: confirmPasswordController.text,
+                          id: id,
+                        );
+                        _clearTexts();
+                        ref
+                            .read(addRegisterProvider.notifier)
+                            .addRegister(item);
+                        Navigator.pushReplacementNamed(context, '/');
+                      }
+                    },
+                  ),
+                ],
               ),
             ),
-    );
+          ),
+        ),
+      );
+    } else {
+      return Container();
+    }
   }
 }
