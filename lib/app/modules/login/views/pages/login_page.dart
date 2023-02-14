@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:my_history_app/app/modules/authentication/dependencies/dependencies.dart';
 import 'package:my_history_app/app/modules/login/dependencies/dependencies.dart';
 import 'package:my_history_app/app/modules/login/views/states/login_state.dart';
+import 'package:my_history_app/app/modules/login/widgets/text_fild_login_widget.dart';
 import 'package:my_history_app/app/shared/widgets/button/button_widget.dart';
 import 'package:my_history_app/app/shared/widgets/spacing/space_widget.dart';
 import 'package:my_history_app/app/shared/widgets/texts/box_text.dart';
@@ -23,142 +24,98 @@ class _LoginPageState extends ConsumerState<LoginPage> {
 
   final _userNameController = TextEditingController();
   final _passwordController = TextEditingController();
+  String image = 'assets/images/logo.png';
+  final formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(30),
-        child: _buildContext(),
-      ),
-    );
-  }
-
-  Widget _buildContext() {
-    String image = 'assets/images/logo.png';
     final loginState = ref.watch(loginProvider);
-    final formKey = GlobalKey<FormState>();
 
     if (loginState is LoadingLoginState) {
-      return const Center(
-        child: CircularProgressIndicator(),
+      return Container(
+        color: Colors.white,
+        child: const Center(
+          child: CircularProgressIndicator(),
+        ),
       );
     } else if (loginState is FailureLoginState) {
       return AlertDialog(
         content: BoxText.body(loginState.errorMessage),
       );
     } else if (loginState is SuccessLoginState) {
-      return Form(
-        key: formKey,
-        child: ListView(
-          children: [
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+      return Scaffold(
+        body: Padding(
+          padding: const EdgeInsets.all(30),
+          child: Form(
+            key: formKey,
+            child: ListView(
               children: [
-                const Space.x10(),
-                const Space.x10(),
-                CircleAvatar(
-                  radius: 60,
-                  backgroundImage: AssetImage(image),
-                ),
-                BoxText.bodyBold(
-                  'Login',
-                  size: 35,
-                ),
-                const Space.x7(),
-                TextFormField(
-                  controller: _userNameController,
-                  decoration: InputDecoration(
-                    label: BoxText.body('Usuário:'),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(
-                        color: Color.fromARGB(255, 148, 146, 146),
+                Column(
+                  children: [
+                    const SizedBox(height: 100),
+                    CircleAvatar(
+                      radius: 60,
+                      backgroundImage: AssetImage(image),
+                    ),
+                    BoxText.bodyBold(
+                      'Login',
+                      size: 35,
+                    ),
+                    const Space.x7(),
+                    TextFieldLoginWidget(
+                      controller: _userNameController,
+                      items: loginState.data,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Este campo não pode ser vazio';
+                        } else if (!loginState.data.any((element) =>
+                            element.userName == _userNameController.text)) {
+                          return 'Usuário não cadastrado';
+                        }
+                        return null;
+                      },
+                    ),
+                    const Space.x4(),
+                    TextFieldLoginWidget(
+                      controller: _passwordController,
+                      items: loginState.data,
+                      suffixIcon: IconButton(
+                        icon: const Icon(Icons.remove_red_eye_outlined),
+                        onPressed: () {},
                       ),
-                      borderRadius: BorderRadius.circular(5),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Este campo não pode ser vazio';
+                        } else if (!loginState.data.any((element) =>
+                            element.userName == _userNameController.text &&
+                            element.password == _passwordController.text)) {
+                          return 'Senha inválida';
+                        }
+                        return null;
+                      },
                     ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(
-                        color: Color.fromARGB(255, 148, 146, 146),
-                      ),
-                      borderRadius: BorderRadius.circular(5),
+                    const Space.x8(),
+                    ButtonWidget(
+                      title: 'Entrar',
+                      onTap: () {
+                        final validadeForm = formKey.currentState?.validate();
+                        if (validadeForm!) {
+                          ref
+                              .read(authenticationProvider.notifier)
+                              .loginVirification(
+                                _userNameController.text,
+                                _passwordController.text,
+                              );
+                          Navigator.of(context).pushReplacementNamed('/');
+                        }
+                      },
                     ),
-                  ),
-                  onChanged: (p0) {
-                    _userNameController.text;
-                  },
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Este campo não pode ser vazio';
-                    } else if (value.length < 8) {
-                      return 'Quantidade de caracteres insuficiente';
-                    }
-                    if (!loginState.data.any((element) =>
-                        element.userName == _userNameController.text)) {
-                      return 'Usuário não cadastrado';
-                    }
-                    return null;
-                  },
+                    _buildTextRow(),
+                  ],
                 ),
-                const Space.x4(),
-                TextFormField(
-                  obscureText: true,
-                  controller: _passwordController,
-                  decoration: InputDecoration(
-                    label: BoxText.body('Senha:'),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(
-                        color: Color.fromARGB(255, 148, 146, 146),
-                      ),
-                      borderRadius: BorderRadius.circular(5),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(
-                        color: Color.fromARGB(255, 148, 146, 146),
-                      ),
-                      borderRadius: BorderRadius.circular(5),
-                    ),
-                    suffixIcon: IconButton(
-                      icon: const Icon(Icons.remove_red_eye_outlined),
-                      onPressed: () {},
-                    ),
-                  ),
-                  onChanged: (p0) {
-                    _passwordController.text;
-                  },
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Este campo não pode ser vazio';
-                    } else if (value.length < 6) {
-                      return 'Sua senha deve contar, pelo menos 6 dígitos';
-                    }
-                    if (!loginState.data.any((element) =>
-                        element.userName == _userNameController.text &&
-                        element.password == _passwordController.text)) {
-                      return 'Senha inválida';
-                    }
-                    return null;
-                  },
-                ),
-                const Space.x8(),
-                ButtonWidget(
-                  title: 'Entrar',
-                  onTap: () {
-                    final validadeForm = formKey.currentState?.validate();
-                    if (validadeForm!) {
-                      ref
-                          .read(authenticationProvider.notifier)
-                          .loginVirification(
-                            _userNameController.text,
-                            _passwordController.text,
-                          );
-                      Navigator.of(context).pushReplacementNamed('/');
-                    }
-                  },
-                ),
-                _buildTextRow(context),
               ],
             ),
-          ],
+          ),
         ),
       );
     } else {
@@ -166,7 +123,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
     }
   }
 
-  Row _buildTextRow(BuildContext context) {
+  Row _buildTextRow() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [

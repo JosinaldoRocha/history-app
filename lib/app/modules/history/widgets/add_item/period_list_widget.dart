@@ -1,7 +1,6 @@
 import 'package:dropdown_textfield/dropdown_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
 import '../../../../shared/widgets/texts/box_text.dart';
 import '../../dependencies/dependencies.dart';
 import '../../views/states/period_list_state/period_list_state.dart';

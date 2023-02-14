@@ -15,27 +15,32 @@ class EditItemContentWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      style: ElevatedButton.styleFrom(
-        elevation: 0,
-        backgroundColor: const Color.fromRGBO(38, 108, 58, 1),
-      ),
-      onPressed: () {
-        showDialog(
-          context: context,
-          builder: (context) => AlertDialog(
-            actions: [
-              textField,
-              Center(
-                child: widgetFunction,
+    return SizedBox(
+      height: 40,
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: const Color.fromARGB(255, 140, 170, 143),
+        ),
+        onPressed: () {
+          showModalBottomSheet(
+            context: context,
+            builder: (context) => Container(
+              color: const Color.fromARGB(255, 202, 243, 206),
+              child: AlertDialog(
+                actions: [
+                  textField,
+                  Center(
+                    child: widgetFunction,
+                  ),
+                ],
               ),
-            ],
-          ),
-        );
-      },
-      child: BoxText.body(
-        title,
-        color: Colors.white,
+            ),
+          );
+        },
+        child: BoxText.body(
+          title,
+          size: 17,
+        ),
       ),
     );
   }

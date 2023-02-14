@@ -16,7 +16,6 @@ class HomeButtonWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 60,
-      //width: 250,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(5),
         color: Theme.of(context).primaryColor,

@@ -4,20 +4,23 @@ part 'user_model.g.dart';
 @HiveType(typeId: 0)
 class UserModel extends HiveObject {
   @HiveField(0)
-  String fullName;
+  String name;
   @HiveField(1)
-  String userName;
+  String surname;
   @HiveField(2)
-  String eMail;
+  String userName;
   @HiveField(3)
-  String password;
+  String eMail;
   @HiveField(4)
-  String confirmPassword;
+  String password;
   @HiveField(5)
+  String confirmPassword;
+  @HiveField(6)
   int id;
 
   UserModel({
-    required this.fullName,
+    required this.name,
+    required this.surname,
     required this.userName,
     required this.eMail,
     required this.password,

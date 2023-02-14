@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:my_history_app/app/modules/history/data/models/history_model.dart';
-import 'package:my_history_app/app/modules/history/widgets/history/edit_history_widget.dart';
+import 'package:my_history_app/app/modules/history/widgets/delete_item/alert_dialog_delete_item_widget.dart';
 import 'package:my_history_app/app/modules/history/widgets/history/history_report_widget.dart';
 import '../../../../shared/widgets/texts/box_text.dart';
-import '../../dependencies/dependencies.dart';
 
 class HistoryItemButtonWidget extends ConsumerWidget {
   const HistoryItemButtonWidget({
@@ -22,8 +21,16 @@ class HistoryItemButtonWidget extends ConsumerWidget {
         borderRadius: BorderRadius.circular(30),
       ),
       child: ListTile(
-        leading: BoxText.bodyBold(
-          '${index + 1}',
+        leading: Container(
+          width: 32,
+          height: 32,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(50),
+            border: Border.all(
+              color: const Color.fromARGB(255, 153, 149, 149),
+            ),
+          ),
+          child: Center(child: BoxText.bodyBold('${index + 1}')),
         ),
         title: ElevatedButton(
           style: ElevatedButton.styleFrom(
@@ -37,20 +44,15 @@ class HistoryItemButtonWidget extends ConsumerWidget {
             );
           },
           onLongPress: () {
-            showModalBottomSheet(
-              context: context,
-              builder: (context) => EditHistoryWidget(history: history),
-            );
+            Navigator.pushNamed(context, '/edit-item-page', arguments: history);
           },
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              BoxText.bodyBold(
-                history.name,
-                size: 18,
-              ),
+              BoxText.bodyBold(history.name),
               BoxText.body(
                 history.reference,
+                size: 14,
                 color: const Color.fromARGB(255, 153, 149, 149),
               ),
             ],
@@ -58,7 +60,11 @@ class HistoryItemButtonWidget extends ConsumerWidget {
         ),
         trailing: IconButton(
           onPressed: () {
-            ref.read(deleteItemProvider.notifier).deleteItem(history);
+            showDialog(
+              context: context,
+              builder: (context) =>
+                  AlertDialogDeleteItemWidget(history: history),
+            );
           },
           icon: Icon(
             Icons.delete,

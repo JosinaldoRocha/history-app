@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:my_history_app/app/modules/authentication/dependencies/dependencies.dart';
-import 'package:my_history_app/app/modules/authentication/states/logout_state.dart';
+import 'package:my_history_app/app/modules/authentication/states/logout_state/logout_state.dart';
 import 'package:my_history_app/app/modules/home/dependencies/dependencies.dart';
-import 'package:my_history_app/app/modules/home/views/states/home_state.dart';
 import 'package:my_history_app/app/modules/home/widgets/drawer_widget.dart';
-import 'package:my_history_app/app/modules/home/widgets/home_button_widget.dart';
+import 'package:my_history_app/app/modules/home/widgets/home_body_widget.dart';
 import 'package:my_history_app/app/modules/home/widgets/icon_button_widget.dart';
 import 'package:my_history_app/app/modules/register/data/models/user_model.dart';
 import 'package:my_history_app/app/modules/register/views/states/clear_register/clear_register_stete.dart';
-import 'package:my_history_app/app/shared/widgets/spacing/space_widget.dart';
 import 'package:my_history_app/app/shared/widgets/texts/box_text.dart';
 
 class HomePage extends ConsumerStatefulWidget {
@@ -84,7 +82,7 @@ class _HomePageState extends ConsumerState<HomePage> {
           : const DrawerWidget(),
       appBar: AppBar(
         title: BoxText.body(
-          'Olá, ${args.userName}!',
+          'Olá, ${args.name}!',
           color: Colors.white,
         ),
       ),
@@ -92,7 +90,7 @@ class _HomePageState extends ConsumerState<HomePage> {
         color: const Color.fromARGB(255, 181, 214, 181),
         child: Padding(
           padding: const EdgeInsets.all(30),
-          child: _buildContext(args),
+          child: HomeBodyWidget(user: args),
         ),
       ),
       floatingActionButton: IconButtonWidget(
@@ -103,52 +101,5 @@ class _HomePageState extends ConsumerState<HomePage> {
         },
       ),
     );
-  }
-
-  Widget _buildContext(UserModel user) {
-    final homeState = ref.watch(homeProvider);
-
-    if (homeState is LoadingHomeState) {
-      return const Center(
-        child: CircularProgressIndicator(),
-      );
-    } else if (homeState is FailureHomeState) {
-      return AlertDialog(
-        content: BoxText.body(homeState.errorMessage),
-      );
-    } else if (homeState is SuccessHomeState) {
-      return Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            HomeButtonWidget(
-              title: 'Histórico',
-              icon: Icons.history,
-              onTap: () {
-                Navigator.pushNamed(
-                  context,
-                  '/history-page',
-                  arguments: user,
-                );
-              },
-            ),
-            const Space.x5(),
-            HomeButtonWidget(
-              title: 'Adicionar',
-              icon: Icons.add,
-              onTap: () {
-                Navigator.pushNamed(
-                  context,
-                  '/add-item-page',
-                  arguments: user,
-                );
-              },
-            ),
-          ],
-        ),
-      );
-    } else {
-      return Container();
-    }
   }
 }

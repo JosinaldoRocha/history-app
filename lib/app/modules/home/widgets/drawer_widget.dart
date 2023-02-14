@@ -11,7 +11,7 @@ class DrawerWidget extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Container(
       height: 70,
-      width: 200,
+      width: 160,
       decoration: const BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.only(
@@ -41,7 +41,7 @@ class DrawerWidget extends ConsumerWidget {
               icon: Icons.cleaning_services_outlined,
               size: 35,
               onTap: () {
-                ref.read(clearRegisterProvider.notifier).clearRegister();
+                ref.read(clearRegisterProvider.notifier).clearRegisters();
               },
             ),
           ),

@@ -1,16 +1,16 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:my_history_app/app/modules/register/data/repositorys/register_repository.dart';
+import 'package:my_history_app/app/modules/register/data/repositorys/user_repository.dart';
 import 'clear_register_stete.dart';
 
 class ClearRegisterStateNotifier extends StateNotifier<ClearRegisterState> {
-  ClearRegisterStateNotifier({required this.registerRepository})
+  ClearRegisterStateNotifier({required this.userRepository})
       : super(InitialClearRegisterState());
-  final RegisterRepository registerRepository;
+  final UserRepository userRepository;
 
-  void clearRegister() async {
+  void clearRegisters() async {
     state = LoadingClearRegisterState();
     try {
-      await registerRepository.clearRegister();
+      await userRepository.clearRegisters();
       state = SuccessClearRegisterState();
     } catch (e) {
       FailureClearRegisterState(errorMessage: 'Erro ao carregar dados');

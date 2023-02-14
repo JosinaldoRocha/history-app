@@ -20,15 +20,6 @@ class HistoryModel extends HiveObject {
   @HiveField(7)
   int id;
 
-  // int generateId(List<HistoryModel> list, int newId) {
-  //   if (list.length == 1) {
-  //     id = 1;
-  //   } else {
-  //     id = newId;
-  //   }
-  //   return id;
-  // }
-
   HistoryModel({
     required this.name,
     required this.reference,

@@ -1,16 +1,15 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:my_history_app/app/modules/register/data/repositorys/register_repository.dart';
+import 'package:my_history_app/app/modules/register/data/repositorys/user_repository.dart';
+import '../views/states/add_user/add_user_state.dart';
+import '../views/states/add_user/add_user_state_notifier.dart';
 
-import '../views/states/add_register/add_register_state.dart';
-import '../views/states/add_register/add_register_state_notifier.dart';
-
-final registerRepository = Provider(
-  (ref) => RegisterRepository(),
+final userRepository = Provider(
+  (ref) => UserRepository(),
 );
 
-final addRegisterProvider =
-    StateNotifierProvider<AddRegisterStateNotifier, AddRegisterState>(
-  (ref) => AddRegisterStateNotifier(
-    ref.read(registerRepository),
+final addUserProvider =
+    StateNotifierProvider<AddUserStateNotifier, AddUserState>(
+  (ref) => AddUserStateNotifier(
+    ref.read(userRepository),
   ),
 );

@@ -17,7 +17,6 @@ class HistoryReportWidget extends StatelessWidget {
       color: const Color.fromARGB(255, 202, 243, 206),
       child: Column(
         children: [
-          const Space.x2(),
           BoxText.bodyBold(
             'Detalhes da minha relação com\n${item.name}',
             textAlign: TextAlign.center,
@@ -28,7 +27,10 @@ class HistoryReportWidget extends StatelessWidget {
             child: Container(
               decoration: BoxDecoration(border: Border.all()),
               child: ListView(
-                padding: const EdgeInsets.all(20),
+                padding: const EdgeInsets.symmetric(
+                  vertical: 5,
+                  horizontal: 15,
+                ),
                 children: [
                   BoxText.bodyBold('Nome:'),
                   BoxText.body(item.name),

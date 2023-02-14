@@ -34,9 +34,7 @@ class TextFieldWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           BoxText.body(label),
-          const SizedBox(
-            height: 10,
-          ),
+          const SizedBox(height: 5),
           InputWidget(
             onChanged: onTap,
             keyboardType: keyboardType,

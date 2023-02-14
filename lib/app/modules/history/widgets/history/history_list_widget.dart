@@ -55,13 +55,17 @@ class _HistoryListWidgetState extends ConsumerState<HistoryListWidget> {
                     separatorBuilder: (context, index) => const Divider(
                       color: Color.fromARGB(255, 60, 114, 78),
                       height: 5,
+                      indent: 55,
+                      endIndent: 55,
                     ),
                     itemCount: history.length,
                   ),
                 ),
                 BoxText.body(
-                  '${history.length}',
-                  size: 14,
+                  (history.length > 1)
+                      ? '${history.length} mulheres'
+                      : '${history.length} mulher',
+                  size: 12,
                 ),
               ],
             );
