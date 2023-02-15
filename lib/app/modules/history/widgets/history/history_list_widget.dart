@@ -62,9 +62,7 @@ class _HistoryListWidgetState extends ConsumerState<HistoryListWidget> {
                   ),
                 ),
                 BoxText.body(
-                  (history.length > 1)
-                      ? '${history.length} mulheres'
-                      : '${history.length} mulher',
+                  '${history.length}',
                   size: 12,
                 ),
               ],

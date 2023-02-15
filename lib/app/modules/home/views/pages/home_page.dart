@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:my_history_app/app/modules/authentication/dependencies/dependencies.dart';
-import 'package:my_history_app/app/modules/authentication/states/logout_state/logout_state.dart';
+import 'package:my_history_app/app/modules/authentication/views/states/logout_state/logout_state.dart';
 import 'package:my_history_app/app/modules/home/dependencies/dependencies.dart';
 import 'package:my_history_app/app/modules/home/widgets/drawer_widget.dart';
 import 'package:my_history_app/app/modules/home/widgets/home_body_widget.dart';

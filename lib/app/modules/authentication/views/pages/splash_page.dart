@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:my_history_app/app/modules/authentication/dependencies/dependencies.dart';
-import 'package:my_history_app/app/modules/authentication/states/authentication_state/authentication_state.dart';
+import 'package:my_history_app/app/modules/authentication/views/states/authentication_state/authentication_state.dart';
 
 class SplashPage extends ConsumerStatefulWidget {
   const SplashPage({super.key});

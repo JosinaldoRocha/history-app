@@ -22,10 +22,22 @@ class _LoginPageState extends ConsumerState<LoginPage> {
     Future.microtask(() => ref.read(loginProvider.notifier).load());
   }
 
+  _showPassword() {
+    if (_obscureText) {
+      _obscureText = false;
+    } else {
+      _obscureText = true;
+    }
+    setState(() {
+      _obscureText;
+    });
+  }
+
   final _userNameController = TextEditingController();
   final _passwordController = TextEditingController();
   String image = 'assets/images/logo.png';
   final formKey = GlobalKey<FormState>();
+  bool _obscureText = true;
 
   @override
   Widget build(BuildContext context) {
@@ -63,6 +75,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                     ),
                     const Space.x7(),
                     TextFieldLoginWidget(
+                      label: 'Usuário:',
                       controller: _userNameController,
                       items: loginState.data,
                       validator: (value) {
@@ -77,11 +90,17 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                     ),
                     const Space.x4(),
                     TextFieldLoginWidget(
+                      label: 'Senha:',
+                      obscureText: _obscureText,
                       controller: _passwordController,
                       items: loginState.data,
                       suffixIcon: IconButton(
-                        icon: const Icon(Icons.remove_red_eye_outlined),
-                        onPressed: () {},
+                        icon: Icon(
+                          _obscureText == false
+                              ? Icons.visibility
+                              : Icons.visibility_off,
+                        ),
+                        onPressed: _showPassword,
                       ),
                       validator: (value) {
                         if (value == null || value.isEmpty) {
@@ -94,7 +113,21 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                         return null;
                       },
                     ),
-                    const Space.x8(),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        TextButton(
+                          onPressed: () {
+                            Navigator.pushNamed(context, '/recover-password');
+                          },
+                          child: BoxText.body(
+                            'Esqueceu a senha?',
+                            color: const Color.fromARGB(255, 3, 90, 240),
+                          ),
+                        ),
+                      ],
+                    ),
+                    const Space.x6(),
                     ButtonWidget(
                       title: 'Entrar',
                       onTap: () {

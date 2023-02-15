@@ -28,6 +28,14 @@ class AuthenticationRepository {
     return false;
   }
 
+  Future<UserModel> recoverPassword(String email) async {
+    await Future.delayed(const Duration(seconds: 2));
+    final values = box.values.toList();
+    final currentUser = values.firstWhere((element) => element.eMail == email);
+
+    return currentUser;
+  }
+
   Future<bool> userVerification() async {
     await Future.delayed(const Duration(seconds: 2));
     if (boxCurrentUser.isEmpty) {

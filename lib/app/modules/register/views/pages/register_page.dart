@@ -115,7 +115,8 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
                         return 'Este campo não pode ser vazio';
                       } else if (value.length < 11) {
                         return 'O e-mail conter, pelo menos 11 dígitos';
-                      } else if (!value.contains('@')) {
+                      } else if (!value.contains('@') ||
+                          !value.contains('.com')) {
                         return 'Formato de e-mail inválido';
                       } else if (addState.data.any((element) =>
                           element.eMail == _eMailController.text)) {

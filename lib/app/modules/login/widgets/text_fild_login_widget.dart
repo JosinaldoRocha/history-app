@@ -11,18 +11,23 @@ class TextFieldLoginWidget extends ConsumerWidget {
     required this.items,
     required this.validator,
     this.suffixIcon,
+    this.obscureText = false,
+    required this.label,
   });
   final TextEditingController controller;
   final List<UserModel> items;
   final String? Function(String?)? validator;
   final Widget? suffixIcon;
+  final bool? obscureText;
+  final String label;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return TextFormField(
+      obscureText: obscureText!,
       controller: controller,
       decoration: InputDecoration(
-        label: BoxText.body('Usuário:'),
+        label: BoxText.body(label),
         enabledBorder: OutlineInputBorder(
           borderSide: const BorderSide(
             color: Color.fromARGB(255, 148, 146, 146),
