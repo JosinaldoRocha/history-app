@@ -2,10 +2,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:my_history_app/app/modules/authentication/data/repositories/authentication_repository.dart';
 import 'package:my_history_app/app/modules/authentication/views/states/authentication_state/authentication_state.dart';
 import 'package:my_history_app/app/modules/authentication/views/states/authentication_state/authentication_state_notifier.dart';
+import 'package:my_history_app/app/modules/authentication/views/states/login_state/login_state_notifier.dart';
 import 'package:my_history_app/app/modules/authentication/views/states/recover_password/check_email/check_email_state.dart';
 import 'package:my_history_app/app/modules/authentication/views/states/recover_password/check_email/check_email_state_notifier.dart';
 import 'package:my_history_app/app/modules/authentication/views/states/recover_password/recover_password/recover_password_state.dart';
 import 'package:my_history_app/app/modules/authentication/views/states/recover_password/recover_password/recover_password_state_notifier.dart';
+import 'package:my_history_app/app/modules/authentication/views/states/login_state/login_state.dart';
 import '../../register/data/repositorys/user_repository.dart';
 import '../views/states/logout_state/logout_state.dart';
 import '../views/states/logout_state/logout_state_notifier.dart';
@@ -42,5 +44,11 @@ final checkEmailProvider =
     StateNotifierProvider.autoDispose<CheckEmailStateNotifier, CheckEmailState>(
   (ref) => CheckEmailStateNotifier(
     authenticationRepository: ref.read(authenticationRepository),
+  ),
+);
+
+final loginProvider = StateNotifierProvider<LoginStateNotifier, LoginState>(
+  (ref) => LoginStateNotifier(
+    userRepository: ref.read(userRepositoryProvider),
   ),
 );

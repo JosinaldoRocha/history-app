@@ -5,7 +5,7 @@ class HistoryRepository {
   final box = Hive.box<HistoryModel>('history');
 
   Future<List<HistoryModel>> getAll(int id) async {
-    await Future.delayed(const Duration(seconds: 1));
+    await Future.delayed(const Duration(seconds: 2));
     final values = box.values.toList();
     values.retainWhere((element) => element.id == id);
     values.sort(
@@ -15,7 +15,7 @@ class HistoryRepository {
   }
 
   Future<void> addItem(HistoryModel history) async {
-    await Future.delayed(const Duration(seconds: 1));
+    await Future.delayed(const Duration(seconds: 2));
     await box.add(history);
   }
 

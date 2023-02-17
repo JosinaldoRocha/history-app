@@ -7,7 +7,7 @@ class UserRepository {
   final historyBox = Hive.box<HistoryModel>('history');
 
   Future<List<UserModel>> getAll() async {
-    await Future.delayed(const Duration(seconds: 1));
+    await Future.delayed(const Duration(seconds: 2));
     final values = box.values.toList();
     return values;
   }

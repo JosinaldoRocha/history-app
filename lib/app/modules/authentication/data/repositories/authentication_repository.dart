@@ -6,7 +6,7 @@ class AuthenticationRepository {
   final boxCurrentUser = Hive.box<UserModel>('currentUser');
 
   Future<bool> loginVerification(String userName, String password) async {
-    await Future.delayed(const Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 3));
     final userList = box.values.toList();
     if (userList.any((element) =>
         element.userName == userName && element.password == password)) {
@@ -29,7 +29,7 @@ class AuthenticationRepository {
   }
 
   Future<UserModel> recoverPassword(String email) async {
-    await Future.delayed(const Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 3));
     final values = box.values.toList();
     final currentUser = values.firstWhere((element) => element.eMail == email);
 
@@ -37,7 +37,7 @@ class AuthenticationRepository {
   }
 
   Future<bool> userVerification() async {
-    await Future.delayed(const Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 3));
     if (boxCurrentUser.isEmpty) {
       return false;
     } else {

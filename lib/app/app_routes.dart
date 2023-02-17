@@ -6,7 +6,7 @@ import 'modules/authentication/views/pages/splash_page.dart';
 import 'modules/history/views/pages/add_item_page.dart';
 import 'modules/history/views/pages/historic_page.dart';
 import 'modules/home/views/pages/home_page.dart';
-import 'modules/login/views/pages/login_page.dart';
+import 'modules/authentication/views/pages/login_page.dart';
 import 'modules/register/data/models/user_model.dart';
 import 'modules/register/views/pages/register_page.dart';
 
