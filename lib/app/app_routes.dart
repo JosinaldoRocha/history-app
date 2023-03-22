@@ -12,8 +12,8 @@ import 'modules/register/views/pages/register_page.dart';
 
 class AppRoutes {
   static Map<String, WidgetBuilder> get all => {
-        '/': (contexto) => const SplashPage(),
-        '/login': (contexto) => const LoginPage(),
+        '/': (context) => const SplashPage(),
+        '/login': (context) => const LoginPage(),
         '/register-page': (context) => const RegisterPage(),
         '/home': (context) => const HomePage(),
         '/history-page': (context) => HistoricPage(
