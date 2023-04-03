@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:my_history_app/app/modules/authentication/views/pages/recover_password_page.dart';
 import 'package:my_history_app/app/modules/history/data/models/history_model.dart';
 import 'package:my_history_app/app/modules/history/views/pages/edit_item_page.dart';
-import 'modules/authentication/views/pages/splash_page.dart';
+import 'modules/splash/views/pages/splash_page.dart';
 import 'modules/history/views/pages/add_item_page.dart';
 import 'modules/history/views/pages/historic_page.dart';
 import 'modules/home/views/pages/home_page.dart';

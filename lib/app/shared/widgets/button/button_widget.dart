@@ -64,10 +64,10 @@ class ButtonWidget extends StatelessWidget {
       minWidth: width ?? double.maxFinite,
       shape: outline
           ? RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(5.0),
+              borderRadius: BorderRadius.circular(10),
               side: BorderSide(color: outline ? LightColors().kcBlue : color!))
           : RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(5.0),
+              borderRadius: BorderRadius.circular(10),
             ),
       color: color ?? Theme.of(context).primaryColor,
       disabledColor: Theme.of(context).primaryColor,

@@ -32,25 +32,25 @@ class TextFieldLoginWidget extends ConsumerWidget {
           borderSide: const BorderSide(
             color: Color.fromARGB(255, 148, 146, 146),
           ),
-          borderRadius: BorderRadius.circular(5),
+          borderRadius: BorderRadius.circular(10),
         ),
         focusedBorder: OutlineInputBorder(
           borderSide: const BorderSide(
             color: Color.fromARGB(255, 148, 146, 146),
           ),
-          borderRadius: BorderRadius.circular(5),
+          borderRadius: BorderRadius.circular(10),
         ),
         errorBorder: OutlineInputBorder(
           borderSide: const BorderSide(
             color: Color.fromARGB(255, 148, 146, 146),
           ),
-          borderRadius: BorderRadius.circular(5),
+          borderRadius: BorderRadius.circular(10),
         ),
         focusedErrorBorder: OutlineInputBorder(
           borderSide: const BorderSide(
             color: Color.fromARGB(255, 148, 146, 146),
           ),
-          borderRadius: BorderRadius.circular(5),
+          borderRadius: BorderRadius.circular(10),
         ),
         suffixIcon: suffixIcon,
       ),

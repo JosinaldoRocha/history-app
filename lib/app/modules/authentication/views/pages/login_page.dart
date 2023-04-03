@@ -6,6 +6,7 @@ import 'package:my_history_app/app/modules/authentication/widgets/text_fild_logi
 import 'package:my_history_app/app/shared/widgets/button/button_widget.dart';
 import 'package:my_history_app/app/shared/widgets/spacing/space_widget.dart';
 import 'package:my_history_app/app/shared/widgets/texts/box_text.dart';
+import '../../../splash/providers/authentication_provider.dart';
 
 class LoginPage extends ConsumerStatefulWidget {
   const LoginPage({super.key});
@@ -56,7 +57,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
     } else if (loginState is SuccessLoginState) {
       return Scaffold(
         body: Padding(
-          padding: const EdgeInsets.all(30),
+          padding: const EdgeInsets.all(10),
           child: Form(
             key: formKey,
             child: ListView(
@@ -74,7 +75,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                     ),
                     const Space.x7(),
                     TextFieldLoginWidget(
-                      label: 'Usuário:',
+                      label: 'E-mail:',
                       controller: _userNameController,
                       items: loginState.data,
                       validator: (value) {
@@ -87,7 +88,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                         return null;
                       },
                     ),
-                    const Space.x4(),
+                    const Space.x5(),
                     TextFieldLoginWidget(
                       label: 'Senha:',
                       obscureText: _obscureText,
@@ -119,14 +120,14 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                           onPressed: () {
                             Navigator.pushNamed(context, '/recover-password');
                           },
-                          child: BoxText.body(
+                          child: BoxText.bodyBold(
                             'Esqueceu a senha?',
                             color: const Color.fromARGB(255, 3, 90, 240),
                           ),
                         ),
                       ],
                     ),
-                    const Space.x6(),
+                    const Space.x4(),
                     ButtonWidget(
                       title: 'Entrar',
                       onTap: () {
@@ -142,6 +143,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                         }
                       },
                     ),
+                    const Space.x4(),
                     _buildTextRow(),
                   ],
                 ),
@@ -161,8 +163,8 @@ class _LoginPageState extends ConsumerState<LoginPage> {
       children: [
         BoxText.body('Não possui uma conta?'),
         TextButton(
-          child: BoxText.body(
-            'cadastre-se!',
+          child: BoxText.bodyBold(
+            'Cadastre-se!',
             color: const Color.fromARGB(255, 3, 90, 240),
           ),
           onPressed: () {
