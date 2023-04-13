@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../shared/widgets/spacing/space_widget.dart';
@@ -17,6 +18,7 @@ class HomeBodyWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final homeState = ref.watch(homeProvider);
+    final auth = FirebaseAuth.instance;
 
     if (homeState is LoadingHomeState) {
       return const Center(
@@ -24,7 +26,7 @@ class HomeBodyWidget extends ConsumerWidget {
       );
     } else if (homeState is FailureHomeState) {
       return AlertDialog(
-        content: BoxText.body(homeState.errorMessage),
+        content: BoxText.body(''),
       );
     } else if (homeState is SuccessHomeState) {
       return Center(
@@ -41,6 +43,11 @@ class HomeBodyWidget extends ConsumerWidget {
                   arguments: user,
                 );
               },
+            ),
+            const Space.x5(),
+            BoxText.body(
+              'Olá, ${auth.currentUser}',
+              color: Colors.black,
             ),
             const Space.x5(),
             HomeButtonWidget(

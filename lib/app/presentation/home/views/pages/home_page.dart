@@ -67,7 +67,7 @@ class _HomePageState extends ConsumerState<HomePage> {
   @override
   Widget build(BuildContext context) {
     //final args = ModalRoute.of(context)?.settings.arguments as UserModel;
-    final auth = FirebaseAuth.instance;
+    final _auth = FirebaseAuth.instance;
 
     final clearState = ref.watch(clearRegisterProvider);
     logoutListen();
@@ -84,7 +84,7 @@ class _HomePageState extends ConsumerState<HomePage> {
           : const DrawerWidget(),
       appBar: AppBar(
         title: BoxText.body(
-          'Olá, ${auth.currentUser}',
+          'Olá, ${_auth.currentUser!.uid}',
           color: Colors.white,
         ),
       ),
