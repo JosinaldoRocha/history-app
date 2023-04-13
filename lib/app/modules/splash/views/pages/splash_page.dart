@@ -20,11 +20,13 @@ class _SplashPageState extends ConsumerState<SplashPage> {
           Navigator.pushReplacementNamed(
             context,
             '/home',
-            arguments: next.data,
+            // arguments: next.data,
           );
         }
         if (next is UnAuthenticated) {
-          Navigator.pushReplacementNamed(context, '/login');
+          Navigator.pushNamedAndRemoveUntil(
+              context, '/login', (route) => false);
+          //Navigator.pushReplacementNamed(context, '/login');
         }
       },
     );
@@ -34,7 +36,7 @@ class _SplashPageState extends ConsumerState<SplashPage> {
   void initState() {
     super.initState();
     Future.microtask(
-        () => ref.read(authenticationProvider.notifier).authentication());
+        () => ref.read(authenticationProvider.notifier).loadAutentication());
   }
 
   @override

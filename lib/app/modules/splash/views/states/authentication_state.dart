@@ -7,8 +7,8 @@ class InitialAuthenticationState implements AuthenticationState {}
 class LoadingAuthenticationState implements AuthenticationState {}
 
 class Authenticated implements AuthenticationState {
-  Authenticated({required this.data});
-  final UserModel data;
+  // Authenticated({required this.data});
+  // final UserModel data;
 }
 
 class UnAuthenticated implements AuthenticationState {

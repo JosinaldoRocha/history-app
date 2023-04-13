@@ -10,9 +10,9 @@ import 'home_button_widget.dart';
 class HomeBodyWidget extends ConsumerWidget {
   const HomeBodyWidget({
     super.key,
-    required this.user,
+    this.user,
   });
-  final UserModel user;
+  final UserModel? user;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

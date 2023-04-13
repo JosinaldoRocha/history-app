@@ -8,7 +8,7 @@ class LogoutStateNotifier extends StateNotifier<LogoutState> {
       : super(InitialLogoutState());
   final AuthenticationRepository authenticationRepository;
 
-  void logout() {
+  void logout() async {
     state = LoadingLogoutState();
 
     try {

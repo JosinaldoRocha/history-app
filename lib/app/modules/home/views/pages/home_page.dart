@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:my_history_app/app/modules/authentication/dependencies/dependencies.dart';
@@ -65,7 +66,8 @@ class _HomePageState extends ConsumerState<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final args = ModalRoute.of(context)?.settings.arguments as UserModel;
+    //final args = ModalRoute.of(context)?.settings.arguments as UserModel;
+    final auth = FirebaseAuth.instance;
 
     final clearState = ref.watch(clearRegisterProvider);
     logoutListen();
@@ -82,15 +84,15 @@ class _HomePageState extends ConsumerState<HomePage> {
           : const DrawerWidget(),
       appBar: AppBar(
         title: BoxText.body(
-          'Olá, ${args.name}!',
+          'Olá, ${auth.currentUser}',
           color: Colors.white,
         ),
       ),
       body: Container(
         color: const Color.fromARGB(255, 181, 214, 181),
-        child: Padding(
-          padding: const EdgeInsets.all(30),
-          child: HomeBodyWidget(user: args),
+        child: const Padding(
+          padding: EdgeInsets.all(30),
+          child: HomeBodyWidget(),
         ),
       ),
       floatingActionButton: IconButtonWidget(

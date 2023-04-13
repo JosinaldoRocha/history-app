@@ -8,14 +8,14 @@ class TextFieldLoginWidget extends ConsumerWidget {
   const TextFieldLoginWidget({
     super.key,
     required this.controller,
-    required this.items,
+    this.items,
     required this.validator,
     this.suffixIcon,
     this.obscureText = false,
     required this.label,
   });
   final TextEditingController controller;
-  final List<UserModel> items;
+  final List<UserModel>? items;
   final String? Function(String?)? validator;
   final Widget? suffixIcon;
   final bool? obscureText;
