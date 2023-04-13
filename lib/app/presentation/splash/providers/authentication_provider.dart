@@ -1,5 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:my_history_app/app/modules/splash/views/states/authentication_state_notifier.dart';
+import 'package:my_history_app/app/presentation/splash/views/states/authentication_state_notifier.dart';
 import '../../authentication/data/repositories/authentication_repository.dart';
 import '../views/states/authentication_state.dart';
 

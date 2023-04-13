@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:my_history_app/app/modules/register/data/models/user_model.dart';
-import 'package:my_history_app/app/modules/register/dependencies/dependencies.dart';
-import 'package:my_history_app/app/modules/register/views/states/add_user/add_user_state.dart';
+import 'package:my_history_app/app/presentation/register/data/models/user_model.dart';
+import 'package:my_history_app/app/presentation/register/dependencies/dependencies.dart';
+import 'package:my_history_app/app/presentation/register/views/states/add_user/add_user_state.dart';
 import 'package:my_history_app/app/shared/widgets/button/button_widget.dart';
 import 'package:my_history_app/app/shared/widgets/texts/box_text.dart';
 import '../../../../shared/widgets/input/info_text_field_widget.dart';

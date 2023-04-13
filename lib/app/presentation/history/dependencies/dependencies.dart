@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:my_history_app/app/modules/history/views/states/edit_history/edit_history_state.dart';
-import 'package:my_history_app/app/modules/history/views/states/edit_history/edit_history_state_notifier.dart';
+import 'package:my_history_app/app/presentation/history/views/states/edit_history/edit_history_state.dart';
+import 'package:my_history_app/app/presentation/history/views/states/edit_history/edit_history_state_notifier.dart';
 import '../data/repositories/history_repository.dart';
 import '../views/states/add-item-state/add_item_state.dart';
 import '../views/states/add-item-state/add_item_state_notifier.dart';

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:my_history_app/app/modules/history/dependencies/dependencies.dart';
-import 'package:my_history_app/app/modules/history/views/states/delete-item-state/delete_item_state.dart';
-import 'package:my_history_app/app/modules/history/views/states/edit_history/edit_history_state.dart';
-import 'package:my_history_app/app/modules/history/widgets/history/history_list_widget.dart';
+import 'package:my_history_app/app/presentation/history/dependencies/dependencies.dart';
+import 'package:my_history_app/app/presentation/history/views/states/delete-item-state/delete_item_state.dart';
+import 'package:my_history_app/app/presentation/history/views/states/edit_history/edit_history_state.dart';
+import 'package:my_history_app/app/presentation/history/widgets/history/history_list_widget.dart';
 import 'package:my_history_app/app/shared/widgets/texts/box_text.dart';
 import '../../../register/data/models/user_model.dart';
 

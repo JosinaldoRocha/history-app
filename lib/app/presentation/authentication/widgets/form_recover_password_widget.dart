@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:my_history_app/app/modules/authentication/views/states/recover_password/recover_password/recover_password_state.dart';
+import 'package:my_history_app/app/presentation/authentication/views/states/recover_password/recover_password/recover_password_state.dart';
 import '../../../shared/widgets/button/button_widget.dart';
 import '../../../shared/widgets/input/info_text_field_widget.dart';
 import '../../../shared/widgets/spacing/space_widget.dart';

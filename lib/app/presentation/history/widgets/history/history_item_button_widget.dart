@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:my_history_app/app/modules/history/data/models/history_model.dart';
-import 'package:my_history_app/app/modules/history/widgets/delete_item/alert_dialog_delete_item_widget.dart';
-import 'package:my_history_app/app/modules/history/widgets/history/history_report_widget.dart';
+import 'package:my_history_app/app/presentation/history/data/models/history_model.dart';
+import 'package:my_history_app/app/presentation/history/widgets/delete_item/alert_dialog_delete_item_widget.dart';
+import 'package:my_history_app/app/presentation/history/widgets/history/history_report_widget.dart';
 import '../../../../shared/widgets/texts/box_text.dart';
 
 class HistoryItemButtonWidget extends ConsumerWidget {

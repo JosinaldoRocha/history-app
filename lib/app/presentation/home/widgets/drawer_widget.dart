@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:my_history_app/app/modules/home/widgets/icon_button_widget.dart';
+import 'package:my_history_app/app/presentation/home/widgets/icon_button_widget.dart';
 import '../../../shared/widgets/texts/box_text.dart';
 import '../dependencies/dependencies.dart';
 

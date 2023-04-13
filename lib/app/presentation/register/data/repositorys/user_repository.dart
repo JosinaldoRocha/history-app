@@ -1,6 +1,6 @@
 import 'package:hive/hive.dart';
-import 'package:my_history_app/app/modules/history/data/models/history_model.dart';
-import 'package:my_history_app/app/modules/register/data/models/user_model.dart';
+import 'package:my_history_app/app/presentation/history/data/models/history_model.dart';
+import 'package:my_history_app/app/presentation/register/data/models/user_model.dart';
 
 class UserRepository {
   final box = Hive.box<UserModel>('users');

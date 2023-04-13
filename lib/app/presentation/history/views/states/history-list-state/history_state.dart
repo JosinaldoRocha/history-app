@@ -1,4 +1,4 @@
-import 'package:my_history_app/app/modules/history/data/models/history_model.dart';
+import 'package:my_history_app/app/presentation/history/data/models/history_model.dart';
 
 abstract class HistoryState {}
 

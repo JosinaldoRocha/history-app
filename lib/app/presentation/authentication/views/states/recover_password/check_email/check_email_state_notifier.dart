@@ -1,5 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:my_history_app/app/modules/authentication/data/repositories/authentication_repository.dart';
+import 'package:my_history_app/app/presentation/authentication/data/repositories/authentication_repository.dart';
 import 'check_email_state.dart';
 
 class CheckEmailStateNotifier extends StateNotifier<CheckEmailState> {

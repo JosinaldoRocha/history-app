@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:my_history_app/app/modules/home/views/states/home_state.dart';
-import 'package:my_history_app/app/modules/register/data/repositorys/user_repository.dart';
+import 'package:my_history_app/app/presentation/home/views/states/home_state.dart';
+import 'package:my_history_app/app/presentation/register/data/repositorys/user_repository.dart';
 
 class HomeStateNotifier extends StateNotifier<HomeState> {
   HomeStateNotifier({required this.userRepository}) : super(InitialHomeState());

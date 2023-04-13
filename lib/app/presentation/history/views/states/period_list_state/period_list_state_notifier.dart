@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:my_history_app/app/modules/history/data/repositories/history_repository.dart';
-import 'package:my_history_app/app/modules/history/views/states/period_list_state/period_list_state.dart';
+import 'package:my_history_app/app/presentation/history/data/repositories/history_repository.dart';
+import 'package:my_history_app/app/presentation/history/views/states/period_list_state/period_list_state.dart';
 
 class PeriodListNotifier extends StateNotifier<PeriodListState> {
   PeriodListNotifier({required this.historyRepository})

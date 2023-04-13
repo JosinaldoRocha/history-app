@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:my_history_app/app/modules/history/data/repositories/history_repository.dart';
-import 'package:my_history_app/app/modules/history/views/states/relationship_list_state/relationship_list_state.dart';
+import 'package:my_history_app/app/presentation/history/data/repositories/history_repository.dart';
+import 'package:my_history_app/app/presentation/history/views/states/relationship_list_state/relationship_list_state.dart';
 
 class RelationshipListNotifier extends StateNotifier<RelationshipListState> {
   RelationshipListNotifier({required this.historyRepository})

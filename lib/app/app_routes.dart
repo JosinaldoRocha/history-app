@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:my_history_app/app/modules/authentication/views/pages/recover_password_page.dart';
-import 'package:my_history_app/app/modules/history/data/models/history_model.dart';
-import 'package:my_history_app/app/modules/history/views/pages/edit_item_page.dart';
-import 'modules/splash/views/pages/splash_page.dart';
-import 'modules/history/views/pages/add_item_page.dart';
-import 'modules/history/views/pages/historic_page.dart';
-import 'modules/home/views/pages/home_page.dart';
-import 'modules/authentication/views/pages/login_page.dart';
-import 'modules/register/data/models/user_model.dart';
-import 'modules/register/views/pages/register_page.dart';
+import 'package:my_history_app/app/presentation/authentication/views/pages/recover_password_page.dart';
+import 'package:my_history_app/app/presentation/history/data/models/history_model.dart';
+import 'package:my_history_app/app/presentation/history/views/pages/edit_item_page.dart';
+import 'presentation/splash/views/pages/splash_page.dart';
+import 'presentation/history/views/pages/add_item_page.dart';
+import 'presentation/history/views/pages/historic_page.dart';
+import 'presentation/home/views/pages/home_page.dart';
+import 'presentation/authentication/views/pages/login_page.dart';
+import 'presentation/register/data/models/user_model.dart';
+import 'presentation/register/views/pages/register_page.dart';
 
 class AppRoutes {
   static Map<String, WidgetBuilder> get all => {

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_history_app/app/modules/history/data/models/history_model.dart';
+import 'package:my_history_app/app/presentation/history/data/models/history_model.dart';
 import '../../../../shared/widgets/spacing/space_widget.dart';
 import '../../../../shared/widgets/texts/box_text.dart';
 

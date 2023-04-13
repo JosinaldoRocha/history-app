@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:my_history_app/app/modules/authentication/dependencies/dependencies.dart';
-import 'package:my_history_app/app/modules/authentication/views/states/recover_password/check_email/check_email_state.dart';
-import 'package:my_history_app/app/modules/authentication/widgets/form_recover_password_widget.dart';
+import 'package:my_history_app/app/presentation/authentication/dependencies/dependencies.dart';
+import 'package:my_history_app/app/presentation/authentication/views/states/recover_password/check_email/check_email_state.dart';
+import 'package:my_history_app/app/presentation/authentication/widgets/form_recover_password_widget.dart';
 import 'package:my_history_app/app/shared/widgets/button/button_widget.dart';
 import 'package:my_history_app/app/shared/widgets/spacing/space_widget.dart';
 import 'package:my_history_app/app/shared/widgets/texts/box_text.dart';

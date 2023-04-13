@@ -1,7 +1,7 @@
 import 'package:dropdown_textfield/dropdown_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:my_history_app/app/modules/register/data/models/user_model.dart';
+import 'package:my_history_app/app/presentation/register/data/models/user_model.dart';
 import 'package:my_history_app/app/shared/widgets/spacing/space_widget.dart';
 import '../../data/models/history_model.dart';
 import '../../dependencies/dependencies.dart';

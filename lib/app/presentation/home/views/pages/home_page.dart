@@ -1,14 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:my_history_app/app/modules/authentication/dependencies/dependencies.dart';
-import 'package:my_history_app/app/modules/authentication/views/states/logout_state/logout_state.dart';
-import 'package:my_history_app/app/modules/home/dependencies/dependencies.dart';
-import 'package:my_history_app/app/modules/home/widgets/drawer_widget.dart';
-import 'package:my_history_app/app/modules/home/widgets/home_body_widget.dart';
-import 'package:my_history_app/app/modules/home/widgets/icon_button_widget.dart';
-import 'package:my_history_app/app/modules/register/data/models/user_model.dart';
-import 'package:my_history_app/app/modules/register/views/states/clear_register/clear_register_stete.dart';
+import 'package:my_history_app/app/presentation/authentication/dependencies/dependencies.dart';
+import 'package:my_history_app/app/presentation/authentication/views/states/logout_state/logout_state.dart';
+import 'package:my_history_app/app/presentation/home/dependencies/dependencies.dart';
+import 'package:my_history_app/app/presentation/home/widgets/drawer_widget.dart';
+import 'package:my_history_app/app/presentation/home/widgets/home_body_widget.dart';
+import 'package:my_history_app/app/presentation/home/widgets/icon_button_widget.dart';
+import 'package:my_history_app/app/presentation/register/views/states/clear_register/clear_register_stete.dart';
 import 'package:my_history_app/app/shared/widgets/texts/box_text.dart';
 
 class HomePage extends ConsumerStatefulWidget {
@@ -66,10 +65,9 @@ class _HomePageState extends ConsumerState<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    //final args = ModalRoute.of(context)?.settings.arguments as UserModel;
-    final _auth = FirebaseAuth.instance;
-
+    final auth = FirebaseAuth.instance;
     final clearState = ref.watch(clearRegisterProvider);
+
     logoutListen();
     clearRegisterListen();
 
@@ -84,7 +82,7 @@ class _HomePageState extends ConsumerState<HomePage> {
           : const DrawerWidget(),
       appBar: AppBar(
         title: BoxText.body(
-          'Olá, ${_auth.currentUser!.uid}',
+          'Olá, ${auth.currentUser!.email}',
           color: Colors.white,
         ),
       ),

@@ -1,5 +1,5 @@
 import 'package:hive/hive.dart';
-import 'package:my_history_app/app/modules/history/data/models/history_model.dart';
+import 'package:my_history_app/app/presentation/history/data/models/history_model.dart';
 
 class HistoryRepository {
   final box = Hive.box<HistoryModel>('history');
