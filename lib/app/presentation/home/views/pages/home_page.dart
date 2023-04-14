@@ -82,7 +82,7 @@ class _HomePageState extends ConsumerState<HomePage> {
           : const DrawerWidget(),
       appBar: AppBar(
         title: BoxText.body(
-          'Olá, ${auth.currentUser!.email}',
+          'Olá, ${auth.currentUser!.displayName}',
           color: Colors.white,
         ),
       ),

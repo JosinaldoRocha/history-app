@@ -21,21 +21,23 @@ class AddUserStateNotifier extends StateNotifier<AddUserState> {
     }
   }
 
-  void registerUsingEmailPassword(
-    String email,
-    String password,
-  ) async {
+  void registerUsingEmailPassword({
+    required String name,
+    required String email,
+    required String password,
+  }) async {
     state = LoadingAddUserState();
     try {
       await authRepository.signUp(
-        email,
-        password,
+        name: name,
+        email: email,
+        password: password,
       );
       List<UserModel> data = [];
       //final result = await userRepository.getAll();
       state = SuccessAddUserState(data: data);
     } catch (e) {
-      FailureAddUserState(errorMessage: 'Erro ao carregar dados');
+      state = FailureAddUserState(errorMessage: 'Erro ao carregar dados');
     }
   }
 }

@@ -62,11 +62,6 @@ class AuthenticationRepository {
 
   Future<bool> userVerification() async {
     await Future.delayed(const Duration(seconds: 3));
-    // if (boxCurrentUser.isEmpty) {
-    //   return false;
-    // } else {
-    //   return true;
-    // }
 
     if (_auth.currentUser != null) {
       return true;
@@ -83,23 +78,31 @@ class AuthenticationRepository {
     _auth.signOut();
   }
 
-  Future<String?> signUp(String email, String password) async {
+  Future<User?> signUp({
+    required String name,
+    required String email,
+    required String password,
+  }) async {
+    FirebaseAuth auth = FirebaseAuth.instance;
+    User? user;
     try {
-      UserCredential userCredential =
-          await _auth.createUserWithEmailAndPassword(
+      UserCredential userCredential = await auth.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
-      return "Sign up successful";
+      user = userCredential.user;
+      await user!.updateDisplayName(name);
+      await user.reload();
+      user = auth.currentUser;
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
-        return 'The password provided is too weak.';
+        print('The password provided is too weak.');
       } else if (e.code == 'email-already-in-use') {
-        return 'The account already exists for that email.';
+        print('The account already exists for that email.');
       }
-      return e.message;
     } catch (e) {
-      return e.toString();
+      print(e);
     }
+    return user;
   }
 }
