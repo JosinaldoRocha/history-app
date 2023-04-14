@@ -1,28 +1,39 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:my_history_app/app/presentation/authentication/data/repositories/authentication_repository.dart';
 import 'package:my_history_app/app/presentation/register/data/models/user_model.dart';
-import 'package:my_history_app/app/presentation/register/data/repositorys/user_repository.dart';
 import 'package:my_history_app/app/presentation/register/views/states/add_user/add_user_state.dart';
 
 class AddUserStateNotifier extends StateNotifier<AddUserState> {
-  AddUserStateNotifier(this.userRepository) : super(InitialAddUserState());
-  final UserRepository userRepository;
+  AddUserStateNotifier(
+    this.authRepository,
+  ) : super(InitialAddUserState());
+  //final UserRepository userRepository;
+  final AuthenticationRepository authRepository;
 
   void load() async {
     state = LoadingAddUserState();
     try {
-      final result = await userRepository.getAll();
-      state = SuccessAddUserState(data: result);
+      List<UserModel> data = [];
+      // final result = await userRepository.getAll();
+      state = SuccessAddUserState(data: data);
     } catch (e) {
       FailureAddUserState(errorMessage: 'Erro ao carregar dados');
     }
   }
 
-  void addUser(UserModel item) async {
+  void registerUsingEmailPassword(
+    String email,
+    String password,
+  ) async {
     state = LoadingAddUserState();
     try {
-      await userRepository.addUser(item);
-      final result = await userRepository.getAll();
-      state = SuccessAddUserState(data: result);
+      await authRepository.signUp(
+        email,
+        password,
+      );
+      List<UserModel> data = [];
+      //final result = await userRepository.getAll();
+      state = SuccessAddUserState(data: data);
     } catch (e) {
       FailureAddUserState(errorMessage: 'Erro ao carregar dados');
     }
