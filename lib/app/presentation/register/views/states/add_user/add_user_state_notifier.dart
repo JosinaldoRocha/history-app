@@ -17,7 +17,7 @@ class AddUserStateNotifier extends StateNotifier<AddUserState> {
     }
   }
 
-  void registerUsingEmailPassword({
+  void signUp({
     required String name,
     required String email,
     required String password,

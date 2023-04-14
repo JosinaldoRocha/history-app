@@ -185,9 +185,7 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
                     //   confirmPassword: _confirmPasswordController.text,
                     //   id: id,
                     // );
-                    ref
-                        .read(addUserProvider.notifier)
-                        .registerUsingEmailPassword(
+                    ref.read(addUserProvider.notifier).signUp(
                           name: _nameController.text,
                           email: _eMailController.text,
                           password: _confirmPasswordController.text,
