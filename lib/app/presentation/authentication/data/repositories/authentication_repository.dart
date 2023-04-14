@@ -83,25 +83,23 @@ class AuthenticationRepository {
     required String email,
     required String password,
   }) async {
-    FirebaseAuth auth = FirebaseAuth.instance;
     User? user;
     try {
-      UserCredential userCredential = await auth.createUserWithEmailAndPassword(
+      UserCredential userCredential =
+          await _auth.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
       user = userCredential.user;
       await user!.updateDisplayName(name);
       await user.reload();
-      user = auth.currentUser;
+      user = _auth.currentUser;
     } on FirebaseAuthException catch (e) {
-      if (e.code == 'weak-password') {
-        print('The password provided is too weak.');
-      } else if (e.code == 'email-already-in-use') {
-        print('The account already exists for that email.');
+      if (e.code == 'email-already-in-use') {
+        print('A conta já existe para esse e-mail.');
       }
     } catch (e) {
-      print(e);
+      e.toString();
     }
     return user;
   }

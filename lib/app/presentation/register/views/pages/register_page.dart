@@ -4,6 +4,7 @@ import 'package:my_history_app/app/presentation/register/dependencies/dependenci
 import 'package:my_history_app/app/presentation/register/views/states/add_user/add_user_state.dart';
 import 'package:my_history_app/app/shared/widgets/button/button_widget.dart';
 import 'package:my_history_app/app/shared/widgets/spacing/space_widget.dart';
+import 'package:my_history_app/app/shared/widgets/validators/validators.dart';
 import '../../../../shared/widgets/input/info_text_field_widget.dart';
 
 class RegisterPage extends ConsumerStatefulWidget {
@@ -33,12 +34,6 @@ _clearTexts() {
 }
 
 class _RegisterPageState extends ConsumerState<RegisterPage> {
-  @override
-  void initState() {
-    super.initState();
-    //Future.microtask(() => ref.read(addUserProvider.notifier).load());
-  }
-
   void _addUserListen() {
     ref.listen(
       addUserProvider,
@@ -116,33 +111,28 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
                 controller: _eMailController,
                 label: 'E-mail:',
                 hintText: 'Ex: seuemail@.com',
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Este campo não pode ser vazio';
-                  } else if (value.length < 11) {
-                    return 'O e-mail conter, pelo menos 11 dígitos';
-                  } else if (!value.contains('@') || !value.contains('.com')) {
-                    return 'Formato de e-mail inválido';
-                  }
-                  // } else if (addState.data.any(
-                  //     (element) => element.eMail == _eMailController.text)) {
-                  //   return 'Endereço de e-mail existente';
-                  // }
-                  return null;
-                },
+                validator: (p0) => Validators.email(_eMailController.text),
+                // validator: (value) {
+                //   if (value == null || value.isEmpty) {
+                //     return 'Este campo não pode ser vazio';
+                //   } else if (value.length < 11) {
+                //     return 'O e-mail conter, pelo menos 11 dígitos';
+                //   } else if (!value.contains('@') || !value.contains('.com')) {
+                //     return 'Formato de e-mail inválido';
+                //   }
+                //   // } else if (addState.data.any(
+                //   //     (element) => element.eMail == _eMailController.text)) {
+                //   //   return 'Endereço de e-mail existente';
+                //   // }
+                //   return null;
+                // },
               ),
               TextFieldWidget(
                 controller: _passwordController,
                 label: 'Senha:',
                 hintText: 'Crie uma senha para sua conta:',
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Este campo não pode ser vazio';
-                  } else if (value.length < 8) {
-                    return 'Sua senha deve conter, pelo menos 8 caracteres';
-                  }
-                  return null;
-                },
+                validator: (p0) =>
+                    Validators.password(_passwordController.text),
               ),
               TextFieldWidget(
                 controller: _confirmPasswordController,
