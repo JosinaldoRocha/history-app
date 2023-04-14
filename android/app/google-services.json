@@ -1,34 +1,41 @@
 {
   "project_info": {
-    "project_number": "920012027651",
-    "project_id": "historyapp-6b230",
-    "storage_bucket": "historyapp-6b230.appspot.com"
+    "project_number": "331548261481",
+    "project_id": "hystory-app",
+    "storage_bucket": "hystory-app.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:920012027651:android:a4cf8ba79f50415c95db36",
+        "mobilesdk_app_id": "1:331548261481:android:946136a735f4c88a9276f8",
         "android_client_info": {
           "package_name": "com.example.my_history_app"
         }
       },
       "oauth_client": [
         {
-          "client_id": "920012027651-tt4p19savrgn56ttun6u8ofajbsgaesr.apps.googleusercontent.com",
+          "client_id": "331548261481-5hs64cqjvknnghps1a6pfpq3quls9bpe.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAdY70-D2HqJgRdBe4W7COOhuEQGYn5iWs"
+          "current_key": "AIzaSyCtNlDTiMylQ3m_wmVHHwerlYbb8xkm-D4"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "920012027651-tt4p19savrgn56ttun6u8ofajbsgaesr.apps.googleusercontent.com",
+              "client_id": "331548261481-5hs64cqjvknnghps1a6pfpq3quls9bpe.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "331548261481-ir40encahpbc0oa6mpm2pq99r9fsd4uf.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.myHistoryApp"
+              }
             }
           ]
         }
