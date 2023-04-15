@@ -153,7 +153,8 @@ class _AddItemPageState extends ConsumerState<AddItemPage> {
                   whatHappened: whatHappenedController.dropDownValue!.name,
                   amountTimes: amountTimesController.dropDownValue!.name,
                   amountPeriod: amountPeriodsController.dropDownValue!.name,
-                  id: user.id,
+                  //TODO alterar id
+                  id: 0,
                 );
                 ref.read(addItemProvider.notifier).addItem(history);
               }

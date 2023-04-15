@@ -14,9 +14,9 @@ class UserModel extends HiveObject {
   @HiveField(4)
   String password;
   @HiveField(5)
-  String confirmPassword;
+  String? confirmPassword;
   @HiveField(6)
-  int id;
+  String? id;
 
   UserModel({
     required this.name,
@@ -24,7 +24,7 @@ class UserModel extends HiveObject {
     required this.userName,
     required this.eMail,
     required this.password,
-    required this.confirmPassword,
-    required this.id,
+    this.confirmPassword,
+    this.id,
   });
 }

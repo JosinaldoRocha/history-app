@@ -24,7 +24,8 @@ class _HistoricPageState extends ConsumerState<HistoricPage> {
       deleteItemProvider,
       (previous, next) {
         if (next is SuccessDeleteItemState) {
-          ref.read(historyProvider.notifier).load(widget.args.id);
+          //TODO alterar id
+          // ref.read(historyProvider.notifier).load(widget.args.id!);
         }
         if (next is FailureDeleteItemState) {
           showDialog(
@@ -43,7 +44,8 @@ class _HistoricPageState extends ConsumerState<HistoricPage> {
       editHistoryProvider,
       (previous, next) {
         if (next is SuccessEditHistoryState) {
-          ref.read(historyProvider.notifier).load(widget.args.id);
+          //TODO alterar id
+          // ref.read(historyProvider.notifier).load(widget.args.id!);
         }
         if (next is FailureEditHistoryState) {
           showDialog(
@@ -60,8 +62,9 @@ class _HistoricPageState extends ConsumerState<HistoricPage> {
   @override
   void initState() {
     super.initState();
-    Future.microtask(
-        () => ref.read(historyProvider.notifier).load(widget.args.id));
+    // Future.microtask(
+    //     //TODO alterar id
+    //     () => ref.read(historyProvider.notifier).load(widget.args.id));
   }
 
   @override

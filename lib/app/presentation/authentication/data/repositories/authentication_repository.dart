@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:hive/hive.dart';
 import 'package:my_history_app/app/presentation/register/data/models/user_model.dart';
@@ -78,7 +79,7 @@ class AuthenticationRepository {
     _auth.signOut();
   }
 
-  Future<User?> signUp({
+  Future<String?> signUp({
     required String name,
     required String email,
     required String password,
@@ -96,11 +97,30 @@ class AuthenticationRepository {
       user = _auth.currentUser;
     } on FirebaseAuthException catch (e) {
       if (e.code == 'email-already-in-use') {
-        print('A conta já existe para esse e-mail.');
+        return 'A conta já existe para esse e-mail.';
       }
     } catch (e) {
-      e.toString();
+      return e.toString();
     }
-    return user;
+    return user?.uid;
+  }
+
+  Future<void> saveUser(UserModel user, String userId) async {
+    final collection = FirebaseFirestore.instance.collection('users');
+
+    Map<String, dynamic> userData = {
+      'name': user.name,
+      'surname': user.surname,
+      'user-name': user.userName,
+      'email': user.eMail,
+      'password': user.password,
+      'id': userId,
+    };
+
+    collection
+        .doc(userId)
+        .set(userData)
+        .then((value) => print("User data added"))
+        .catchError((error) => print("Failed to add user data: $error"));
   }
 }
