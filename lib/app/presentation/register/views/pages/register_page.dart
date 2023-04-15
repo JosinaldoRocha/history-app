@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:my_history_app/app/presentation/register/data/models/user_model.dart';
 import 'package:my_history_app/app/presentation/register/dependencies/dependencies.dart';
 import 'package:my_history_app/app/presentation/register/views/states/add_user/add_user_state.dart';
 import 'package:my_history_app/app/shared/widgets/button/button_widget.dart';
@@ -189,6 +190,13 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
                           name: _nameController.text,
                           email: _eMailController.text,
                           password: _confirmPasswordController.text,
+                          user: UserModel(
+                            name: _nameController.text,
+                            surname: _surnameController.text,
+                            userName: _userNameController.text,
+                            eMail: _eMailController.text,
+                            password: _passwordController.text,
+                          ),
                         );
                     _clearTexts();
                     //Navigator.pushReplacementNamed(context, '/');
