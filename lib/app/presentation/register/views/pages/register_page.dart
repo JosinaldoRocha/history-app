@@ -80,53 +80,40 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
                   return null;
                 },
               ),
-              // TextFieldWidget(
-              //   controller: _surnameController,
-              //   label: 'Sobrenome:',
-              //   hintText: 'Informe seu sobrenome',
-              //   validator: (value) {
-              //     if (value == null || value.isEmpty) {
-              //       return 'Este campo não pode ser vazio';
-              //     }
-              //     return null;
-              //   },
-              // ),
-              // TextFieldWidget(
-              //   controller: _userNameController,
-              //   label: 'Nome de usuário:',
-              //   hintText: 'Ex: Usuario123',
-              //   validator: (value) {
-              //     if (value == null || value.isEmpty) {
-              //       return 'Este campo não pode ser vazio';
-              //     } else if (value.length < 6) {
-              //       return 'O nome de usuário deve conter, pelo menos 6 dígitos';
-              //     } else if (addState.data.any((element) =>
-              //         element.userName == _userNameController.text)) {
-              //       return 'Usuário existente. Tente um nome de usuário diferente';
-              //     }
+              TextFieldWidget(
+                controller: _surnameController,
+                label: 'Sobrenome:',
+                hintText: 'Informe seu sobrenome',
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Este campo não pode ser vazio';
+                  }
+                  return null;
+                },
+              ),
+              TextFieldWidget(
+                controller: _userNameController,
+                label: 'Nome de usuário:',
+                hintText: 'Ex: Usuario123',
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Este campo não pode ser vazio';
+                  } else if (value.length < 6) {
+                    return 'O nome de usuário deve conter, pelo menos 6 dígitos';
+                  }
+                  // else if (addState.data.any((element) =>
+                  //     element.userName == _userNameController.text)) {
+                  //   return 'Usuário existente. Tente um nome de usuário diferente';
+                  // }
 
-              //     return null;
-              //   },
-              // ),
+                  return null;
+                },
+              ),
               TextFieldWidget(
                 controller: _eMailController,
                 label: 'E-mail:',
                 hintText: 'Ex: seuemail@.com',
                 validator: (p0) => Validators.email(_eMailController.text),
-                // validator: (value) {
-                //   if (value == null || value.isEmpty) {
-                //     return 'Este campo não pode ser vazio';
-                //   } else if (value.length < 11) {
-                //     return 'O e-mail conter, pelo menos 11 dígitos';
-                //   } else if (!value.contains('@') || !value.contains('.com')) {
-                //     return 'Formato de e-mail inválido';
-                //   }
-                //   // } else if (addState.data.any(
-                //   //     (element) => element.eMail == _eMailController.text)) {
-                //   //   return 'Endereço de e-mail existente';
-                //   // }
-                //   return null;
-                // },
               ),
               TextFieldWidget(
                 controller: _passwordController,
@@ -150,25 +137,6 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
                   return null;
                 },
               ),
-              // TextFieldWidget(
-              //   controller: _idController,
-              //   label: 'Id de usuário:',
-              //   hintText: 'Ex: 1',
-              //   onTap: (p0) {
-              //     _idController.text;
-              //   },
-              //   validator: (value) {
-              //     if (value == null || value.isEmpty) {
-              //       return 'Este campo não pode ser vazio';
-              //     }
-              //     int id = int.parse(_idController.text);
-              //     if (addState.data.any((element) => element.id == id)) {
-              //       return 'Id existente. Tente um id diferente';
-              //     }
-
-              //     return null;
-              //   },
-              // ),
               const Space.x5(),
               ButtonWidget(
                 isLoading: addState is LoadingAddUserState,
@@ -176,16 +144,6 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
                 onTap: () {
                   final validadeForm = _formKey.currentState!.validate();
                   if (validadeForm) {
-                    //int id = int.parse(_idController.text);
-                    // UserModel item = UserModel(
-                    //   name: _nameController.text,
-                    //   surname: _surnameController.text,
-                    //   userName: _userNameController.text,
-                    //   eMail: _eMailController.text,
-                    //   password: _passwordController.text,
-                    //   confirmPassword: _confirmPasswordController.text,
-                    //   id: id,
-                    // );
                     ref.read(addUserProvider.notifier).signUp(
                           name: _nameController.text,
                           email: _eMailController.text,
@@ -199,7 +157,6 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
                           ),
                         );
                     _clearTexts();
-                    //Navigator.pushReplacementNamed(context, '/');
                   }
                 },
               ),
@@ -208,8 +165,5 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
         ),
       ),
     );
-    //} else {
-    //  return Container();
-    // }
   }
 }
