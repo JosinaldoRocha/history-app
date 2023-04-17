@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:my_history_app/app/presentation/authentication/data/repositories/authentication_repository.dart';
 import 'package:my_history_app/app/presentation/register/data/models/user_model.dart';
@@ -31,13 +32,22 @@ class AddUserStateNotifier extends StateNotifier<AddUserState> {
         email: email,
         password: password,
       );
-      if (result != null) {
-        try {
-          await authRepository.saveUser(user, result);
-          state = SuccessAddUserState();
-        } catch (e) {
-          state = FailureAddUserState(errorMessage: 'Erro ao carregar dados');
-        }
+
+      try {
+        await authRepository.saveUser(user, result!);
+        state = SuccessAddUserState();
+      } catch (e) {
+        state = FailureAddUserState(errorMessage: 'Erro ao carregar dados');
+      }
+
+      state = SuccessAddUserState();
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'email-already-in-use') {
+        state = FailureAddUserState(
+            errorMessage: 'A conta já existe para esse e-mail.');
+      }
+      if (e.code == 'weak-password') {
+        state = FailureAddUserState(errorMessage: 'Senha fraca.');
       }
     } catch (e) {
       state = FailureAddUserState(errorMessage: 'Erro ao carregar dados');

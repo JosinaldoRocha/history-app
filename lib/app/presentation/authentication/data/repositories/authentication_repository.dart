@@ -85,23 +85,15 @@ class AuthenticationRepository {
     required String password,
   }) async {
     User? user;
-    try {
-      UserCredential userCredential =
-          await _auth.createUserWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
-      user = userCredential.user;
-      await user!.updateDisplayName(name);
-      await user.reload();
-      user = _auth.currentUser;
-    } on FirebaseAuthException catch (e) {
-      if (e.code == 'email-already-in-use') {
-        return 'A conta já existe para esse e-mail.';
-      }
-    } catch (e) {
-      return e.toString();
-    }
+    UserCredential userCredential = await _auth.createUserWithEmailAndPassword(
+      email: email,
+      password: password,
+    );
+    user = userCredential.user;
+    await user!.updateDisplayName(name);
+    await user.reload();
+    user = _auth.currentUser;
+
     return user?.uid;
   }
 
