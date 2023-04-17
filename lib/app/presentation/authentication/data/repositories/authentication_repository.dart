@@ -38,19 +38,6 @@ class AuthenticationRepository {
     );
     User? user = userCredential.user;
     return user;
-
-    // try { }
-    // on FirebaseAuthException catch (e) {
-    //   if (e.code == 'user-not-found') {
-    //     return 'Usuário não encontrado.';
-    //   } else if (e.code == 'wrong-password') {
-    //     return 'Senha incorreta.';
-    //   } else {
-    //     return e.message;
-    //   }
-    // } catch (e) {
-    //   return e.toString();
-    //}
   }
 
   Future<UserModel> recoverPassword(String email) async {
