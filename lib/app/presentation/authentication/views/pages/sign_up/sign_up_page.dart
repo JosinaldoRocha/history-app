@@ -35,7 +35,7 @@ _clearTexts() {
 }
 
 class _SignUpPageState extends ConsumerState<SignUpPage> {
-  void _addUserListen() {
+  void _signUpListen() {
     ref.listen(
       signUpProvider,
       <SignUpState>(previous, next) {
@@ -57,7 +57,7 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
   @override
   Widget build(BuildContext context) {
     final addState = ref.watch(signUpProvider);
-    _addUserListen();
+    _signUpListen();
 
     return Scaffold(
       appBar: AppBar(

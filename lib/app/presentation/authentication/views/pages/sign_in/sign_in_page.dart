@@ -1,30 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:my_history_app/app/presentation/authentication/dependencies/dependencies.dart';
-import 'package:my_history_app/app/presentation/authentication/views/states/login_state/login_state.dart';
+import 'package:my_history_app/app/presentation/authentication/views/states/sign_in_state/sign_in_state.dart';
 import 'package:my_history_app/app/presentation/authentication/widgets/text_fild_login_widget.dart';
 import 'package:my_history_app/app/presentation/splash/views/states/authentication_state.dart';
 import 'package:my_history_app/app/shared/widgets/button/button_widget.dart';
 import 'package:my_history_app/app/shared/widgets/spacing/space_widget.dart';
 import 'package:my_history_app/app/shared/widgets/texts/box_text.dart';
-import '../../../splash/providers/authentication_provider.dart';
+import 'package:my_history_app/app/shared/widgets/validators/validators.dart';
 
-class LoginPage extends ConsumerStatefulWidget {
-  const LoginPage({super.key});
+class SignInPage extends ConsumerStatefulWidget {
+  const SignInPage({super.key});
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _LoginPageState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _SignInPageState();
 }
 
-class _LoginPageState extends ConsumerState<LoginPage> {
-  void _listen() {
-    ref.listen<AuthenticationState>(
-      authenticationProvider,
+class _SignInPageState extends ConsumerState<SignInPage> {
+  void _signInlisten() {
+    ref.listen<SignInState>(
+      signInProvider,
       (previous, next) {
-        if (next is Authenticated) {
+        if (next is SuccessSignInState) {
           Navigator.of(context).pushReplacementNamed('/');
         }
-        if (next is UnAuthenticated) {
+        if (next is FailureSignInState) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               backgroundColor: Colors.red,
@@ -49,27 +49,14 @@ class _LoginPageState extends ConsumerState<LoginPage> {
 
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
-  String image = 'assets/images/logo.png';
   final formKey = GlobalKey<FormState>();
   bool _obscureText = true;
 
   @override
   Widget build(BuildContext context) {
-    final authentication = ref.watch(authenticationProvider);
-    _listen();
+    final authentication = ref.watch(signInProvider);
+    _signInlisten();
 
-    // if (loginState is LoadingLoginState) {
-    //   return Container(
-    //     color: Colors.white,
-    //     child: const Center(
-    //       child: CircularProgressIndicator(),
-    //     ),
-    //   );
-    // } else if (loginState is FailureLoginState) {
-    //   return AlertDialog(
-    //     content: BoxText.body(loginState.errorMessage),
-    //   );
-    // if (loginState is SuccessLoginState) {
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(10),
@@ -80,9 +67,9 @@ class _LoginPageState extends ConsumerState<LoginPage> {
               Column(
                 children: [
                   const SizedBox(height: 100),
-                  CircleAvatar(
+                  const CircleAvatar(
                     radius: 60,
-                    backgroundImage: AssetImage(image),
+                    backgroundImage: AssetImage('assets/images/logo.png'),
                   ),
                   BoxText.bodyBold(
                     'Login',
@@ -92,23 +79,13 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                   TextFieldLoginWidget(
                     label: 'E-mail:',
                     controller: _emailController,
-                    //items: loginState.data,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Este campo não pode ser vazio';
-                        // } else if (!loginState.data.any((element) =>
-                        //     element.userName == _emailController.text)) {
-                        //   return 'E-mail não cadastrado';
-                      }
-                      return null;
-                    },
+                    validator: (p0) => Validators.email(_emailController.text),
                   ),
                   const Space.x5(),
                   TextFieldLoginWidget(
                     label: 'Senha:',
                     obscureText: _obscureText,
                     controller: _passwordController,
-                    //items: loginState.data,
                     suffixIcon: IconButton(
                       icon: Icon(
                         _obscureText == false
@@ -117,16 +94,8 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                       ),
                       onPressed: _showPassword,
                     ),
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Este campo não pode ser vazio';
-                        // } else if (!loginState.data.any((element) =>
-                        //     element.userName == _emailController.text &&
-                        //     element.password == _passwordController.text)) {
-                        //   return 'Senha inválida';
-                      }
-                      return null;
-                    },
+                    validator: (p0) =>
+                        Validators.password(_passwordController.text),
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
@@ -149,11 +118,10 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                     onTap: () {
                       final validadeForm = formKey.currentState?.validate();
                       if (validadeForm!) {
-                        ref.read(authenticationProvider.notifier).signIn(
+                        ref.read(signInProvider.notifier).signIn(
                               _emailController.text,
                               _passwordController.text,
                             );
-                        // Navigator.of(context).pushReplacementNamed('/');
                       }
                     },
                   ),
@@ -166,9 +134,6 @@ class _LoginPageState extends ConsumerState<LoginPage> {
         ),
       ),
     );
-    // } else {
-    //   return Container();
-    // }
   }
 
   Row _buildTextRow() {

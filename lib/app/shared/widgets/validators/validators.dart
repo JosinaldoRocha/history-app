@@ -4,7 +4,7 @@ class Validators {
         RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(email ?? '');
 
     if (email == null || email.isEmpty) {
-      return 'Não pode ser vazio';
+      return 'O e-mail é obrigatório';
     } else if (!emailRegex) {
       return "Email inválido";
     }
