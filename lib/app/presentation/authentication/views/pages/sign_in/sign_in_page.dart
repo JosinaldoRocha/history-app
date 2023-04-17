@@ -8,6 +8,7 @@ import 'package:my_history_app/app/shared/widgets/button/button_widget.dart';
 import 'package:my_history_app/app/shared/widgets/spacing/space_widget.dart';
 import 'package:my_history_app/app/shared/widgets/texts/box_text.dart';
 import 'package:my_history_app/app/shared/widgets/validators/validators.dart';
+import '../../../widgets/eye_password_widget.dart';
 
 class SignInPage extends ConsumerStatefulWidget {
   const SignInPage({super.key});
@@ -36,21 +37,10 @@ class _SignInPageState extends ConsumerState<SignInPage> {
     );
   }
 
-  _showPassword() {
-    if (_obscureText) {
-      _obscureText = false;
-    } else {
-      _obscureText = true;
-    }
-    setState(() {
-      _obscureText;
-    });
-  }
-
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final formKey = GlobalKey<FormState>();
-  bool _obscureText = true;
+  bool visibility = true;
 
   @override
   Widget build(BuildContext context) {
@@ -84,15 +74,11 @@ class _SignInPageState extends ConsumerState<SignInPage> {
                   const Space.x5(),
                   TextFieldLoginWidget(
                     label: 'Senha:',
-                    obscureText: _obscureText,
+                    obscureText: visibility,
                     controller: _passwordController,
-                    suffixIcon: IconButton(
-                      icon: Icon(
-                        _obscureText == false
-                            ? Icons.visibility
-                            : Icons.visibility_off,
-                      ),
-                      onPressed: _showPassword,
+                    suffixIcon: EyePasswordWidget(
+                      onChanged: () => setState(() => visibility = !visibility),
+                      isObscure: visibility,
                     ),
                     validator: (p0) =>
                         Validators.password(_passwordController.text),
@@ -113,7 +99,7 @@ class _SignInPageState extends ConsumerState<SignInPage> {
                   ),
                   const Space.x4(),
                   ButtonWidget(
-                    isLoading: authentication is LoadingAuthenticationState,
+                    isLoading: authentication is LoadingSignInState,
                     title: 'Entrar',
                     onTap: () {
                       final validadeForm = formKey.currentState?.validate();
