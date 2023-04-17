@@ -8,29 +8,6 @@ class AuthenticationRepository {
   final boxCurrentUser = Hive.box<UserModel>('currentUser');
   final _auth = FirebaseAuth.instance;
 
-  // Future<bool> loginVerification(String userName, String password) async {
-  //   await Future.delayed(const Duration(seconds: 3));
-  //   final userList = box.values.toList();
-  //   if (userList.any((element) =>
-  //       element.userName == userName && element.password == password)) {
-  //     final currentUser =
-  //         userList.firstWhere((element) => element.userName == userName);
-
-  //     final user = UserModel(
-  //       name: currentUser.name,
-  //       surname: currentUser.surname,
-  //       userName: currentUser.userName,
-  //       eMail: currentUser.eMail,
-  //       password: currentUser.password,
-  //       confirmPassword: currentUser.confirmPassword,
-  //       id: currentUser.id,
-  //     );
-  //     boxCurrentUser.add(user);
-  //     return true;
-  //   }
-  //   return false;
-  // }
-
   Future<User?> signIn(String email, String password) async {
     UserCredential userCredential = await _auth.signInWithEmailAndPassword(
       email: email,
