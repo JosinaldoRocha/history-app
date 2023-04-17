@@ -1,4 +1,4 @@
-import 'package:my_history_app/app/presentation/register/data/models/user_model.dart';
+import 'package:my_history_app/app/presentation/authentication/data/models/user_model.dart';
 
 abstract class LoginState {}
 

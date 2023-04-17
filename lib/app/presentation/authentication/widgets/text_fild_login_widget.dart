@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:my_history_app/app/presentation/register/data/models/user_model.dart';
-
 import '../../../shared/widgets/texts/box_text.dart';
+import '../data/models/user_model.dart';
 
 class TextFieldLoginWidget extends ConsumerWidget {
   const TextFieldLoginWidget({

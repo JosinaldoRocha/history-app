@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:my_history_app/app/presentation/register/data/models/user_model.dart';
-import 'package:my_history_app/app/presentation/register/dependencies/dependencies.dart';
-import 'package:my_history_app/app/presentation/register/views/states/add_user/add_user_state.dart';
+import 'package:my_history_app/app/presentation/authentication/views/states/sign_up/sign_up_state.dart';
 import 'package:my_history_app/app/shared/widgets/button/button_widget.dart';
 import 'package:my_history_app/app/shared/widgets/spacing/space_widget.dart';
 import 'package:my_history_app/app/shared/widgets/validators/validators.dart';
-import '../../../../shared/widgets/input/info_text_field_widget.dart';
+import '../../../../../shared/widgets/input/info_text_field_widget.dart';
+import '../../../data/models/user_model.dart';
+import '../../../dependencies/dependencies.dart';
 
-class RegisterPage extends ConsumerStatefulWidget {
-  const RegisterPage({super.key});
+class SignUpPage extends ConsumerStatefulWidget {
+  const SignUpPage({super.key});
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _RegisterPageState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _SignUpPageState();
 }
 
 final _nameController = TextEditingController();
@@ -34,15 +34,15 @@ _clearTexts() {
   _idController.clear();
 }
 
-class _RegisterPageState extends ConsumerState<RegisterPage> {
+class _SignUpPageState extends ConsumerState<SignUpPage> {
   void _addUserListen() {
     ref.listen(
-      addUserProvider,
-      <AddUserState>(previous, next) {
-        if (next is SuccessAddUserState) {
+      signUpProvider,
+      <SignUpState>(previous, next) {
+        if (next is SuccessSignUpState) {
           Navigator.pushReplacementNamed(context, '/');
         }
-        if (next is FailureAddUserState) {
+        if (next is FailureSignUpState) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               backgroundColor: Colors.red,
@@ -56,7 +56,7 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
 
   @override
   Widget build(BuildContext context) {
-    final addState = ref.watch(addUserProvider);
+    final addState = ref.watch(signUpProvider);
     _addUserListen();
 
     return Scaffold(
@@ -101,10 +101,6 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
                   } else if (value.length < 6) {
                     return 'O nome de usuário deve conter, pelo menos 6 dígitos';
                   }
-                  // else if (addState.data.any((element) =>
-                  //     element.userName == _userNameController.text)) {
-                  //   return 'Usuário existente. Tente um nome de usuário diferente';
-                  // }
 
                   return null;
                 },
@@ -139,12 +135,12 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
               ),
               const Space.x5(),
               ButtonWidget(
-                isLoading: addState is LoadingAddUserState,
+                isLoading: addState is LoadingSignUpState,
                 title: 'Cadastrar',
                 onTap: () {
                   final validadeForm = _formKey.currentState!.validate();
                   if (validadeForm) {
-                    ref.read(addUserProvider.notifier).signUp(
+                    ref.read(signUpProvider.notifier).signUp(
                           name: _nameController.text,
                           email: _eMailController.text,
                           password: _confirmPasswordController.text,
@@ -156,7 +152,7 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
                             password: _passwordController.text,
                           ),
                         );
-                    _clearTexts();
+                    //_clearTexts();
                   }
                 },
               ),

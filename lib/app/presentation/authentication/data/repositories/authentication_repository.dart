@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:hive/hive.dart';
-import 'package:my_history_app/app/presentation/register/data/models/user_model.dart';
+import '../models/user_model.dart';
 
 class AuthenticationRepository {
   final box = Hive.box<UserModel>('users');

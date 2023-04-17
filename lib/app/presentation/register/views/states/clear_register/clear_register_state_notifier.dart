@@ -1,5 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:my_history_app/app/presentation/register/data/repositorys/user_repository.dart';
+import 'package:my_history_app/app/presentation/authentication/data/repositories/user_repository.dart';
 import 'clear_register_stete.dart';
 
 class ClearRegisterStateNotifier extends StateNotifier<ClearRegisterState> {

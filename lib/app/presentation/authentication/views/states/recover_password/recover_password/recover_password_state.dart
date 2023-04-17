@@ -1,4 +1,4 @@
-import '../../../../../register/data/models/user_model.dart';
+import '../../../../data/models/user_model.dart';
 
 abstract class RecoverPasswordState {}
 

@@ -1,6 +1,6 @@
 import 'package:hive_flutter/adapters.dart';
 import 'package:my_history_app/app/presentation/history/data/models/history_model.dart';
-import 'package:my_history_app/app/presentation/register/data/models/user_model.dart';
+import '../../presentation/authentication/data/models/user_model.dart';
 
 class HiveInit {
   static Future<void> load() async {

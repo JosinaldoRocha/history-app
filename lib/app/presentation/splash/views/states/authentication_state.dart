@@ -1,5 +1,3 @@
-import 'package:my_history_app/app/presentation/register/data/models/user_model.dart';
-
 abstract class AuthenticationState {}
 
 class InitialAuthenticationState implements AuthenticationState {}

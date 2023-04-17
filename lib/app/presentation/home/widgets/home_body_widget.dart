@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../shared/widgets/spacing/space_widget.dart';
 import '../../../shared/widgets/texts/box_text.dart';
-import '../../register/data/models/user_model.dart';
+import '../../authentication/data/models/user_model.dart';
 import '../dependencies/dependencies.dart';
 import '../views/states/home_state.dart';
 import 'home_button_widget.dart';

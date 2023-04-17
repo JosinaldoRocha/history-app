@@ -5,7 +5,7 @@ import 'package:my_history_app/app/presentation/history/views/states/delete-item
 import 'package:my_history_app/app/presentation/history/views/states/edit_history/edit_history_state.dart';
 import 'package:my_history_app/app/presentation/history/widgets/history/history_list_widget.dart';
 import 'package:my_history_app/app/shared/widgets/texts/box_text.dart';
-import '../../../register/data/models/user_model.dart';
+import '../../../authentication/data/models/user_model.dart';
 
 class HistoricPage extends ConsumerStatefulWidget {
   const HistoricPage({
