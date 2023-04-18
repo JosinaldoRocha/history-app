@@ -25,7 +25,7 @@ class _SplashPageState extends ConsumerState<SplashPage> {
         }
         if (next is UnAuthenticated) {
           Navigator.pushNamedAndRemoveUntil(
-              context, '/login', (route) => false);
+              context, '/sign-in', (route) => false);
         }
       },
     );

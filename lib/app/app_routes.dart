@@ -13,8 +13,8 @@ import 'presentation/authentication/views/pages/sign_in/sign_in_page.dart';
 class AppRoutes {
   static Map<String, WidgetBuilder> get all => {
         '/': (context) => const SplashPage(),
-        '/login': (context) => const SignInPage(),
-        '/register-page': (context) => const SignUpPage(),
+        '/sign-in': (context) => const SignInPage(),
+        '/sign-up': (context) => const SignUpPage(),
         '/home': (context) => HomePage(
               args: getArgs(context),
             ),

@@ -133,7 +133,7 @@ class _SignInPageState extends ConsumerState<SignInPage> {
             color: const Color.fromARGB(255, 3, 90, 240),
           ),
           onPressed: () {
-            Navigator.of(context).pushReplacementNamed('/register-page');
+            Navigator.of(context).pushReplacementNamed('/sign-up');
           },
         ),
       ],
