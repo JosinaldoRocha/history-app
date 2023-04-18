@@ -18,7 +18,7 @@ class HistoryModel extends HiveObject {
   @HiveField(6)
   String amountPeriod;
   @HiveField(7)
-  int id;
+  String id;
 
   HistoryModel({
     required this.name,

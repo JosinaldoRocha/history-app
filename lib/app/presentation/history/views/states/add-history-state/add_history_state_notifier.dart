@@ -11,7 +11,7 @@ class AddHistoryStateNotifier extends StateNotifier<AddHistoryState> {
   void addHistory(HistoryModel history) async {
     state = LoadingAddHistoryState();
     try {
-      await historyRepository.addHistory(history);
+      await historyRepository.saveHistory(history);
       state = SuccessAddHistoryState();
     } catch (e) {
       state = FailureAddHistoryState(errorMessage: 'Erro ao carregar dados');

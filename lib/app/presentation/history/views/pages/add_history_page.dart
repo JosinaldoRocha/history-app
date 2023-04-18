@@ -39,28 +39,27 @@ class _AddHistoryPageState extends ConsumerState<AddHistoryPage> {
     ref.listen<AddHistoryState>(
       addHistoryProvider,
       (previous, next) {
-        if (next is LoadingAddHistoryState) {
-          showDialog(
-            context: context,
-            builder: (context) => Container(
-              height: 200,
-              width: 300,
-              color: const Color.fromARGB(255, 181, 214, 181),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Center(child: Image.asset('assets/images/logo1.png')),
-                  const Space.x4(),
-                  const Center(
-                    child: CircularProgressIndicator(),
-                  ),
-                ],
-              ),
-            ),
-          );
-        }
+        // if (next is LoadingAddHistoryState) {
+        //   // showDialog(
+        //   //   context: context,
+        //   //   builder: (context) => Container(
+        //   //     height: 200,
+        //   //     width: 300,
+        //   //     color: const Color.fromARGB(255, 181, 214, 181),
+        //   //     child: Column(
+        //   //       mainAxisAlignment: MainAxisAlignment.center,
+        //   //       children: [
+        //   //         Center(child: Image.asset('assets/images/logo1.png')),
+        //   //         const Space.x4(),
+        //   //         const Center(
+        //   //           child: CircularProgressIndicator(),
+        //   //         ),
+        //   //       ],
+        //   //     ),
+        //   //   ),
+        //   // );
+        // }
         if (next is SuccessAddHistoryState) {
-          Navigator.pop(context);
           Navigator.pop(context);
         }
         if (next is FailureAddHistoryState) {
@@ -91,18 +90,20 @@ class _AddHistoryPageState extends ConsumerState<AddHistoryPage> {
 
   @override
   Widget build(BuildContext context) {
+    final addHistoryState = ref.watch(addHistoryProvider);
     _listen();
+
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(30),
         child: Center(
-          child: _buildContext(widget.args),
+          child: _buildContext(widget.args, addHistoryState),
         ),
       ),
     );
   }
 
-  Widget _buildContext(Map<String, dynamic> user) {
+  Widget _buildContext(Map<String, dynamic> user, AddHistoryState state) {
     return Form(
       key: _formKey,
       child: Column(
@@ -144,6 +145,7 @@ class _AddHistoryPageState extends ConsumerState<AddHistoryPage> {
           const SizedBox(height: 20),
           ButtonWidget(
             title: 'Confirmar',
+            isLoading: state is LoadingAddHistoryState,
             onTap: () {
               final validadeForm = _formKey.currentState!.validate();
               if (validadeForm) {
@@ -155,8 +157,7 @@ class _AddHistoryPageState extends ConsumerState<AddHistoryPage> {
                   whatHappened: whatHappenedController.dropDownValue!.name,
                   amountTimes: amountTimesController.dropDownValue!.name,
                   amountPeriod: amountPeriodsController.dropDownValue!.name,
-                  //TODO alterar id
-                  id: 0,
+                  id: widget.args['id'],
                 );
                 ref.read(addHistoryProvider.notifier).addHistory(history);
               }

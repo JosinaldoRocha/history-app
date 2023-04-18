@@ -7,7 +7,7 @@ class HistoryStateNotifier extends StateNotifier<HistoryState> {
       : super(InitialHistoryState());
   final HistoryRepository historyRepository;
 
-  void load(int id) async {
+  void load(String id) async {
     state = LoadingHistoryState();
     try {
       final success = await historyRepository.getAll(id);

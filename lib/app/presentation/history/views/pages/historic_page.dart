@@ -61,9 +61,9 @@ class _HistoricPageState extends ConsumerState<HistoricPage> {
   @override
   void initState() {
     super.initState();
-    // Future.microtask(
-    //     //TODO alterar id
-    //     () => ref.read(historyProvider.notifier).load(widget.args.id));
+    Future.microtask(
+        //TODO alterar id
+        () => ref.read(historyProvider.notifier).load(widget.args['id']));
   }
 
   @override

@@ -59,10 +59,6 @@ class AuthenticationRepository {
       'id': userId,
     };
 
-    collection
-        .doc(userId)
-        .set(userData)
-        .then((value) => print("User data added"))
-        .catchError((error) => print("Failed to add user data: $error"));
+    await collection.doc(userId).set(userData);
   }
 }

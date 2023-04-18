@@ -1,22 +1,43 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:hive/hive.dart';
 import 'package:my_history_app/app/presentation/history/data/models/history_model.dart';
 
 class HistoryRepository {
   final box = Hive.box<HistoryModel>('history');
+  final _firestore = FirebaseFirestore.instance;
 
-  Future<List<HistoryModel>> getAll(int id) async {
-    await Future.delayed(const Duration(seconds: 2));
-    final values = box.values.toList();
-    values.retainWhere((element) => element.id == id);
-    values.sort(
-      (a, b) => a.name.compareTo(b.name),
-    );
-    return values;
+  // Future<List<HistoryModel>> getAll(int id) async {
+  //   await Future.delayed(const Duration(seconds: 2));
+  //   final values = box.values.toList();
+  //   values.retainWhere((element) => element.id == id);
+  //   values.sort(
+  //     (a, b) => a.name.compareTo(b.name),
+  //   );
+  //   return values;
+  // }
+
+  Future<List<QueryDocumentSnapshot>> getAll(String id) async {
+    final collection = _firestore.collection('history');
+    final getDocs = await collection.where('id', isEqualTo: id).get();
+    final result = getDocs.docs;
+    result.sort((a, b) => a['name'].compareTo(b['name']));
+    return result;
   }
 
-  Future<void> addHistory(HistoryModel history) async {
-    await Future.delayed(const Duration(seconds: 2));
-    await box.add(history);
+  Future<void> saveHistory(HistoryModel history) async {
+    final collection = _firestore.collection('history');
+
+    Map<String, dynamic> historyData = {
+      'name': history.name,
+      'reference': history.reference,
+      'civil-status': history.civilStatus,
+      'relationship': history.relationship,
+      'whatHappened': history.whatHappened,
+      'amountTimes': history.amountTimes,
+      'amountPeriod': history.amountPeriod,
+      'id': history.id,
+    };
+    await collection.add(historyData);
   }
 
   Future<void> deleteItem(HistoryModel history) async {

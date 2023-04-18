@@ -21,18 +21,7 @@ final _userNameController = TextEditingController();
 final _eMailController = TextEditingController();
 final _passwordController = TextEditingController();
 final _confirmPasswordController = TextEditingController();
-final _idController = TextEditingController();
 final _formKey = GlobalKey<FormState>();
-
-_clearTexts() {
-  _nameController.clear();
-  _surnameController.clear();
-  _userNameController.clear();
-  _eMailController.clear();
-  _passwordController.clear();
-  _confirmPasswordController.clear();
-  _idController.clear();
-}
 
 class _SignUpPageState extends ConsumerState<SignUpPage> {
   void _signUpListen() {
