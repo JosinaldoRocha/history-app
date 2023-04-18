@@ -2,8 +2,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:my_history_app/app/presentation/history/views/states/edit_history/edit_history_state.dart';
 import 'package:my_history_app/app/presentation/history/views/states/edit_history/edit_history_state_notifier.dart';
 import '../data/repositories/history_repository.dart';
-import '../views/states/add-item-state/add_item_state.dart';
-import '../views/states/add-item-state/add_item_state_notifier.dart';
+import '../views/states/add-history-state/add_history_state.dart';
+import '../views/states/add-history-state/add_history_state_notifier.dart';
 import '../views/states/civil_status_state/civil_status_list_state.dart';
 import '../views/states/civil_status_state/civil_status_list_state_notifier.dart';
 import '../views/states/delete-item-state/delete_item_state.dart';
@@ -30,9 +30,9 @@ final historyProvider =
   ),
 );
 
-final addItemProvider =
-    StateNotifierProvider.autoDispose<AddItemStateNotifier, AddItemState>(
-  (ref) => AddItemStateNotifier(
+final addHistoryProvider =
+    StateNotifierProvider.autoDispose<AddHistoryStateNotifier, AddHistoryState>(
+  (ref) => AddHistoryStateNotifier(
     historyRepository: ref.read(historyRepositoryProvider),
   ),
 );

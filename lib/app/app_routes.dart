@@ -5,7 +5,7 @@ import 'package:my_history_app/app/presentation/authentication/views/pages/sign_
 import 'package:my_history_app/app/presentation/history/data/models/history_model.dart';
 import 'package:my_history_app/app/presentation/history/views/pages/edit_item_page.dart';
 import 'presentation/splash/views/pages/splash_page.dart';
-import 'presentation/history/views/pages/add_item_page.dart';
+import 'presentation/history/views/pages/add_history_page.dart';
 import 'presentation/history/views/pages/historic_page.dart';
 import 'presentation/home/views/pages/home_page.dart';
 import 'presentation/authentication/views/pages/sign_in/sign_in_page.dart';
@@ -21,7 +21,7 @@ class AppRoutes {
         '/history-page': (context) => HistoricPage(
               args: getArgs(context),
             ),
-        '/add-item-page': (context) => AddItemPage(
+        '/add-history-page': (context) => AddHistoryPage(
               args: getArgs(context),
             ),
         '/edit-item-page': (context) => EditItemPage(

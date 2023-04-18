@@ -34,7 +34,7 @@ class HomeBodyWidget extends ConsumerWidget {
             onTap: () {
               Navigator.pushNamed(
                 context,
-                '/add-item-page',
+                '/add-history-page',
                 arguments: user,
               );
             },

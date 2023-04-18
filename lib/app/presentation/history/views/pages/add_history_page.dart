@@ -2,10 +2,9 @@ import 'package:dropdown_textfield/dropdown_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:my_history_app/app/shared/widgets/spacing/space_widget.dart';
-import '../../../authentication/data/models/user_model.dart';
 import '../../data/models/history_model.dart';
 import '../../dependencies/dependencies.dart';
-import '../../views/states/add-item-state/add_item_state.dart';
+import '../states/add-history-state/add_history_state.dart';
 import '../../views/states/period_list_state/period_list_state.dart';
 import '../../widgets/add_item/civil_status_list_widget.dart';
 import '../../widgets/add_item/list_of_times_widget.dart';
@@ -16,18 +15,18 @@ import 'package:my_history_app/app/shared/widgets/button/button_widget.dart';
 import 'package:my_history_app/app/shared/widgets/input/info_text_field_widget.dart';
 import 'package:my_history_app/app/shared/widgets/texts/box_text.dart';
 
-class AddItemPage extends ConsumerStatefulWidget {
-  const AddItemPage({
+class AddHistoryPage extends ConsumerStatefulWidget {
+  const AddHistoryPage({
     super.key,
     required this.args,
   });
   final Map<String, dynamic> args;
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _AddItemPageState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _AddHistoryPageState();
 }
 
-class _AddItemPageState extends ConsumerState<AddItemPage> {
+class _AddHistoryPageState extends ConsumerState<AddHistoryPage> {
   final nameController = TextEditingController();
   final referenceController = TextEditingController();
   final relationshipController = SingleValueDropDownController();
@@ -37,10 +36,10 @@ class _AddItemPageState extends ConsumerState<AddItemPage> {
   final amountPeriodsController = SingleValueDropDownController();
 
   void _listen() {
-    ref.listen<AddItemState>(
-      addItemProvider,
+    ref.listen<AddHistoryState>(
+      addHistoryProvider,
       (previous, next) {
-        if (next is LoadingAddItemState) {
+        if (next is LoadingAddHistoryState) {
           showDialog(
             context: context,
             builder: (context) => Container(
@@ -60,11 +59,11 @@ class _AddItemPageState extends ConsumerState<AddItemPage> {
             ),
           );
         }
-        if (next is SuccessAddItemState) {
+        if (next is SuccessAddHistoryState) {
           Navigator.pop(context);
           Navigator.pop(context);
         }
-        if (next is FailureAddItemState) {
+        if (next is FailureAddHistoryState) {
           showDialog(
             context: context,
             builder: (context) => AlertDialog(
@@ -159,7 +158,7 @@ class _AddItemPageState extends ConsumerState<AddItemPage> {
                   //TODO alterar id
                   id: 0,
                 );
-                ref.read(addItemProvider.notifier).addItem(history);
+                ref.read(addHistoryProvider.notifier).addHistory(history);
               }
             },
           ),
