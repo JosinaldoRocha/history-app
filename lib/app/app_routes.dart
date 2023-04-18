@@ -19,9 +19,11 @@ class AppRoutes {
               args: getArgs(context),
             ),
         '/history-page': (context) => HistoricPage(
-              args: getArgs(context) as UserModel,
+              args: getArgs(context),
             ),
-        '/add-item-page': (context) => const AddItemPage(),
+        '/add-item-page': (context) => AddItemPage(
+              args: getArgs(context),
+            ),
         '/edit-item-page': (context) => EditItemPage(
               history: getArgs(context) as HistoryModel,
             ),

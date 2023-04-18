@@ -63,9 +63,9 @@ class _HomePageState extends ConsumerState<HomePage> {
       ),
       body: Container(
         color: const Color.fromARGB(255, 181, 214, 181),
-        child: const Padding(
-          padding: EdgeInsets.all(10),
-          child: HomeBodyWidget(),
+        child: Padding(
+          padding: const EdgeInsets.all(10),
+          child: HomeBodyWidget(user: widget.args),
         ),
       ),
     );

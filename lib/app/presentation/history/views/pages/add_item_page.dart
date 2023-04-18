@@ -17,7 +17,11 @@ import 'package:my_history_app/app/shared/widgets/input/info_text_field_widget.d
 import 'package:my_history_app/app/shared/widgets/texts/box_text.dart';
 
 class AddItemPage extends ConsumerStatefulWidget {
-  const AddItemPage({super.key});
+  const AddItemPage({
+    super.key,
+    required this.args,
+  });
+  final Map<String, dynamic> args;
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() => _AddItemPageState();
@@ -88,19 +92,18 @@ class _AddItemPageState extends ConsumerState<AddItemPage> {
 
   @override
   Widget build(BuildContext context) {
-    final args = ModalRoute.of(context)!.settings.arguments as UserModel;
     _listen();
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(30),
         child: Center(
-          child: _buildContext(args),
+          child: _buildContext(widget.args),
         ),
       ),
     );
   }
 
-  Widget _buildContext(UserModel user) {
+  Widget _buildContext(Map<String, dynamic> user) {
     return Form(
       key: _formKey,
       child: Column(

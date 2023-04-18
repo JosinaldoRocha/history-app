@@ -14,14 +14,14 @@ class DrawerWidget extends ConsumerWidget {
       children: [
         const Space.x2(),
         ListTile(
-          leading: BoxText.body('Home'),
+          leading: const Text('Home'),
           trailing: const Icon(Icons.home),
           onTap: () => Navigator.pop(context),
         ),
         const Divider(),
-        ListTile(
-          leading: BoxText.body('Sobre'),
-          trailing: const Icon(Icons.info),
+        const ListTile(
+          leading: Text('Sobre'),
+          trailing: Icon(Icons.info),
         ),
         const Divider(),
         const Spacer(),
