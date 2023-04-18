@@ -7,6 +7,7 @@ import 'package:my_history_app/app/presentation/home/widgets/drawer_widget.dart'
 import 'package:my_history_app/app/presentation/home/widgets/home_body_widget.dart';
 import 'package:my_history_app/app/presentation/home/widgets/icon_button_widget.dart';
 import 'package:my_history_app/app/presentation/register/views/states/clear_register/clear_register_stete.dart';
+import 'package:my_history_app/app/shared/widgets/spacing/space_widget.dart';
 import 'package:my_history_app/app/shared/widgets/texts/box_text.dart';
 
 class HomePage extends ConsumerStatefulWidget {
@@ -82,7 +83,7 @@ class _HomePageState extends ConsumerState<HomePage> {
           : const DrawerWidget(),
       appBar: AppBar(
         title: BoxText.body(
-          'Olá, ${user['name']}',
+          'Olá, ${user['name']}!',
           color: Colors.white,
         ),
       ),
@@ -97,9 +98,49 @@ class _HomePageState extends ConsumerState<HomePage> {
         icon: Icons.exit_to_app,
         size: 45,
         onTap: () {
-          ref.read(logoutProvider.notifier).logout();
+          showDialog(
+            context: context,
+            builder: (context) => _buildAlertDialog(),
+          );
         },
       ),
+    );
+  }
+
+  AlertDialog _buildAlertDialog() {
+    return AlertDialog(
+      actions: [
+        Padding(
+          padding: const EdgeInsets.all(10),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              BoxText.body('Sair do aplicativo?'),
+              const Space.x5(),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  TextButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: BoxText.body('CANCELAR'),
+                  ),
+                  const SizedBox(
+                    width: 20,
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      ref.read(logoutProvider.notifier).logout();
+                    },
+                    child: BoxText.body('SAIR'),
+                  ),
+                ],
+              )
+            ],
+          ),
+        )
+      ],
     );
   }
 }
