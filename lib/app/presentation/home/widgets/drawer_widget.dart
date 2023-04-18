@@ -1,52 +1,78 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:my_history_app/app/presentation/home/widgets/icon_button_widget.dart';
+import '../../../shared/widgets/spacing/space_widget.dart';
 import '../../../shared/widgets/texts/box_text.dart';
-import '../dependencies/dependencies.dart';
+import '../../authentication/dependencies/dependencies.dart';
 
 class DrawerWidget extends ConsumerWidget {
   const DrawerWidget({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Container(
-      height: 70,
-      width: 160,
-      decoration: const BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.only(
-          bottomRight: Radius.circular(39),
-          topRight: Radius.circular(39),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        const Space.x2(),
+        ListTile(
+          leading: BoxText.body('Home'),
+          trailing: const Icon(Icons.home),
+          onTap: () => Navigator.pop(context),
         ),
-      ),
-      padding: const EdgeInsets.only(right: 7),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.end,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          BoxText.bodyBold(
-            'Limpar\ncadastros',
-            textAlign: TextAlign.center,
-            size: 14,
+        const Divider(),
+        ListTile(
+          leading: BoxText.body('Sobre'),
+          trailing: const Icon(Icons.info),
+        ),
+        const Divider(),
+        const Spacer(),
+        ListTile(
+          leading: BoxText.body('Sair'),
+          trailing: const Icon(Icons.exit_to_app),
+          onTap: () {
+            showDialog(
+              context: context,
+              builder: (context) => _buildAlertDialog(ref, context),
+            );
+          },
+        ),
+      ],
+    );
+  }
+
+  AlertDialog _buildAlertDialog(WidgetRef ref, BuildContext context) {
+    return AlertDialog(
+      actions: [
+        Padding(
+          padding: const EdgeInsets.all(10),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              BoxText.body('Sair do aplicativo?'),
+              const Space.x5(),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  TextButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: BoxText.body('CANCELAR'),
+                  ),
+                  const SizedBox(
+                    width: 20,
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      ref.read(logoutProvider.notifier).logout();
+                    },
+                    child: BoxText.body('SAIR'),
+                  ),
+                ],
+              )
+            ],
           ),
-          const SizedBox(width: 10),
-          Container(
-            decoration: BoxDecoration(
-              color: const Color.fromARGB(255, 209, 208, 208),
-              borderRadius: BorderRadius.circular(50),
-            ),
-            height: 60,
-            width: 60,
-            child: IconButtonWidget(
-              icon: Icons.cleaning_services_outlined,
-              size: 35,
-              onTap: () {
-                ref.read(clearRegisterProvider.notifier).clearRegisters();
-              },
-            ),
-          ),
-        ],
-      ),
+        )
+      ],
     );
   }
 }
