@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:my_history_app/app/presentation/authentication/dependencies/dependencies.dart';
@@ -11,7 +10,8 @@ import 'package:my_history_app/app/presentation/register/views/states/clear_regi
 import 'package:my_history_app/app/shared/widgets/texts/box_text.dart';
 
 class HomePage extends ConsumerStatefulWidget {
-  const HomePage({super.key});
+  const HomePage({super.key, required this.args});
+  final Map<String, dynamic> args;
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() => _HomePageState();
@@ -65,8 +65,8 @@ class _HomePageState extends ConsumerState<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final auth = FirebaseAuth.instance;
     final clearState = ref.watch(clearRegisterProvider);
+    final user = widget.args;
 
     logoutListen();
     clearRegisterListen();
@@ -82,7 +82,7 @@ class _HomePageState extends ConsumerState<HomePage> {
           : const DrawerWidget(),
       appBar: AppBar(
         title: BoxText.body(
-          'Olá, ${auth.currentUser!.displayName}',
+          'Olá, ${user['name']}',
           color: Colors.white,
         ),
       ),

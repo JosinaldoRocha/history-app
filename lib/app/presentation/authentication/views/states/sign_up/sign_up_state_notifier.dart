@@ -14,6 +14,7 @@ class SignUpStateNotifier extends StateNotifier<SignUpState> {
     required String password,
     required UserModel user,
   }) async {
+    state = LoadingSignUpState();
     try {
       final result = await authRepository.signUp(
         name: name,

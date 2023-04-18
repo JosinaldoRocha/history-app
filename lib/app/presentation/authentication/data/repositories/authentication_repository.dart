@@ -25,20 +25,6 @@ class AuthenticationRepository {
     return currentUser;
   }
 
-  Future<bool> userVerification() async {
-    await Future.delayed(const Duration(seconds: 3));
-
-    if (_auth.currentUser != null) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
-  Future<UserModel?> getCurrentUser() async {
-    return boxCurrentUser.get(0);
-  }
-
   void logout() async {
     _auth.signOut();
   }

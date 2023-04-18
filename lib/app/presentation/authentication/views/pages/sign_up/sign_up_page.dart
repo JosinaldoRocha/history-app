@@ -56,7 +56,7 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
 
   @override
   Widget build(BuildContext context) {
-    final addState = ref.watch(signUpProvider);
+    final signUpState = ref.watch(signUpProvider);
     _signUpListen();
 
     return Scaffold(
@@ -135,7 +135,7 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
               ),
               const Space.x5(),
               ButtonWidget(
-                isLoading: addState is LoadingSignUpState,
+                isLoading: signUpState is LoadingSignUpState,
                 title: 'Cadastrar',
                 onTap: () {
                   final validadeForm = _formKey.currentState!.validate();
@@ -152,7 +152,6 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
                             password: _passwordController.text,
                           ),
                         );
-                    //_clearTexts();
                   }
                 },
               ),

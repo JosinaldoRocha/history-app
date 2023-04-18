@@ -15,7 +15,9 @@ class AppRoutes {
         '/': (context) => const SplashPage(),
         '/login': (context) => const SignInPage(),
         '/register-page': (context) => const SignUpPage(),
-        '/home': (context) => const HomePage(),
+        '/home': (context) => HomePage(
+              args: getArgs(context),
+            ),
         '/history-page': (context) => HistoricPage(
               args: getArgs(context) as UserModel,
             ),

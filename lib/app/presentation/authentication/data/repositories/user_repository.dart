@@ -7,27 +7,24 @@ import '../models/user_model.dart';
 class UserRepository {
   final box = Hive.box<UserModel>('users');
   final historyBox = Hive.box<HistoryModel>('history');
-  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final _auth = FirebaseAuth.instance;
+  final _firestore = FirebaseFirestore.instance;
 
   Future<List<UserModel>> getAll() async {
-    //await Future.delayed(const Duration(seconds: 2));
     final values = box.values.toList();
     return values;
   }
 
-  User? getCurrentUser() {
-    final User? user = _auth.currentUser;
-    final collection = FirebaseFirestore.instance.collection('users');
-
-    if (user != null) {
-      return user;
-    } else {
-      return null;
-    }
+  Future<Map<String, dynamic>> getCurrentUser() async {
+    final docRef = _firestore.collection('users').doc(_auth.currentUser!.uid);
+    final docSnapshot = await docRef.get();
+    final user = docSnapshot.data();
+    return user!;
   }
 
-  Future<void> addUser(UserModel item) async {
-    await box.add(item);
+  Future<User?> checkUser() async {
+    final user = _auth.currentUser;
+    return user;
   }
 
   Future<void> clearRegisters() async {
@@ -36,5 +33,3 @@ class UserRepository {
     await historyBox.clear();
   }
 }
-
-class FirebaseUser {}

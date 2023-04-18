@@ -20,13 +20,12 @@ class _SplashPageState extends ConsumerState<SplashPage> {
           Navigator.pushReplacementNamed(
             context,
             '/home',
-            // arguments: next.data,
+            arguments: next.data,
           );
         }
         if (next is UnAuthenticated) {
           Navigator.pushNamedAndRemoveUntil(
               context, '/login', (route) => false);
-          //Navigator.pushReplacementNamed(context, '/login');
         }
       },
     );
