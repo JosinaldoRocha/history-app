@@ -1,7 +1,6 @@
 import 'package:dropdown_textfield/dropdown_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:my_history_app/app/shared/widgets/spacing/space_widget.dart';
 import '../../data/models/history_model.dart';
 import '../../dependencies/dependencies.dart';
 import '../states/add-history-state/add_history_state.dart';
@@ -157,7 +156,8 @@ class _AddHistoryPageState extends ConsumerState<AddHistoryPage> {
                   whatHappened: whatHappenedController.dropDownValue!.name,
                   amountTimes: amountTimesController.dropDownValue!.name,
                   amountPeriod: amountPeriodsController.dropDownValue!.name,
-                  id: widget.args['id'],
+                  id: '',
+                  userId: widget.args['id'],
                 );
                 ref.read(addHistoryProvider.notifier).addHistory(history);
               }

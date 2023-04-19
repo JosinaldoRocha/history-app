@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../shared/widgets/spacing/space_widget.dart';
 import '../../../../shared/widgets/texts/box_text.dart';
-import '../../dependencies/dependencies.dart';
 
 class AlertDialogDeleteItemWidget extends ConsumerWidget {
   const AlertDialogDeleteItemWidget({

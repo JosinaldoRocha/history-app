@@ -47,10 +47,6 @@ class HistoryItemButtonWidget extends ConsumerWidget {
                 ),
               );
             },
-            onLongPress: () {
-              Navigator.pushNamed(context, '/edit-item-page',
-                  arguments: history);
-            },
             child: Column(
               children: [
                 BoxText.bodyBold(history['name']),

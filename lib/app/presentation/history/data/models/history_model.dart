@@ -19,6 +19,8 @@ class HistoryModel extends HiveObject {
   String amountPeriod;
   @HiveField(7)
   String id;
+  @HiveField(8)
+  String userId;
 
   HistoryModel({
     required this.name,
@@ -29,5 +31,6 @@ class HistoryModel extends HiveObject {
     required this.amountTimes,
     required this.amountPeriod,
     required this.id,
+    required this.userId,
   });
 }
