@@ -8,7 +8,7 @@ class HistoryRepository {
 
   Future<List<QueryDocumentSnapshot>> getAll(String id) async {
     final collection = _firestore.collection('history');
-    final getDocs = await collection.where('user-id', isEqualTo: id).get();
+    final getDocs = await collection.where('id', isEqualTo: id).get();
     final result = getDocs.docs;
     result.sort((a, b) => a['name'].compareTo(b['name']));
     return result;
@@ -16,31 +16,7 @@ class HistoryRepository {
 
   Future<void> saveHistory(HistoryModel history) async {
     final collection = _firestore.collection('history');
-
-    Map<String, dynamic> historyData = {
-      'name': history.name,
-      'reference': history.reference,
-      'civil-status': history.civilStatus,
-      'relationship': history.relationship,
-      'what-happened': history.whatHappened,
-      'amount-times': history.amountTimes,
-      'amount-period': history.amountPeriod,
-      'id': history.id,
-      'user-id': history.userId,
-    };
-    final newHistory = await collection.add(historyData);
-    historyData = {
-      'name': history.name,
-      'reference': history.reference,
-      'civil-status': history.civilStatus,
-      'relationship': history.relationship,
-      'what-happened': history.whatHappened,
-      'amount-times': history.amountTimes,
-      'amount-period': history.amountPeriod,
-      'id': newHistory.id,
-      'user-id': history.userId,
-    };
-    await collection.doc(newHistory.id).update(historyData);
+    await collection.add(history.toMap());
   }
 
   Future<void> deleteItem(HistoryModel history) async {

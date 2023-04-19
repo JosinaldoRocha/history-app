@@ -25,7 +25,6 @@ class HistoryModelAdapter extends TypeAdapter<HistoryModel> {
       amountTimes: fields[5] as String,
       amountPeriod: fields[6] as String,
       id: fields[7] as String,
-      userId: fields[8] as String,
     );
   }
 
@@ -48,9 +47,7 @@ class HistoryModelAdapter extends TypeAdapter<HistoryModel> {
       ..writeByte(6)
       ..write(obj.amountPeriod)
       ..writeByte(7)
-      ..write(obj.id)
-      ..writeByte(8)
-      ..write(obj.userId);
+      ..write(obj.id);
   }
 
   @override

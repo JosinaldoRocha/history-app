@@ -156,8 +156,7 @@ class _AddHistoryPageState extends ConsumerState<AddHistoryPage> {
                   whatHappened: whatHappenedController.dropDownValue!.name,
                   amountTimes: amountTimesController.dropDownValue!.name,
                   amountPeriod: amountPeriodsController.dropDownValue!.name,
-                  id: '',
-                  userId: widget.args['id'],
+                  id: widget.args['id'],
                 );
                 ref.read(addHistoryProvider.notifier).addHistory(history);
               }
