@@ -62,7 +62,6 @@ class _HistoricPageState extends ConsumerState<HistoricPage> {
   void initState() {
     super.initState();
     Future.microtask(
-        //TODO alterar id
         () => ref.read(historyProvider.notifier).load(widget.args['id']));
   }
 
@@ -77,12 +76,9 @@ class _HistoricPageState extends ConsumerState<HistoricPage> {
           color: Colors.white,
         ),
       ),
-      body: Container(
-        color: const Color.fromARGB(255, 181, 214, 181),
-        child: const Padding(
-          padding: EdgeInsets.all(20),
-          child: HistoryListWidget(),
-        ),
+      body: const Padding(
+        padding: EdgeInsets.all(20),
+        child: HistoryListWidget(),
       ),
     );
   }

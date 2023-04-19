@@ -8,7 +8,7 @@ class LoadingHistoryState implements HistoryState {}
 
 class SuccessHistoryState implements HistoryState {
   SuccessHistoryState({required this.data});
-  final List<DocumentSnapshot> data;
+  final List<QueryDocumentSnapshot> data;
 }
 
 class FailureHistoryState implements HistoryState {

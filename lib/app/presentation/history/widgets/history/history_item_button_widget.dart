@@ -12,30 +12,21 @@ class HistoryItemButtonWidget extends ConsumerWidget {
     required this.history,
   });
   final int index;
-  final DocumentSnapshot history;
+  final QueryDocumentSnapshot history;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Container(
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(30),
+        borderRadius: BorderRadius.circular(8),
+        color: const Color.fromARGB(26, 146, 141, 141),
       ),
       child: ListTile(
-        leading: Container(
-          width: 32,
-          height: 32,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(50),
-            border: Border.all(
-              color: const Color.fromARGB(255, 153, 149, 149),
-            ),
-          ),
-          child: Center(child: BoxText.bodyBold('${index + 1}')),
-        ),
+        leading: BoxText.bodyBold('${index + 1}'),
         title: ElevatedButton(
           style: ElevatedButton.styleFrom(
             elevation: 0,
-            backgroundColor: const Color.fromARGB(255, 181, 214, 181),
+            backgroundColor: Colors.transparent,
           ),
           onPressed: () {
             showModalBottomSheet(
@@ -47,7 +38,6 @@ class HistoryItemButtonWidget extends ConsumerWidget {
             Navigator.pushNamed(context, '/edit-item-page', arguments: history);
           },
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               BoxText.bodyBold(history['name']),
               BoxText.body(

@@ -6,16 +6,6 @@ class HistoryRepository {
   final box = Hive.box<HistoryModel>('history');
   final _firestore = FirebaseFirestore.instance;
 
-  // Future<List<HistoryModel>> getAll(int id) async {
-  //   await Future.delayed(const Duration(seconds: 2));
-  //   final values = box.values.toList();
-  //   values.retainWhere((element) => element.id == id);
-  //   values.sort(
-  //     (a, b) => a.name.compareTo(b.name),
-  //   );
-  //   return values;
-  // }
-
   Future<List<QueryDocumentSnapshot>> getAll(String id) async {
     final collection = _firestore.collection('history');
     final getDocs = await collection.where('id', isEqualTo: id).get();
@@ -32,9 +22,9 @@ class HistoryRepository {
       'reference': history.reference,
       'civil-status': history.civilStatus,
       'relationship': history.relationship,
-      'whatHappened': history.whatHappened,
-      'amountTimes': history.amountTimes,
-      'amountPeriod': history.amountPeriod,
+      'what-happened': history.whatHappened,
+      'amount-times': history.amountTimes,
+      'amount-period': history.amountPeriod,
       'id': history.id,
     };
     await collection.add(historyData);

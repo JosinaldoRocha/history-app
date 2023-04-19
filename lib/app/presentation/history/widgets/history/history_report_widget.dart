@@ -8,7 +8,7 @@ class HistoryReportWidget extends StatelessWidget {
     Key? key,
     required this.item,
   }) : super(key: key);
-  final DocumentSnapshot item;
+  final QueryDocumentSnapshot item;
 
   @override
   Widget build(BuildContext context) {
@@ -45,13 +45,13 @@ class HistoryReportWidget extends StatelessWidget {
                   BoxText.body(item['relationship']),
                   const Divider(height: 5, thickness: 1),
                   BoxText.bodyBold('O que rolou:'),
-                  BoxText.body(item['whatHappened']),
+                  BoxText.body(item['what-happened']),
                   const Divider(height: 5, thickness: 1),
                   BoxText.bodyBold('Quantas vezes:'),
-                  BoxText.body(item['amountTimes']),
+                  BoxText.body(item['amount-times']),
                   const Divider(height: 5, thickness: 1),
                   BoxText.bodyBold('Em quantos períodos:'),
-                  BoxText.body(item['amountPeriod']),
+                  BoxText.body(item['amount-period']),
                 ],
               ),
             ),

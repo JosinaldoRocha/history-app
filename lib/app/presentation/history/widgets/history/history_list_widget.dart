@@ -30,13 +30,8 @@ class _HistoryListWidgetState extends ConsumerState<HistoryListWidget> {
     } else if (state is SuccessHistoryState) {
       final history = state.data;
       return history.isEmpty
-          ? const Center(
-              child: Text(
-                'Seu histórico está vazio!',
-                style: TextStyle(
-                  fontSize: 25,
-                ),
-              ),
+          ? Center(
+              child: BoxText.body('Seu histórico está vazio!'),
             )
           : Column(
               crossAxisAlignment: CrossAxisAlignment.end,
@@ -52,12 +47,7 @@ class _HistoryListWidgetState extends ConsumerState<HistoryListWidget> {
                       index: index,
                       history: history[index],
                     ),
-                    separatorBuilder: (context, index) => const Divider(
-                      color: Color.fromARGB(255, 60, 114, 78),
-                      height: 5,
-                      indent: 55,
-                      endIndent: 55,
-                    ),
+                    separatorBuilder: (context, index) => const Space.x3(),
                     itemCount: history.length,
                   ),
                 ),
