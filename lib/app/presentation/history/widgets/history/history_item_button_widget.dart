@@ -21,46 +21,55 @@ class HistoryItemButtonWidget extends ConsumerWidget {
         borderRadius: BorderRadius.circular(8),
         color: const Color.fromARGB(26, 146, 141, 141),
       ),
-      child: ListTile(
-        leading: BoxText.bodyBold('${index + 1}'),
-        title: ElevatedButton(
-          style: ElevatedButton.styleFrom(
-            elevation: 0,
-            backgroundColor: Colors.transparent,
+      padding: const EdgeInsets.only(
+        left: 20,
+        top: 3,
+        bottom: 3,
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          BoxText.bodyBold('${index + 1}'),
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              elevation: 0,
+              backgroundColor: Colors.transparent,
+            ),
+            onPressed: () {
+              showModalBottomSheet(
+                context: context,
+                builder: (context) => HistoryReportWidget(item: history),
+              );
+            },
+            onLongPress: () {
+              Navigator.pushNamed(context, '/edit-item-page',
+                  arguments: history);
+            },
+            child: Column(
+              children: [
+                BoxText.bodyBold(history['name']),
+                BoxText.body(
+                  history['reference'],
+                  size: 14,
+                  color: const Color.fromARGB(255, 153, 149, 149),
+                ),
+              ],
+            ),
           ),
-          onPressed: () {
-            showModalBottomSheet(
-              context: context,
-              builder: (context) => HistoryReportWidget(item: history),
-            );
-          },
-          onLongPress: () {
-            Navigator.pushNamed(context, '/edit-item-page', arguments: history);
-          },
-          child: Column(
-            children: [
-              BoxText.bodyBold(history['name']),
-              BoxText.body(
-                history['reference'],
-                size: 14,
-                color: const Color.fromARGB(255, 153, 149, 149),
-              ),
-            ],
+          IconButton(
+            onPressed: () {
+              showDialog(
+                context: context,
+                builder: (context) =>
+                    AlertDialogDeleteItemWidget(history: history),
+              );
+            },
+            icon: Icon(
+              Icons.edit_square,
+              color: Theme.of(context).primaryColor,
+            ),
           ),
-        ),
-        trailing: IconButton(
-          onPressed: () {
-            showDialog(
-              context: context,
-              builder: (context) =>
-                  AlertDialogDeleteItemWidget(history: history),
-            );
-          },
-          icon: Icon(
-            Icons.delete,
-            color: Theme.of(context).primaryColor,
-          ),
-        ),
+        ],
       ),
     );
   }

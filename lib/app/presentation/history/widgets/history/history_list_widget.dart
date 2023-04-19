@@ -34,13 +34,13 @@ class _HistoryListWidgetState extends ConsumerState<HistoryListWidget> {
               child: BoxText.body('Seu histórico está vazio!'),
             )
           : Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 BoxText.bodyBold(
-                  'Toque para ver detalhes ou pressione para editar as informações',
-                  textAlign: TextAlign.center,
+                  'Toque na história para ver detalhes',
+                  color: Colors.blue,
                 ),
-                const Space.x8(),
+                const Space.x6(),
                 Flexible(
                   child: ListView.separated(
                     itemBuilder: (context, index) => HistoryItemButtonWidget(
@@ -50,10 +50,6 @@ class _HistoryListWidgetState extends ConsumerState<HistoryListWidget> {
                     separatorBuilder: (context, index) => const Space.x3(),
                     itemCount: history.length,
                   ),
-                ),
-                BoxText.body(
-                  '${history.length}',
-                  size: 12,
                 ),
               ],
             );

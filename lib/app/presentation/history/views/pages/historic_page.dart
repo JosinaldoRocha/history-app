@@ -71,8 +71,10 @@ class _HistoricPageState extends ConsumerState<HistoricPage> {
     _listenEditHistory();
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         title: BoxText.body(
           'Histórico',
+          size: 18,
           color: Colors.white,
         ),
       ),

@@ -17,10 +17,19 @@ class HistoryReportWidget extends StatelessWidget {
       color: const Color.fromARGB(255, 202, 243, 206),
       child: Column(
         children: [
-          BoxText.bodyBold(
-            'Detalhes da minha relação com\n${item['name']}',
-            textAlign: TextAlign.center,
-            size: 17,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              BoxText.bodyBold(
+                'Detalhes da minha relação com\n${item['name']}',
+                textAlign: TextAlign.start,
+                size: 17,
+              ),
+              IconButton(
+                onPressed: () {},
+                icon: const Icon(Icons.delete),
+              )
+            ],
           ),
           const Space.x3(),
           Flexible(
