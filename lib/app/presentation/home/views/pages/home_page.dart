@@ -43,6 +43,15 @@ class _HomePageState extends ConsumerState<HomePage> {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
+          onPressed: () {},
+          icon: const Icon(Icons.person),
+        ),
+        title: BoxText.body(
+          'Olá, ${user['name']}!',
+          color: Colors.white,
+        ),
+        actions: [
+          IconButton(
             onPressed: () {
               showModalBottomSheet(
                 context: context,
@@ -55,11 +64,10 @@ class _HomePageState extends ConsumerState<HomePage> {
                 ),
               );
             },
-            icon: const Icon(Icons.menu_rounded)),
-        title: BoxText.body(
-          'Olá, ${user['name']}!',
-          color: Colors.white,
-        ),
+            icon: const Icon(Icons.menu_rounded),
+          ),
+          const SizedBox(width: 10)
+        ],
       ),
       body: Container(
         color: const Color.fromARGB(255, 181, 214, 181),
