@@ -7,8 +7,10 @@ class HistoryRepository {
   final _firestore = FirebaseFirestore.instance;
 
   Future<List<HistoryModel>> getAll(String id) async {
-    final getDocuments =
-        await _firestore.collection('history').where('id', isEqualTo: id).get();
+    final getDocuments = await _firestore
+        .collection('history')
+        .where('user-id', isEqualTo: id)
+        .get();
     final documents = getDocuments.docs;
     List<HistoryModel> historics = [];
 
@@ -23,8 +25,9 @@ class HistoryRepository {
 
   Future<void> saveHistory(HistoryModel history) async {
     final collection = _firestore.collection('history');
-    final item = history.toMap();
-    await collection.add(item);
+    final item = await collection.add(history.toMap());
+    history.id = item.id;
+    await collection.doc(item.id).update(history.toMap());
   }
 
   Future<void> deleteItem(HistoryModel history) async {
