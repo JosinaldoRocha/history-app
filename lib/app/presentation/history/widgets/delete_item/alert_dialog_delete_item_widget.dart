@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:my_history_app/app/presentation/history/data/models/history_model.dart';
+import 'package:my_history_app/app/shared/widgets/alert_dialog_loading_widget.dart';
 import '../../../../shared/widgets/spacing/space_widget.dart';
 import '../../../../shared/widgets/texts/box_text.dart';
 import '../../dependencies/dependencies.dart';
@@ -36,22 +37,7 @@ class AlertDialogDeleteItemWidget extends ConsumerWidget {
       },
     );
     return (state is LoadinglDeleteItemState)
-        ? AlertDialog(
-            actions: [
-              Center(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: const [
-                      Text('carregando...'),
-                      CircularProgressIndicator(),
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          )
+        ? const AlertDialogLoadingWidget()
         : AlertDialog(
             actions: [
               const Space.x2(),

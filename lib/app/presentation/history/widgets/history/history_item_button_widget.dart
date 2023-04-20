@@ -51,7 +51,7 @@ class HistoryItemButtonWidget extends ConsumerWidget {
               children: [
                 BoxText.bodyBold(history.name),
                 BoxText.body(
-                  history.id,
+                  history.reference,
                   size: 14,
                   color: const Color.fromARGB(255, 153, 149, 149),
                 ),

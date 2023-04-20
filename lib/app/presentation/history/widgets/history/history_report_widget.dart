@@ -4,8 +4,6 @@ import 'package:my_history_app/app/presentation/history/data/models/history_mode
 import 'package:my_history_app/app/presentation/history/widgets/delete_item/alert_dialog_delete_item_widget.dart';
 import '../../../../shared/widgets/spacing/space_widget.dart';
 import '../../../../shared/widgets/texts/box_text.dart';
-import '../../dependencies/dependencies.dart';
-import '../../views/states/delete-item-state/delete_item_state.dart';
 
 class HistoryReportWidget extends ConsumerWidget {
   const HistoryReportWidget({
@@ -37,9 +35,6 @@ class HistoryReportWidget extends ConsumerWidget {
                     builder: (context) =>
                         AlertDialogDeleteItemWidget(history: history),
                   );
-                  // ref
-                  //     .read(deleteItemProvider.notifier)
-                  //     .deleteItem(history.id);
                 },
                 icon: const Icon(Icons.delete),
               ),
