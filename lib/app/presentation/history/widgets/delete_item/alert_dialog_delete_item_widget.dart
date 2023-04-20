@@ -1,6 +1,6 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:my_history_app/app/presentation/history/data/models/history_model.dart';
 import '../../../../shared/widgets/spacing/space_widget.dart';
 import '../../../../shared/widgets/texts/box_text.dart';
 
@@ -9,14 +9,14 @@ class AlertDialogDeleteItemWidget extends ConsumerWidget {
     super.key,
     required this.history,
   });
-  final DocumentSnapshot history;
+  final HistoryModel history;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return AlertDialog(
       actions: [
         Center(
-          child: BoxText.body('Excluir ${history['name']} do histórico?'),
+          child: BoxText.body('Excluir ${history.name} do histórico?'),
         ),
         const Space.x4(),
         Row(

@@ -1,6 +1,6 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:my_history_app/app/presentation/history/data/models/history_model.dart';
 import 'package:my_history_app/app/presentation/history/widgets/delete_item/alert_dialog_delete_item_widget.dart';
 import 'package:my_history_app/app/presentation/history/widgets/history/history_report_widget.dart';
 import '../../../../shared/widgets/texts/box_text.dart';
@@ -12,7 +12,7 @@ class HistoryItemButtonWidget extends ConsumerWidget {
     required this.history,
   });
   final int index;
-  final QueryDocumentSnapshot history;
+  final HistoryModel history;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -49,9 +49,9 @@ class HistoryItemButtonWidget extends ConsumerWidget {
             },
             child: Column(
               children: [
-                BoxText.bodyBold(history['name']),
+                BoxText.bodyBold(history.name),
                 BoxText.body(
-                  history['reference'],
+                  history.reference,
                   size: 14,
                   color: const Color.fromARGB(255, 153, 149, 149),
                 ),

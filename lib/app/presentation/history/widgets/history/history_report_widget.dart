@@ -1,5 +1,5 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:my_history_app/app/presentation/history/data/models/history_model.dart';
 import '../../../../shared/widgets/spacing/space_widget.dart';
 import '../../../../shared/widgets/texts/box_text.dart';
 
@@ -8,7 +8,7 @@ class HistoryReportWidget extends StatelessWidget {
     Key? key,
     required this.item,
   }) : super(key: key);
-  final QueryDocumentSnapshot item;
+  final HistoryModel item;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,7 @@ class HistoryReportWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               BoxText.bodyBold(
-                'Minha história com ${item['name']}',
+                'Minha história com ${item.name}',
                 textAlign: TextAlign.start,
               ),
               IconButton(
@@ -46,25 +46,25 @@ class HistoryReportWidget extends StatelessWidget {
               ),
               children: [
                 BoxText.bodyBold('Nome:'),
-                BoxText.body(item['name']),
+                BoxText.body(item.name),
                 const Divider(height: 5, thickness: 1),
                 BoxText.bodyBold('Referência:'),
-                BoxText.body(item['reference']),
+                BoxText.body(item.reference),
                 const Divider(height: 5, thickness: 1),
                 BoxText.bodyBold('Estado civil:'),
-                BoxText.body(item['civil-status']),
+                BoxText.body(item.civilStatus),
                 const Divider(height: 5, thickness: 1),
                 BoxText.bodyBold('Relação que tivemos:'),
-                BoxText.body(item['relationship']),
+                BoxText.body(item.relationship),
                 const Divider(height: 5, thickness: 1),
                 BoxText.bodyBold('O que rolou:'),
-                BoxText.body(item['what-happened']),
+                BoxText.body(item.whatHappened),
                 const Divider(height: 5, thickness: 1),
                 BoxText.bodyBold('Quantas vezes:'),
-                BoxText.body(item['amount-times']),
+                BoxText.body(item.amountTimes),
                 const Divider(height: 5, thickness: 1),
                 BoxText.bodyBold('Em quantos períodos:'),
-                BoxText.body(item['amount-period']),
+                BoxText.body(item.amountPeriod),
               ],
             ),
           ),

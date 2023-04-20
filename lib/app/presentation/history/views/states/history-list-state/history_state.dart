@@ -1,4 +1,4 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:my_history_app/app/presentation/history/data/models/history_model.dart';
 
 abstract class HistoryState {}
 
@@ -8,7 +8,7 @@ class LoadingHistoryState implements HistoryState {}
 
 class SuccessHistoryState implements HistoryState {
   SuccessHistoryState({required this.data});
-  final List<QueryDocumentSnapshot> data;
+  final List<HistoryModel> data;
 }
 
 class FailureHistoryState implements HistoryState {

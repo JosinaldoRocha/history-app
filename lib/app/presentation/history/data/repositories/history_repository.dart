@@ -6,17 +6,25 @@ class HistoryRepository {
   final box = Hive.box<HistoryModel>('history');
   final _firestore = FirebaseFirestore.instance;
 
-  Future<List<QueryDocumentSnapshot>> getAll(String id) async {
-    final collection = _firestore.collection('history');
-    final getDocs = await collection.where('id', isEqualTo: id).get();
-    final result = getDocs.docs;
-    result.sort((a, b) => a['name'].compareTo(b['name']));
-    return result;
+  Future<List<HistoryModel>> getAll(String id) async {
+    final getDocuments =
+        await _firestore.collection('history').where('id', isEqualTo: id).get();
+    final documents = getDocuments.docs;
+    List<HistoryModel> historics = [];
+
+    for (var docs in documents) {
+      final item = HistoryModel.fromMap(docs.data());
+      historics.add(item);
+    }
+    historics.sort((a, b) => a.name.compareTo(b.name));
+
+    return historics;
   }
 
   Future<void> saveHistory(HistoryModel history) async {
     final collection = _firestore.collection('history');
-    await collection.add(history.toMap());
+    final item = history.toMap();
+    await collection.add(item);
   }
 
   Future<void> deleteItem(HistoryModel history) async {
