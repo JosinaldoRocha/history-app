@@ -67,7 +67,7 @@ class HistoryItemButtonWidget extends ConsumerWidget {
               );
             },
             icon: Icon(
-              Icons.edit_square,
+              Icons.edit_outlined,
               color: Theme.of(context).primaryColor,
             ),
           ),

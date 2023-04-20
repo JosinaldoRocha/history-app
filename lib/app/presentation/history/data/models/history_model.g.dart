@@ -25,7 +25,7 @@ class HistoryModelAdapter extends TypeAdapter<HistoryModel> {
       amountTimes: fields[5] as String,
       amountPeriod: fields[6] as String,
       id: fields[7] as String,
-      userId: fields[8] as String,
+      userId: fields[8] as String?,
     );
   }
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:my_history_app/app/presentation/history/widgets/history/history_item_button_widget.dart';
-import '../../../../shared/widgets/alert_dialog_loading_widget.dart';
+import '../../../../shared/widgets/alert_dialog/alert_dialog_loading_widget.dart';
 import '../../../../shared/widgets/spacing/space_widget.dart';
 import '../../../../shared/widgets/texts/box_text.dart';
 import '../../dependencies/dependencies.dart';
@@ -67,5 +67,3 @@ class _HistoryListWidgetState extends ConsumerState<HistoryListWidget> {
     }
   }
 }
-
-class Firestore {}

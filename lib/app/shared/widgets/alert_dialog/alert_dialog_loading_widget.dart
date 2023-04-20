@@ -13,7 +13,7 @@ class AlertDialogLoadingWidget extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: const [
-                Text('carregando...'),
+                Text('Carregando...'),
                 CircularProgressIndicator(),
               ],
             ),

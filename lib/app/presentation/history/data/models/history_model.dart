@@ -20,7 +20,7 @@ class HistoryModel extends HiveObject {
   @HiveField(7)
   String id;
   @HiveField(8)
-  String userId;
+  String? userId;
 
   HistoryModel({
     required this.name,

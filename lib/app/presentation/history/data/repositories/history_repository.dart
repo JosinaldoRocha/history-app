@@ -1,10 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:hive/hive.dart';
 import 'package:my_history_app/app/presentation/history/data/models/history_model.dart';
 
 class HistoryRepository {
   final box = Hive.box<HistoryModel>('history');
   final _firestore = FirebaseFirestore.instance;
+  final _auth = FirebaseAuth.instance;
 
   Future<List<HistoryModel>> getAll(String id) async {
     final getDocuments = await _firestore
@@ -27,6 +29,7 @@ class HistoryRepository {
     final collection = _firestore.collection('history');
     final item = await collection.add(history.toMap());
     history.id = item.id;
+    history.userId = _auth.currentUser!.uid;
     await collection.doc(item.id).update(history.toMap());
   }
 
