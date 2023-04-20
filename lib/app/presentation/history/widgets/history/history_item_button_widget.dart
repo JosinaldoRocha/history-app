@@ -38,7 +38,7 @@ class HistoryItemButtonWidget extends ConsumerWidget {
             onPressed: () {
               showModalBottomSheet(
                 context: context,
-                builder: (context) => HistoryReportWidget(item: history),
+                builder: (context) => HistoryReportWidget(history: history),
                 shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(10),

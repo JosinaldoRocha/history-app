@@ -30,8 +30,9 @@ class HistoryRepository {
     await collection.doc(item.id).update(history.toMap());
   }
 
-  Future<void> deleteItem(HistoryModel history) async {
-    await history.delete();
+  Future<void> deleteItem(String id) async {
+    final document = _firestore.collection('history').doc(id);
+    await document.delete();
   }
 
   Future<void> editHistory(HistoryModel history) async {

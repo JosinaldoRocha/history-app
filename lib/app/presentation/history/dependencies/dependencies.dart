@@ -38,7 +38,7 @@ final addHistoryProvider =
 );
 
 final deleteItemProvider =
-    StateNotifierProvider.autoDispose<DeleteItemStateNotifier, DeleteItemState>(
+    StateNotifierProvider<DeleteItemStateNotifier, DeleteItemState>(
   (ref) => DeleteItemStateNotifier(
     historyRepository: ref.read(historyRepositoryProvider),
   ),

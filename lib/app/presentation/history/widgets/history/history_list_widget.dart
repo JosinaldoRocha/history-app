@@ -7,7 +7,11 @@ import '../../dependencies/dependencies.dart';
 import '../../views/states/history-list-state/history_state.dart';
 
 class HistoryListWidget extends ConsumerStatefulWidget {
-  const HistoryListWidget({super.key});
+  const HistoryListWidget({
+    super.key,
+    required this.id,
+  });
+  final String id;
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() =>
@@ -15,6 +19,12 @@ class HistoryListWidget extends ConsumerStatefulWidget {
 }
 
 class _HistoryListWidgetState extends ConsumerState<HistoryListWidget> {
+  @override
+  void initState() {
+    super.initState();
+    Future.microtask(() => ref.read(historyProvider.notifier).load(widget.id));
+  }
+
   @override
   Widget build(BuildContext context) {
     final state = ref.watch(historyProvider);

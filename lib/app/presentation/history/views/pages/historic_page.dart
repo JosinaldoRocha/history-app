@@ -18,26 +18,6 @@ class HistoricPage extends ConsumerStatefulWidget {
 }
 
 class _HistoricPageState extends ConsumerState<HistoricPage> {
-  void _listenAddHistory() {
-    ref.listen<DeleteItemState>(
-      deleteItemProvider,
-      (previous, next) {
-        if (next is SuccessDeleteItemState) {
-          //TODO alterar id
-          // ref.read(historyProvider.notifier).load(widget.args.id!);
-        }
-        if (next is FailureDeleteItemState) {
-          showDialog(
-            context: context,
-            builder: (context) => AlertDialog(
-              content: BoxText.body(next.errorMessage),
-            ),
-          );
-        }
-      },
-    );
-  }
-
   void _listenEditHistory() {
     ref.listen<EditHistoryState>(
       editHistoryProvider,
@@ -59,15 +39,7 @@ class _HistoricPageState extends ConsumerState<HistoricPage> {
   }
 
   @override
-  void initState() {
-    super.initState();
-    Future.microtask(
-        () => ref.read(historyProvider.notifier).load(widget.args['id']));
-  }
-
-  @override
   Widget build(BuildContext context) {
-    _listenAddHistory();
     _listenEditHistory();
     return Scaffold(
       appBar: AppBar(
@@ -78,9 +50,9 @@ class _HistoricPageState extends ConsumerState<HistoricPage> {
           color: Colors.white,
         ),
       ),
-      body: const Padding(
-        padding: EdgeInsets.all(20),
-        child: HistoryListWidget(),
+      body: Padding(
+        padding: const EdgeInsets.all(20),
+        child: HistoryListWidget(id: widget.args['id']),
       ),
     );
   }

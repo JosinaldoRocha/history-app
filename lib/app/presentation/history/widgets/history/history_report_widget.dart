@@ -1,17 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:my_history_app/app/presentation/history/data/models/history_model.dart';
+import 'package:my_history_app/app/presentation/history/widgets/delete_item/alert_dialog_delete_item_widget.dart';
 import '../../../../shared/widgets/spacing/space_widget.dart';
 import '../../../../shared/widgets/texts/box_text.dart';
+import '../../dependencies/dependencies.dart';
+import '../../views/states/delete-item-state/delete_item_state.dart';
 
-class HistoryReportWidget extends StatelessWidget {
+class HistoryReportWidget extends ConsumerWidget {
   const HistoryReportWidget({
     Key? key,
-    required this.item,
+    required this.history,
   }) : super(key: key);
-  final HistoryModel item;
+  final HistoryModel history;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Container(
       padding: const EdgeInsets.symmetric(
         vertical: 5,
@@ -23,11 +27,20 @@ class HistoryReportWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               BoxText.bodyBold(
-                'Minha história com ${item.name}',
+                'Minha história com ${history.name}',
                 textAlign: TextAlign.start,
               ),
               IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  showDialog(
+                    context: context,
+                    builder: (context) =>
+                        AlertDialogDeleteItemWidget(history: history),
+                  );
+                  // ref
+                  //     .read(deleteItemProvider.notifier)
+                  //     .deleteItem(history.id);
+                },
                 icon: const Icon(Icons.delete),
               ),
             ],
@@ -46,25 +59,25 @@ class HistoryReportWidget extends StatelessWidget {
               ),
               children: [
                 BoxText.bodyBold('Nome:'),
-                BoxText.body(item.name),
+                BoxText.body(history.name),
                 const Divider(height: 5, thickness: 1),
                 BoxText.bodyBold('Referência:'),
-                BoxText.body(item.reference),
+                BoxText.body(history.reference),
                 const Divider(height: 5, thickness: 1),
                 BoxText.bodyBold('Estado civil:'),
-                BoxText.body(item.civilStatus),
+                BoxText.body(history.civilStatus),
                 const Divider(height: 5, thickness: 1),
                 BoxText.bodyBold('Relação que tivemos:'),
-                BoxText.body(item.relationship),
+                BoxText.body(history.relationship),
                 const Divider(height: 5, thickness: 1),
                 BoxText.bodyBold('O que rolou:'),
-                BoxText.body(item.whatHappened),
+                BoxText.body(history.whatHappened),
                 const Divider(height: 5, thickness: 1),
                 BoxText.bodyBold('Quantas vezes:'),
-                BoxText.body(item.amountTimes),
+                BoxText.body(history.amountTimes),
                 const Divider(height: 5, thickness: 1),
                 BoxText.bodyBold('Em quantos períodos:'),
-                BoxText.body(item.amountPeriod),
+                BoxText.body(history.amountPeriod),
               ],
             ),
           ),

@@ -3,6 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:my_history_app/app/presentation/history/data/models/history_model.dart';
 import '../../../../shared/widgets/spacing/space_widget.dart';
 import '../../../../shared/widgets/texts/box_text.dart';
+import '../../dependencies/dependencies.dart';
+import '../../views/states/delete-item-state/delete_item_state.dart';
 
 class AlertDialogDeleteItemWidget extends ConsumerWidget {
   const AlertDialogDeleteItemWidget({
@@ -13,34 +15,74 @@ class AlertDialogDeleteItemWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return AlertDialog(
-      actions: [
-        Center(
-          child: BoxText.body('Excluir ${history.name} do histórico?'),
-        ),
-        const Space.x4(),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                  elevation: 0, backgroundColor: Colors.transparent),
-              onPressed: () {
-                //ref.read(deleteItemProvider.notifier).deleteItem(history);
-                Navigator.pop(context);
-              },
-              child: BoxText.bodyBold('Sim'),
+    final state = ref.watch(deleteItemProvider);
+
+    ref.listen<DeleteItemState>(
+      deleteItemProvider,
+      (previous, next) {
+        if (next is SuccessDeleteItemState) {
+          ref.read(historyProvider.notifier).load(history.userId);
+          Navigator.pop(context);
+          Navigator.pop(context);
+        }
+        if (next is FailureDeleteItemState) {
+          showDialog(
+            context: context,
+            builder: (context) => AlertDialog(
+              content: BoxText.body(next.errorMessage),
             ),
-            const SizedBox(width: 20),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                  elevation: 0, backgroundColor: Colors.transparent),
-              onPressed: () => Navigator.pop(context),
-              child: BoxText.bodyBold('Não'),
-            ),
-          ],
-        )
-      ],
+          );
+        }
+      },
     );
+    return (state is LoadinglDeleteItemState)
+        ? AlertDialog(
+            actions: [
+              Center(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: const [
+                      Text('carregando...'),
+                      CircularProgressIndicator(),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          )
+        : AlertDialog(
+            actions: [
+              const Space.x2(),
+              Center(
+                child: BoxText.body('Excluir ${history.name} do histórico?'),
+              ),
+              const Space.x4(),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        elevation: 0, backgroundColor: Colors.transparent),
+                    onPressed: () => Navigator.pop(context),
+                    child: BoxText.bodyBold('Não'),
+                  ),
+                  const SizedBox(width: 20),
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        elevation: 0, backgroundColor: Colors.transparent),
+                    onPressed: () {
+                      ref
+                          .read(deleteItemProvider.notifier)
+                          .deleteItem(history.id);
+                    },
+                    child: BoxText.bodyBold('Sim'),
+                  ),
+                ],
+              ),
+              const Space.x2(),
+            ],
+          );
   }
 }
