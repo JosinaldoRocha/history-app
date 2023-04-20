@@ -34,7 +34,21 @@ class HistoryModel extends HiveObject {
     required this.userId,
   });
 
-  Map<String, dynamic> toMap() {
+  Map<String, dynamic> toMap(String userId) {
+    return <String, dynamic>{
+      'name': name,
+      'reference': reference,
+      'civil-status': civilStatus,
+      'relationship': relationship,
+      'what-happened': whatHappened,
+      'amount-times': amountTimes,
+      'amount-period': amountPeriod,
+      'id': id,
+      'user-id': userId,
+    };
+  }
+
+  Map<String, dynamic> updateToMap() {
     return <String, dynamic>{
       'name': name,
       'reference': reference,

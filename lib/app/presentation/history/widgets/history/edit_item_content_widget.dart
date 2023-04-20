@@ -16,10 +16,11 @@ class EditItemContentWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 40,
+      height: 60,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          backgroundColor: const Color.fromARGB(255, 140, 170, 143),
+          backgroundColor: const Color.fromARGB(26, 146, 141, 141),
+          elevation: 0,
         ),
         onPressed: () {
           showModalBottomSheet(
@@ -37,10 +38,7 @@ class EditItemContentWidget extends StatelessWidget {
             ),
           );
         },
-        child: BoxText.body(
-          title,
-          size: 17,
-        ),
+        child: BoxText.body(title),
       ),
     );
   }
