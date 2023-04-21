@@ -61,7 +61,7 @@ class AlertDialogDeleteItemWidget extends ConsumerWidget {
                     onPressed: () {
                       ref
                           .read(deleteItemProvider.notifier)
-                          .deleteItem(history.id);
+                          .deleteItem(history.id!);
                     },
                     child: BoxText.bodyBold('Sim'),
                   ),

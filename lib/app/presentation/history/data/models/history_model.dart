@@ -32,7 +32,7 @@ class HistoryModel extends HiveObject {
     required this.amountTimes,
     required this.amountPeriod,
     this.id,
-    required this.userId,
+    this.userId,
   });
 
   Map<String, dynamic> toMap(String userId) {
