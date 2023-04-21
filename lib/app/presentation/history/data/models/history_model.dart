@@ -8,16 +8,7 @@ class HistoryModel extends HiveObject {
   String name;
   @HiveField(1)
   String reference;
-  @HiveField(2)
-  String civilStatus;
-  @HiveField(3)
-  String relationship;
-  @HiveField(4)
-  String whatHappened;
-  @HiveField(5)
-  String amountTimes;
-  @HiveField(6)
-  String amountPeriod;
+
   @HiveField(7)
   String id;
   @HiveField(8)
@@ -26,11 +17,6 @@ class HistoryModel extends HiveObject {
   HistoryModel({
     required this.name,
     required this.reference,
-    required this.civilStatus,
-    required this.relationship,
-    required this.whatHappened,
-    required this.amountTimes,
-    required this.amountPeriod,
     required this.id,
     required this.userId,
   });
@@ -39,11 +25,6 @@ class HistoryModel extends HiveObject {
     return <String, dynamic>{
       'name': name,
       'reference': reference,
-      'civil-status': civilStatus,
-      'relationship': relationship,
-      'what-happened': whatHappened,
-      'amount-times': amountTimes,
-      'amount-period': amountPeriod,
       'id': id,
       'user-id': userId,
     };
@@ -53,11 +34,6 @@ class HistoryModel extends HiveObject {
     return <String, dynamic>{
       'name': name,
       'reference': reference,
-      'civil-status': civilStatus,
-      'relationship': relationship,
-      'what-happened': whatHappened,
-      'amount-times': amountTimes,
-      'amount-period': amountPeriod,
       'id': id,
       'user-id': userId,
     };
@@ -66,15 +42,16 @@ class HistoryModel extends HiveObject {
   factory HistoryModel.fromSnapShot(
       QueryDocumentSnapshot<Map<String, dynamic>> data) {
     return HistoryModel(
-      name: (data.data()["name"] ?? '') as String,
-      reference: (data.data()["reference"] ?? 0) as String,
-      civilStatus: (data.data()["civil-status"] ?? 0) as String,
-      relationship: (data.data()["relationship"] ?? 0) as String,
-      whatHappened: (data.data()["what-happened"] ?? '') as String,
-      amountTimes: (data.data()["amount-times"] ?? '') as String,
-      amountPeriod: (data.data()["amount-period"] ?? '') as String,
-      id: data.id,
-      userId: (data.data()["user-id"] ?? '') as String,
+      name: (map["name"] ?? '') as String,
+      reference: (map["reference"] ?? 0) as String,
+      civilStatus: (map["civil-status"] ?? 0) as String,
+      relationship: (map["relationship"] ?? 0) as String,
+      whatHappened: (map["what-happened"] ?? '') as String,
+      amountTimes: (map["amount-times"] ?? '') as String,
+      amountPeriod: (map["amount-period"] ?? '') as String,
+      id: (id),
+      //id: (map["id"] ?? '') as String,
+      userId: (map["user-id"] ?? '') as String,
     );
   }
 }

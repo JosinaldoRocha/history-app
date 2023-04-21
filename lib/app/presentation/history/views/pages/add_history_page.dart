@@ -151,11 +151,6 @@ class _AddHistoryPageState extends ConsumerState<AddHistoryPage> {
                 final history = HistoryModel(
                   name: nameController.text,
                   reference: referenceController.text,
-                  civilStatus: civilStatusTypeController.dropDownValue!.name,
-                  relationship: relationshipController.dropDownValue!.name,
-                  whatHappened: whatHappenedController.dropDownValue!.name,
-                  amountTimes: amountTimesController.dropDownValue!.name,
-                  amountPeriod: amountPeriodsController.dropDownValue!.name,
                   id: '',
                   userId: widget.args['id'],
                 );
