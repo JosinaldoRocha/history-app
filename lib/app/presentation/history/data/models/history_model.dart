@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:hive/hive.dart';
 part 'history_model.g.dart';
 
@@ -62,18 +63,18 @@ class HistoryModel extends HiveObject {
     };
   }
 
-  factory HistoryModel.fromMap(Map<String, dynamic> map, String id) {
+  factory HistoryModel.fromSnapShot(
+      QueryDocumentSnapshot<Map<String, dynamic>> data) {
     return HistoryModel(
-      name: (map["name"] ?? '') as String,
-      reference: (map["reference"] ?? 0) as String,
-      civilStatus: (map["civil-status"] ?? 0) as String,
-      relationship: (map["relationship"] ?? 0) as String,
-      whatHappened: (map["what-happened"] ?? '') as String,
-      amountTimes: (map["amount-times"] ?? '') as String,
-      amountPeriod: (map["amount-period"] ?? '') as String,
-      id: (id),
-      //id: (map["id"] ?? '') as String,
-      userId: (map["user-id"] ?? '') as String,
+      name: (data.data()["name"] ?? '') as String,
+      reference: (data.data()["reference"] ?? 0) as String,
+      civilStatus: (data.data()["civil-status"] ?? 0) as String,
+      relationship: (data.data()["relationship"] ?? 0) as String,
+      whatHappened: (data.data()["what-happened"] ?? '') as String,
+      amountTimes: (data.data()["amount-times"] ?? '') as String,
+      amountPeriod: (data.data()["amount-period"] ?? '') as String,
+      id: data.id,
+      userId: (data.data()["user-id"] ?? '') as String,
     );
   }
 }
