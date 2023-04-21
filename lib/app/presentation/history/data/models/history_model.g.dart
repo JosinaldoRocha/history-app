@@ -19,7 +19,12 @@ class HistoryModelAdapter extends TypeAdapter<HistoryModel> {
     return HistoryModel(
       name: fields[0] as String,
       reference: fields[1] as String,
-      id: fields[7] as String,
+      civilStatus: fields[2] as String,
+      relationship: fields[3] as String,
+      whatHappened: fields[4] as String,
+      amountTimes: fields[5] as String,
+      amountPeriod: fields[6] as String,
+      id: fields[7] as String?,
       userId: fields[8] as String?,
     );
   }
@@ -32,6 +37,16 @@ class HistoryModelAdapter extends TypeAdapter<HistoryModel> {
       ..write(obj.name)
       ..writeByte(1)
       ..write(obj.reference)
+      ..writeByte(2)
+      ..write(obj.civilStatus)
+      ..writeByte(3)
+      ..write(obj.relationship)
+      ..writeByte(4)
+      ..write(obj.whatHappened)
+      ..writeByte(5)
+      ..write(obj.amountTimes)
+      ..writeByte(6)
+      ..write(obj.amountPeriod)
       ..writeByte(7)
       ..write(obj.id)
       ..writeByte(8)

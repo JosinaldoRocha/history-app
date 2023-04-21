@@ -19,14 +19,19 @@ class HistoryModel extends HiveObject {
   @HiveField(6)
   String amountPeriod;
   @HiveField(7)
-  String id;
+  String? id;
   @HiveField(8)
   String? userId;
 
   HistoryModel({
     required this.name,
     required this.reference,
-    required this.id,
+    required this.civilStatus,
+    required this.relationship,
+    required this.whatHappened,
+    required this.amountTimes,
+    required this.amountPeriod,
+    this.id,
     required this.userId,
   });
 
@@ -34,7 +39,11 @@ class HistoryModel extends HiveObject {
     return <String, dynamic>{
       'name': name,
       'reference': reference,
-      'id': id,
+      'civil-status': civilStatus,
+      'relationship': reference,
+      'what-happened': whatHappened,
+      'amount-times': amountTimes,
+      'amount-period': amountPeriod,
       'user-id': userId,
     };
   }
@@ -43,6 +52,11 @@ class HistoryModel extends HiveObject {
     return <String, dynamic>{
       'name': name,
       'reference': reference,
+      'civil-status': civilStatus,
+      'relationship': reference,
+      'what-happened': whatHappened,
+      'amount-times': amountTimes,
+      'amount-period': amountPeriod,
       'id': id,
       'user-id': userId,
     };
@@ -59,7 +73,6 @@ class HistoryModel extends HiveObject {
       amountTimes: (data.data()["amount-times"] ?? '') as String,
       amountPeriod: (data.data()["amount-period"] ?? '') as String,
       id: data.id,
-      //id: (data.data()["id"] ?? '') as String,
       userId: (data.data()["user-id"] ?? '') as String,
     );
   }
