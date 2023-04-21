@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:my_history_app/app/presentation/authentication/data/models/user_model.dart';
 import 'package:my_history_app/app/presentation/history/dependencies/dependencies.dart';
 import 'package:my_history_app/app/presentation/history/views/states/edit_history/edit_history_state.dart';
 import 'package:my_history_app/app/presentation/history/widgets/history/history_list_widget.dart';
@@ -10,7 +11,7 @@ class HistoricPage extends ConsumerStatefulWidget {
     required this.args,
     super.key,
   });
-  final Map<String, dynamic> args;
+  final UserModel args;
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() => _HistoricPageState();
@@ -51,7 +52,7 @@ class _HistoricPageState extends ConsumerState<HistoricPage> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(20),
-        child: HistoryListWidget(id: widget.args['id']),
+        child: HistoryListWidget(id: widget.args.id!),
       ),
     );
   }

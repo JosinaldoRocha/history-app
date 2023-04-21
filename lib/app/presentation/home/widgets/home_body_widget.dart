@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:my_history_app/app/presentation/authentication/data/models/user_model.dart';
 import '../../../shared/widgets/spacing/space_widget.dart';
 import 'home_button_widget.dart';
 
@@ -8,7 +9,7 @@ class HomeBodyWidget extends ConsumerWidget {
     super.key,
     required this.user,
   });
-  final Map<String, dynamic> user;
+  final UserModel user;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -32,11 +33,7 @@ class HomeBodyWidget extends ConsumerWidget {
             title: 'Adicionar história',
             icon: Icons.add,
             onTap: () {
-              Navigator.pushNamed(
-                context,
-                '/add-history-page',
-                arguments: user,
-              );
+              Navigator.pushNamed(context, '/add-history-page');
             },
           ),
         ],

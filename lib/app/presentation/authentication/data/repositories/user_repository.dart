@@ -15,11 +15,11 @@ class UserRepository {
     return values;
   }
 
-  Future<Map<String, dynamic>> getCurrentUser() async {
+  Future<UserModel> getCurrentUser() async {
     final docRef = _firestore.collection('users').doc(_auth.currentUser!.uid);
     final docSnapshot = await docRef.get();
-    final user = docSnapshot.data();
-    return user!;
+    final user = UserModel.fromSnapShot(docSnapshot);
+    return user;
   }
 
   Future<User?> checkUser() async {

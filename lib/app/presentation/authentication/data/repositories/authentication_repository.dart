@@ -17,18 +17,6 @@ class AuthenticationRepository {
     return user;
   }
 
-  Future<UserModel> recoverPassword(String email) async {
-    await Future.delayed(const Duration(seconds: 3));
-    final values = box.values.toList();
-    final currentUser = values.firstWhere((element) => element.eMail == email);
-
-    return currentUser;
-  }
-
-  void logout() async {
-    _auth.signOut();
-  }
-
   Future<String?> signUp({
     required String name,
     required String email,
@@ -47,18 +35,20 @@ class AuthenticationRepository {
     return user?.uid;
   }
 
+  Future<UserModel> recoverPassword(String email) async {
+    await Future.delayed(const Duration(seconds: 3));
+    final values = box.values.toList();
+    final currentUser = values.firstWhere((element) => element.eMail == email);
+
+    return currentUser;
+  }
+
+  void logout() async {
+    _auth.signOut();
+  }
+
   Future<void> saveUser(UserModel user, String userId) async {
     final collection = FirebaseFirestore.instance.collection('users');
-
-    Map<String, dynamic> userData = {
-      'name': user.name,
-      'surname': user.surname,
-      'user-name': user.userName,
-      'email': user.eMail,
-      'password': user.password,
-      'id': userId,
-    };
-
-    await collection.doc(userId).set(userData);
+    await collection.doc(userId).set(user.toMap(userId));
   }
 }

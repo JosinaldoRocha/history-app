@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:hive/hive.dart';
 part 'user_model.g.dart';
 
@@ -27,4 +28,26 @@ class UserModel extends HiveObject {
     this.confirmPassword,
     this.id,
   });
+
+  Map<String, dynamic> toMap(String userId) {
+    return {
+      'name': name,
+      'surname': surname,
+      'user-name': userName,
+      'email': eMail,
+      'password': password,
+      'id': userId,
+    };
+  }
+
+  factory UserModel.fromSnapShot(DocumentSnapshot<Map<String, dynamic>> data) {
+    return UserModel(
+      name: (data.data()!["name"] ?? '') as String,
+      surname: (data.data()!["surname"] ?? 0) as String,
+      userName: (data.data()!["user-name"] ?? 0) as String,
+      eMail: (data.data()!["email"] ?? 0) as String,
+      password: (data.data()!["password"] ?? '') as String,
+      id: (data.data()!["id"] ?? '') as String,
+    );
+  }
 }

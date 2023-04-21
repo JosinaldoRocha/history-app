@@ -1,6 +1,7 @@
 import 'package:dropdown_textfield/dropdown_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:my_history_app/app/presentation/authentication/data/models/user_model.dart';
 import '../../data/models/history_model.dart';
 import '../../dependencies/dependencies.dart';
 import '../states/add-history-state/add_history_state.dart';
@@ -19,7 +20,7 @@ class AddHistoryPage extends ConsumerStatefulWidget {
     super.key,
     required this.args,
   });
-  final Map<String, dynamic> args;
+  final UserModel? args;
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() => _AddHistoryPageState();
@@ -102,7 +103,7 @@ class _AddHistoryPageState extends ConsumerState<AddHistoryPage> {
     );
   }
 
-  Widget _buildContext(Map<String, dynamic> user, AddHistoryState state) {
+  Widget _buildContext(UserModel? user, AddHistoryState state) {
     return Form(
       key: _formKey,
       child: Column(

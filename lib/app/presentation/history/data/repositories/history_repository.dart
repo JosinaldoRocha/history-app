@@ -27,7 +27,7 @@ class HistoryRepository {
   Future<void> saveHistory(HistoryModel history) async {
     final userId = await UserRepository().getCurrentUser();
     final collection = _firestore.collection('history');
-    await collection.add(history.toMap(userId['id']));
+    await collection.add(history.toMap(userId.id!));
   }
 
   Future<void> deleteItem(String id) async {
