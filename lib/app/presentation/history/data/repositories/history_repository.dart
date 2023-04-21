@@ -16,7 +16,7 @@ class HistoryRepository {
     List<HistoryModel> historics = [];
 
     for (var docs in documents) {
-      final item = HistoryModel.fromMap(docs.data(), docs.id);
+      final item = HistoryModel.fromSnapShot(docs);
       historics.add(item);
     }
     historics.sort((a, b) => a.name.compareTo(b.name));
