@@ -14,13 +14,14 @@ class HomeButtonWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 60,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(5),
-        color: Theme.of(context).primaryColor,
-      ),
       child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(8),
+          ),
+        ),
         onPressed: onTap,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
