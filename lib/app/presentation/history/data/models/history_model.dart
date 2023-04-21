@@ -62,7 +62,7 @@ class HistoryModel extends HiveObject {
     };
   }
 
-  factory HistoryModel.fromMap(Map<String, dynamic> map) {
+  factory HistoryModel.fromMap(Map<String, dynamic> map, String id) {
     return HistoryModel(
       name: (map["name"] ?? '') as String,
       reference: (map["reference"] ?? 0) as String,
@@ -71,7 +71,8 @@ class HistoryModel extends HiveObject {
       whatHappened: (map["what-happened"] ?? '') as String,
       amountTimes: (map["amount-times"] ?? '') as String,
       amountPeriod: (map["amount-period"] ?? '') as String,
-      id: (map["id"] ?? '') as String,
+      id: (id),
+      //id: (map["id"] ?? '') as String,
       userId: (map["user-id"] ?? '') as String,
     );
   }

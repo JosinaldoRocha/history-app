@@ -16,7 +16,7 @@ class HistoryRepository {
     List<HistoryModel> historics = [];
 
     for (var docs in documents) {
-      final item = HistoryModel.fromMap(docs.data());
+      final item = HistoryModel.fromMap(docs.data(), docs.id);
       historics.add(item);
     }
     historics.sort((a, b) => a.name.compareTo(b.name));
@@ -27,9 +27,7 @@ class HistoryRepository {
   Future<void> saveHistory(HistoryModel history) async {
     final userId = await UserRepository().getCurrentUser();
     final collection = _firestore.collection('history');
-    final item = await collection.add(history.toMap(userId['id']));
-    history.id = item.id;
-    await collection.doc(item.id).update(history.toMap(userId['id']));
+    await collection.add(history.toMap(userId['id']));
   }
 
   Future<void> deleteItem(String id) async {
