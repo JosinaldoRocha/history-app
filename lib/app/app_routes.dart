@@ -22,9 +22,9 @@ class AppRoutes {
         '/add-history-page': (context) => AddHistoryPage(
               args: getArgs(context),
             ),
-        '/edit-item-page': (context) => EditItemPage(
-              history: getArgs(context),
-            ),
+        // '/edit-item-page': (context) => EditItemPage(
+        //       history: getArgs(context),
+        //     ),
         '/recover-password': (context) => const RecoverPasswordPage(),
       };
 

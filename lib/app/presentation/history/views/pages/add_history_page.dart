@@ -1,7 +1,7 @@
 import 'package:dropdown_textfield/dropdown_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:my_history_app/app/presentation/authentication/data/models/user_model.dart';
+import 'package:my_history_app/app/presentation/history/views/states/edit_history/edit_history_state.dart';
 import '../../data/models/history_model.dart';
 import '../../dependencies/dependencies.dart';
 import '../states/add-history-state/add_history_state.dart';
@@ -20,7 +20,7 @@ class AddHistoryPage extends ConsumerStatefulWidget {
     super.key,
     required this.args,
   });
-  final UserModel? args;
+  final HistoryModel? args;
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() => _AddHistoryPageState();
@@ -29,13 +29,13 @@ class AddHistoryPage extends ConsumerStatefulWidget {
 class _AddHistoryPageState extends ConsumerState<AddHistoryPage> {
   final nameController = TextEditingController();
   final referenceController = TextEditingController();
-  final relationshipController = SingleValueDropDownController();
-  final civilStatusTypeController = SingleValueDropDownController();
-  final whatHappenedController = SingleValueDropDownController();
-  final amountTimesController = SingleValueDropDownController();
-  final amountPeriodsController = SingleValueDropDownController();
+  var relationshipController = SingleValueDropDownController();
+  var civilStatusTypeController = SingleValueDropDownController();
+  var whatHappenedController = SingleValueDropDownController();
+  var amountTimesController = SingleValueDropDownController();
+  var amountPeriodsController = SingleValueDropDownController();
 
-  void _listen() {
+  void _listenAddHistory() {
     ref.listen<AddHistoryState>(
       addHistoryProvider,
       (previous, next) {
@@ -43,6 +43,26 @@ class _AddHistoryPageState extends ConsumerState<AddHistoryPage> {
           Navigator.pop(context);
         }
         if (next is FailureAddHistoryState) {
+          showDialog(
+            context: context,
+            builder: (context) => AlertDialog(
+              content: BoxText.body(next.errorMessage),
+            ),
+          );
+        }
+      },
+    );
+  }
+
+  void _listenEditHistory() {
+    ref.listen<EditHistoryState>(
+      editHistoryProvider,
+      (previous, next) {
+        if (next is SuccessEditHistoryState) {
+          ref.read(historyProvider.notifier).load(widget.args!.userId!);
+          Navigator.pop(context);
+        }
+        if (next is FailureEditHistoryState) {
           showDialog(
             context: context,
             builder: (context) => AlertDialog(
@@ -64,6 +84,33 @@ class _AddHistoryPageState extends ConsumerState<AddHistoryPage> {
       ref.read(listOfTimesProvider.notifier).load();
       ref.read(periodListProvider.notifier).load();
     });
+
+    if (widget.args != null) {
+      final history = widget.args!;
+      final relationship = SingleValueDropDownController(
+          data: DropDownValueModel(
+              name: history.relationship, value: history.relationship));
+      final civilStatus = SingleValueDropDownController(
+          data: DropDownValueModel(
+              name: history.civilStatus, value: history.civilStatus));
+      final whatHappened = SingleValueDropDownController(
+          data: DropDownValueModel(
+              name: history.whatHappened, value: history.whatHappened));
+      final amountTimes = SingleValueDropDownController(
+          data: DropDownValueModel(
+              name: history.amountTimes, value: history.amountTimes));
+      final amountPeriods = SingleValueDropDownController(
+          data: DropDownValueModel(
+              name: history.amountPeriod, value: history.amountPeriod));
+
+      nameController.text = history.name;
+      referenceController.text = history.reference;
+      relationshipController = relationship;
+      civilStatusTypeController = civilStatus;
+      whatHappenedController = whatHappened;
+      amountTimesController = amountTimes;
+      amountPeriodsController = amountPeriods;
+    }
   }
 
   final _formKey = GlobalKey<FormState>();
@@ -71,19 +118,24 @@ class _AddHistoryPageState extends ConsumerState<AddHistoryPage> {
   @override
   Widget build(BuildContext context) {
     final addHistoryState = ref.watch(addHistoryProvider);
-    _listen();
+    final editHistoryState = ref.watch(editHistoryProvider);
+    _listenAddHistory();
+    _listenEditHistory();
 
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(30),
         child: Center(
-          child: _buildContext(widget.args, addHistoryState),
+          child: _buildContext(addHistoryState, editHistoryState),
         ),
       ),
     );
   }
 
-  Widget _buildContext(UserModel? user, AddHistoryState state) {
+  Widget _buildContext(
+    AddHistoryState addHistoryState,
+    EditHistoryState editHistoryState,
+  ) {
     return Form(
       key: _formKey,
       child: Column(
@@ -125,20 +177,36 @@ class _AddHistoryPageState extends ConsumerState<AddHistoryPage> {
           const SizedBox(height: 20),
           ButtonWidget(
             title: 'Confirmar',
-            isLoading: state is LoadingAddHistoryState,
+            isLoading: addHistoryState is LoadingAddHistoryState ||
+                editHistoryState is LoadingEditHistoryState,
             onTap: () {
               final validadeForm = _formKey.currentState!.validate();
               if (validadeForm) {
-                final history = HistoryModel(
-                  name: nameController.text,
-                  reference: referenceController.text,
-                  civilStatus: civilStatusTypeController.dropDownValue!.name,
-                  relationship: relationshipController.dropDownValue!.name,
-                  whatHappened: whatHappenedController.dropDownValue!.name,
-                  amountTimes: amountTimesController.dropDownValue!.name,
-                  amountPeriod: amountPeriodsController.dropDownValue!.name,
-                );
-                ref.read(addHistoryProvider.notifier).addHistory(history);
+                if (widget.args != null) {
+                  final history = HistoryModel(
+                    name: nameController.text,
+                    reference: referenceController.text,
+                    civilStatus: civilStatusTypeController.dropDownValue!.name,
+                    relationship: relationshipController.dropDownValue!.name,
+                    whatHappened: whatHappenedController.dropDownValue!.name,
+                    amountTimes: amountTimesController.dropDownValue!.name,
+                    amountPeriod: amountPeriodsController.dropDownValue!.name,
+                    id: widget.args!.id,
+                    userId: widget.args!.userId,
+                  );
+                  ref.read(editHistoryProvider.notifier).editHistory(history);
+                } else {
+                  final history = HistoryModel(
+                    name: nameController.text,
+                    reference: referenceController.text,
+                    civilStatus: civilStatusTypeController.dropDownValue!.name,
+                    relationship: relationshipController.dropDownValue!.name,
+                    whatHappened: whatHappenedController.dropDownValue!.name,
+                    amountTimes: amountTimesController.dropDownValue!.name,
+                    amountPeriod: amountPeriodsController.dropDownValue!.name,
+                  );
+                  ref.read(addHistoryProvider.notifier).addHistory(history);
+                }
               }
             },
           ),

@@ -61,7 +61,7 @@ class HistoryItemButtonWidget extends ConsumerWidget {
             onPressed: () {
               Navigator.pushNamed(
                 context,
-                '/edit-item-page',
+                '/add-history-page',
                 arguments: history,
               );
             },

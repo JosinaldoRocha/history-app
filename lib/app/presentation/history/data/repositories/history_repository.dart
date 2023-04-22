@@ -36,7 +36,8 @@ class HistoryRepository {
   }
 
   Future<void> editHistory(HistoryModel history) async {
-    history.save();
+    final document = _firestore.collection('history').doc(history.id);
+    await document.update(history.updateToMap());
   }
 
   Future<List<String>> getCivilStatusList() async {
