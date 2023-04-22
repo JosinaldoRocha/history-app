@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:my_history_app/app/presentation/authentication/data/models/user_model.dart';
@@ -6,6 +8,7 @@ import 'package:my_history_app/app/presentation/authentication/views/states/logo
 import 'package:my_history_app/app/presentation/home/widgets/drawer_widget.dart';
 import 'package:my_history_app/app/presentation/home/widgets/home_body_widget.dart';
 import 'package:my_history_app/app/shared/widgets/texts/box_text.dart';
+import 'package:image_picker/image_picker.dart';
 
 class HomePage extends ConsumerStatefulWidget {
   const HomePage({super.key, required this.args});
@@ -44,7 +47,16 @@ class _HomePageState extends ConsumerState<HomePage> {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          onPressed: () {},
+          onPressed: () async {
+            final pickedFile =
+                await ImagePicker().pickImage(source: ImageSource.gallery);
+            // ou: final pickedFile = await ImagePicker().getImage(source: ImageSource.camera);
+            if (pickedFile != null) {
+              // faça algo com o arquivo de imagem selecionado
+              final image = File(pickedFile.path);
+              Image.file(image);
+            }
+          },
           icon: const Icon(Icons.person),
         ),
         title: BoxText.body(
