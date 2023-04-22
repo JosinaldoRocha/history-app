@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:my_history_app/app/presentation/history/views/states/edit_history/edit_history_state.dart';
 import '../../data/models/history_model.dart';
 import '../../dependencies/dependencies.dart';
+import '../../widgets/add_item/period_list_widget.dart';
 import '../states/add-history-state/add_history_state.dart';
 import '../../views/states/period_list_state/period_list_state.dart';
 import '../../widgets/add_item/civil_status_list_widget.dart';
@@ -169,8 +170,8 @@ class _AddHistoryPageState extends ConsumerState<AddHistoryPage> {
                 RelationshipListWidget(controller: relationshipController),
                 ListWhatHappenedWidget(controller: whatHappenedController),
                 ListOfTimesWidget(controller: amountTimesController),
-                //PeriodListWidget(controller: amountPeriodsController),
-                _buildPeriodList(),
+                PeriodListWidget(controller: amountPeriodsController),
+                //_buildPeriodList(),
               ],
             ),
           ),

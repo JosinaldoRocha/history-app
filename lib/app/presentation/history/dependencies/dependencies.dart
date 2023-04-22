@@ -73,8 +73,8 @@ final listOfTimesProvider =
 );
 
 final periodListProvider =
-    StateNotifierProvider.autoDispose<PeriodListNotifier, PeriodListState>(
-  (ref) => PeriodListNotifier(
+    StateNotifierProvider<PeriodListStateNotifier, PeriodListState>(
+  (ref) => PeriodListStateNotifier(
     historyRepository: ref.read(historyRepositoryProvider),
   ),
 );
