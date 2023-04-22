@@ -39,26 +39,6 @@ class _AddHistoryPageState extends ConsumerState<AddHistoryPage> {
     ref.listen<AddHistoryState>(
       addHistoryProvider,
       (previous, next) {
-        // if (next is LoadingAddHistoryState) {
-        //   // showDialog(
-        //   //   context: context,
-        //   //   builder: (context) => Container(
-        //   //     height: 200,
-        //   //     width: 300,
-        //   //     color: const Color.fromARGB(255, 181, 214, 181),
-        //   //     child: Column(
-        //   //       mainAxisAlignment: MainAxisAlignment.center,
-        //   //       children: [
-        //   //         Center(child: Image.asset('assets/images/logo1.png')),
-        //   //         const Space.x4(),
-        //   //         const Center(
-        //   //           child: CircularProgressIndicator(),
-        //   //         ),
-        //   //       ],
-        //   //     ),
-        //   //   ),
-        //   // );
-        // }
         if (next is SuccessAddHistoryState) {
           Navigator.pop(context);
         }
