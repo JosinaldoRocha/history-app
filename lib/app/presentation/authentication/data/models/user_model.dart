@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:hive/hive.dart';
 part 'user_model.g.dart';
@@ -18,6 +20,8 @@ class UserModel extends HiveObject {
   String? confirmPassword;
   @HiveField(6)
   String? id;
+  @HiveField(7)
+  File? image;
 
   UserModel({
     required this.name,
@@ -27,6 +31,7 @@ class UserModel extends HiveObject {
     required this.password,
     this.confirmPassword,
     this.id,
+    this.image,
   });
 
   Map<String, dynamic> toMap(String userId) {
@@ -37,6 +42,18 @@ class UserModel extends HiveObject {
       'email': eMail,
       'password': password,
       'id': userId,
+    };
+  }
+
+  Map<String, dynamic> updateToMap(File image) {
+    return {
+      'name': name,
+      'surname': surname,
+      'user-name': userName,
+      'email': eMail,
+      'password': password,
+      'id': id,
+      'image': image,
     };
   }
 
