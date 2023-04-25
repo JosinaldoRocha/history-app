@@ -3,10 +3,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:my_history_app/app/presentation/authentication/data/models/user_model.dart';
 import 'package:my_history_app/app/presentation/authentication/dependencies/dependencies.dart';
 import 'package:my_history_app/app/presentation/authentication/views/states/logout_state/logout_state.dart';
+import 'package:my_history_app/app/presentation/home/widgets/alert_dialog_update_profile_picture.dart';
 import 'package:my_history_app/app/presentation/home/widgets/drawer_widget.dart';
 import 'package:my_history_app/app/presentation/home/widgets/home_body_widget.dart';
 import 'package:my_history_app/app/shared/widgets/texts/box_text.dart';
-import 'package:image_picker/image_picker.dart';
 import '../../../authentication/views/states/update_user/update_profile_picture_state.dart';
 
 class HomePage extends ConsumerStatefulWidget {
@@ -71,13 +71,19 @@ class _HomePageState extends ConsumerState<HomePage> {
               )
             : IconButton(
                 onPressed: () async {
-                  final pickedFile = await ImagePicker()
-                      .pickImage(source: ImageSource.gallery);
-                  if (pickedFile != null) {
-                    ref
-                        .read(updataProfilePictureProvider.notifier)
-                        .load(user, pickedFile.path);
-                  }
+                  showDialog(
+                    context: context,
+                    builder: (context) =>
+                        AlertDialogUpdateProfilePictureWidget(user: user),
+                  );
+
+                  // final pickedFile = await ImagePicker()
+                  //     .pickImage(source: ImageSource.gallery);
+                  // if (pickedFile != null) {
+                  //   ref
+                  //       .read(updataProfilePictureProvider.notifier)
+                  //       .load(user, pickedFile.path);
+                  // }
                 },
                 icon: (user.image.isEmpty)
                     ? const CircleAvatar(
