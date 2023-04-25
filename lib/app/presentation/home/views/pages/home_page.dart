@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:my_history_app/app/presentation/authentication/data/models/user_model.dart';
 import 'package:my_history_app/app/presentation/authentication/dependencies/dependencies.dart';
 import 'package:my_history_app/app/presentation/authentication/views/states/logout_state/logout_state.dart';
-import 'package:my_history_app/app/presentation/home/dependencies/dependencies.dart';
 import 'package:my_history_app/app/presentation/home/widgets/drawer_widget.dart';
 import 'package:my_history_app/app/presentation/home/widgets/home_body_widget.dart';
 import 'package:my_history_app/app/shared/widgets/texts/box_text.dart';

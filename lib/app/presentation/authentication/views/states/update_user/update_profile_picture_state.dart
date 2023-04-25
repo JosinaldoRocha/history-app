@@ -7,8 +7,8 @@ class InitialUpdateProfilePictureState implements UpdateProfilePictureState {}
 class LoadingUpdateProfilePictureState implements UpdateProfilePictureState {}
 
 class SuccessUpdateProfilePictureState implements UpdateProfilePictureState {
-  final UserModel data;
   SuccessUpdateProfilePictureState({required this.data});
+  final UserModel data;
 }
 
 class FailureUpdateProfilePictureState implements UpdateProfilePictureState {
