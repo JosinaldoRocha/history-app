@@ -36,7 +36,7 @@ class UserRepository {
     await document.update(user.updateToMap(user));
   }
 
-  Future<UserModel> updateProfilePicture(UserModel user, String image) async {
+  Future<void> updateProfilePicture(UserModel user, String image) async {
     final userId = _firestore.collection('users').doc(user.id);
     final Reference reference =
         _storage.ref().child('profilePicture/${userId.id}');
@@ -44,7 +44,6 @@ class UserRepository {
     await task.whenComplete(() => null);
     final imageUrl = await reference.getDownloadURL();
     await userId.update({'image': imageUrl});
-    return user;
   }
 
   Future<void> clearRegisters() async {

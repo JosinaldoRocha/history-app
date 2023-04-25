@@ -42,6 +42,9 @@ class _HomePageState extends ConsumerState<HomePage> {
     ref.listen<UpdateProfilePictureState>(
       updataProfilePictureProvider,
       (previous, next) {
+        if (next is SuccessUpdateProfilePictureState) {
+          widget.args.image = next.data.image;
+        }
         if (next is FailureUpdateProfilePictureState) {
           showDialog(
             context: context,
@@ -58,7 +61,6 @@ class _HomePageState extends ConsumerState<HomePage> {
   Widget build(BuildContext context) {
     final user = widget.args;
     final updateProfilePictureState = ref.watch(updataProfilePictureProvider);
-    final homeState = ref.watch(homeProvider);
 
     logoutListen();
     updateProfilePictureListen();
