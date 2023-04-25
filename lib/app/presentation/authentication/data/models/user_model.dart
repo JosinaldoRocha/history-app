@@ -21,7 +21,7 @@ class UserModel extends HiveObject {
   @HiveField(6)
   String? id;
   @HiveField(7)
-  File? image;
+  String image;
 
   UserModel({
     required this.name,
@@ -31,7 +31,7 @@ class UserModel extends HiveObject {
     required this.password,
     this.confirmPassword,
     this.id,
-    this.image,
+    required this.image,
   });
 
   Map<String, dynamic> toMap(String userId) {
@@ -45,15 +45,15 @@ class UserModel extends HiveObject {
     };
   }
 
-  Map<String, dynamic> updateToMap(File image) {
+  Map<String, dynamic> updateToMap(UserModel user) {
     return {
-      'name': name,
-      'surname': surname,
-      'user-name': userName,
-      'email': eMail,
-      'password': password,
-      'id': id,
-      'image': image,
+      'name': user.name,
+      'surname': user.surname,
+      'user-name': user.userName,
+      'email': user.eMail,
+      'password': user.password,
+      'id': user.id,
+      'image': user.image,
     };
   }
 
@@ -65,6 +65,7 @@ class UserModel extends HiveObject {
       eMail: (data.data()!["email"] ?? 0) as String,
       password: (data.data()!["password"] ?? '') as String,
       id: (data.data()!["id"] ?? '') as String,
+      image: (data.data()!["image"] ?? '') as String,
     );
   }
 }

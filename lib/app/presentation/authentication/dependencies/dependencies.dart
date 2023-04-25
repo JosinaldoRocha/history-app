@@ -6,11 +6,13 @@ import 'package:my_history_app/app/presentation/authentication/views/states/reco
 import 'package:my_history_app/app/presentation/authentication/views/states/recover_password/recover_password/recover_password_state.dart';
 import 'package:my_history_app/app/presentation/authentication/views/states/recover_password/recover_password/recover_password_state_notifier.dart';
 import 'package:my_history_app/app/presentation/authentication/views/states/sign_in_state/sign_in_state.dart';
+import 'package:my_history_app/app/presentation/authentication/views/states/update_user/update_profile_picture_state.dart';
 import '../data/repositories/user_repository.dart';
 import '../views/states/sign_up/sign_up_state.dart';
 import '../views/states/sign_up/sign_up_state_notifier.dart';
 import '../views/states/logout_state/logout_state.dart';
 import '../views/states/logout_state/logout_state_notifier.dart';
+import '../views/states/update_user/update_profile_picture_state_notifier.dart';
 
 final authenticationRepository = Provider(
   (ref) => AuthenticationRepository(),
@@ -50,5 +52,12 @@ final checkEmailProvider =
     StateNotifierProvider.autoDispose<CheckEmailStateNotifier, CheckEmailState>(
   (ref) => CheckEmailStateNotifier(
     authenticationRepository: ref.read(authenticationRepository),
+  ),
+);
+
+final updataProfilePictureProvider = StateNotifierProvider<
+    UpdateProfilePictureStateNotifier, UpdateProfilePictureState>(
+  (ref) => UpdateProfilePictureStateNotifier(
+    userRepository: ref.read(userRepositoryProvider),
   ),
 );

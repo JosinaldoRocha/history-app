@@ -139,6 +139,7 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
                             userName: _userNameController.text,
                             eMail: _eMailController.text,
                             password: _passwordController.text,
+                            image: '',
                           ),
                         );
                   }

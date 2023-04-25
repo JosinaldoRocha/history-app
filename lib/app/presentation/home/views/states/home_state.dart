@@ -8,7 +8,7 @@ class LoadingHomeState implements HomeState {}
 
 class SuccessHomeState implements HomeState {
   SuccessHomeState({required this.data});
-  final List<UserModel> data;
+  final UserModel data;
 }
 
 class FailureHomeState implements HomeState {

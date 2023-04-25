@@ -9,7 +9,7 @@ class HomeStateNotifier extends StateNotifier<HomeState> {
   void load() async {
     state = LoadingHomeState();
     try {
-      final result = await userRepository.getAll();
+      final result = await userRepository.getCurrentUser();
       state = SuccessHomeState(data: result);
     } catch (e) {
       state = FailureHomeState(errorMessage: 'Erro ao carregar dados.');
