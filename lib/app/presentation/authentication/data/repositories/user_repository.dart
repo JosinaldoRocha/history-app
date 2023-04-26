@@ -46,6 +46,11 @@ class UserRepository {
     await userId.update({'image': imageUrl});
   }
 
+  Future<void> removeProfilePicture(UserModel user) async {
+    final userId = _firestore.collection('users').doc(user.id);
+    await userId.update({'image': ''});
+  }
+
   Future<void> clearRegisters() async {
     await Future.delayed(const Duration(seconds: 2));
     await box.clear();

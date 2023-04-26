@@ -9,7 +9,19 @@ class UpdateProfilePictureStateNotifier
       : super(InitialUpdateProfilePictureState());
   final UserRepository userRepository;
 
-  void load(UserModel user, String image) async {
+  void removeProfilePicture(UserModel user) async {
+    state = LoadingUpdateProfilePictureState();
+    try {
+      await userRepository.removeProfilePicture(user);
+      final result = await userRepository.getCurrentUser();
+      state = SuccessUpdateProfilePictureState(data: result);
+    } catch (e) {
+      state = FailureUpdateProfilePictureState(
+          errorMessage: 'Erro ao carregar imagem.');
+    }
+  }
+
+  void updateProfilePicture(UserModel user, String image) async {
     state = LoadingUpdateProfilePictureState();
     try {
       await userRepository.updateProfilePicture(user, image);

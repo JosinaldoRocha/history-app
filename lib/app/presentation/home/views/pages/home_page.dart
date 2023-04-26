@@ -66,7 +66,8 @@ class _HomePageState extends ConsumerState<HomePage> {
     return Scaffold(
       appBar: AppBar(
         leading: (updateProfilePictureState is LoadingUpdateProfilePictureState)
-            ? const CircleAvatar(
+            ? const Padding(
+                padding: EdgeInsets.all(15),
                 child: CircularProgressIndicator(color: Colors.white),
               )
             : IconButton(
@@ -76,14 +77,6 @@ class _HomePageState extends ConsumerState<HomePage> {
                     builder: (context) =>
                         AlertDialogUpdateProfilePictureWidget(user: user),
                   );
-
-                  // final pickedFile = await ImagePicker()
-                  //     .pickImage(source: ImageSource.gallery);
-                  // if (pickedFile != null) {
-                  //   ref
-                  //       .read(updataProfilePictureProvider.notifier)
-                  //       .load(user, pickedFile.path);
-                  // }
                 },
                 icon: (user.image.isEmpty)
                     ? const CircleAvatar(

@@ -5,7 +5,7 @@ import 'package:my_history_app/app/presentation/authentication/data/models/user_
 import '../../../shared/widgets/texts/box_text.dart';
 import '../../authentication/dependencies/dependencies.dart';
 
-class AlertDialogUpdateProfilePictureWidget extends ConsumerWidget {
+class AlertDialogUpdateProfilePictureWidget extends ConsumerStatefulWidget {
   const AlertDialogUpdateProfilePictureWidget({
     super.key,
     required this.user,
@@ -13,10 +13,16 @@ class AlertDialogUpdateProfilePictureWidget extends ConsumerWidget {
   final UserModel user;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<ConsumerStatefulWidget> createState() =>
+      _AlertDialogUpdateProfilePictureWidgetState();
+}
+
+class _AlertDialogUpdateProfilePictureWidgetState
+    extends ConsumerState<AlertDialogUpdateProfilePictureWidget> {
+  @override
+  Widget build(BuildContext context) {
     return AlertDialog(
       actionsAlignment: MainAxisAlignment.start,
-      alignment: Alignment.topLeft,
       actions: [
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -32,13 +38,12 @@ class AlertDialogUpdateProfilePictureWidget extends ConsumerWidget {
                 if (pickedFile != null) {
                   ref
                       .read(updataProfilePictureProvider.notifier)
-                      .load(user, pickedFile.path);
+                      .updateProfilePicture(widget.user, pickedFile.path);
                 }
-                Navigator.pop(context);
+                if (context.mounted) Navigator.of(context).pop();
               },
-              child: BoxText.body('Carregar'),
+              child: BoxText.body('Carregar da galeria'),
             ),
-            const SizedBox(width: 20),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
                   elevation: 0, backgroundColor: Colors.transparent),
@@ -48,12 +53,40 @@ class AlertDialogUpdateProfilePictureWidget extends ConsumerWidget {
                 if (pickedFile != null) {
                   ref
                       .read(updataProfilePictureProvider.notifier)
-                      .load(user, pickedFile.path);
+                      .updateProfilePicture(widget.user, pickedFile.path);
                 }
-                Navigator.pop(context);
+                if (context.mounted) Navigator.of(context).pop();
               },
               child: BoxText.body('Tirar foto'),
             ),
+            if (widget.user.image.isNotEmpty)
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                    elevation: 0, backgroundColor: Colors.transparent),
+                onPressed: () {
+                  showDialog(
+                    context: context,
+                    builder: (context) => AlertDialog(
+                      actions: [
+                        Image.network(widget.user.image),
+                      ],
+                    ),
+                  );
+                },
+                child: BoxText.body('Ver foto de perfil'),
+              ),
+            if (widget.user.image.isNotEmpty)
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                    elevation: 0, backgroundColor: Colors.transparent),
+                onPressed: () {
+                  ref
+                      .read(updataProfilePictureProvider.notifier)
+                      .removeProfilePicture(widget.user);
+                  Navigator.pop(context);
+                },
+                child: BoxText.body('Remover foto'),
+              ),
           ],
         ),
       ],
