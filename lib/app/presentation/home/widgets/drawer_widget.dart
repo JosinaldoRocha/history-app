@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:my_history_app/app/presentation/home/widgets/alert_dialog_logout_widget.dart';
 import '../../../shared/widgets/spacing/space_widget.dart';
 import '../../../shared/widgets/texts/box_text.dart';
-import '../../authentication/dependencies/dependencies.dart';
 
 class DrawerWidget extends ConsumerWidget {
   const DrawerWidget({super.key});
@@ -31,47 +31,10 @@ class DrawerWidget extends ConsumerWidget {
           onTap: () {
             showDialog(
               context: context,
-              builder: (context) => _buildAlertDialog(ref, context),
+              builder: (context) => const AlertDialogLogoutWidget(),
             );
           },
         ),
-      ],
-    );
-  }
-
-  AlertDialog _buildAlertDialog(WidgetRef ref, BuildContext context) {
-    return AlertDialog(
-      actions: [
-        Padding(
-          padding: const EdgeInsets.all(10),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              BoxText.body('Sair do aplicativo?'),
-              const Space.x5(),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  TextButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    child: BoxText.body('CANCELAR'),
-                  ),
-                  const SizedBox(
-                    width: 20,
-                  ),
-                  TextButton(
-                    onPressed: () {
-                      ref.read(logoutProvider.notifier).logout();
-                    },
-                    child: BoxText.body('SAIR'),
-                  ),
-                ],
-              )
-            ],
-          ),
-        )
       ],
     );
   }
