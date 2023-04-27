@@ -63,11 +63,6 @@ class _HomePageState extends ConsumerState<HomePage> {
     logoutListen();
     updateProfilePictureListen();
     return Scaffold(
-      appBar: AppBarWidget(
-        updateProfilePictureState: updateProfilePictureState,
-        user: user,
-        context: context,
-      ),
       body: Container(
         decoration: const BoxDecoration(
           image: DecorationImage(
@@ -77,8 +72,21 @@ class _HomePageState extends ConsumerState<HomePage> {
           ),
         ),
         child: Padding(
-          padding: const EdgeInsets.all(10),
-          child: HomeBodyWidget(user: user),
+          padding: const EdgeInsets.symmetric(
+            vertical: 40,
+            horizontal: 10,
+          ),
+          child: Column(
+            children: [
+              AppBarWidget(
+                updateProfilePictureState: updateProfilePictureState,
+                user: user,
+              ),
+              const Spacer(),
+              HomeBodyWidget(user: user),
+              const Spacer(),
+            ],
+          ),
         ),
       ),
     );
