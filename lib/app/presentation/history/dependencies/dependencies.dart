@@ -1,4 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:my_history_app/app/presentation/history/views/states/add_image/add_image_history_state.dart';
+import 'package:my_history_app/app/presentation/history/views/states/add_image/add_image_history_state_notifier.dart';
 import 'package:my_history_app/app/presentation/history/views/states/edit_history/edit_history_state.dart';
 import 'package:my_history_app/app/presentation/history/views/states/edit_history/edit_history_state_notifier.dart';
 import '../data/repositories/history_repository.dart';
@@ -82,6 +84,13 @@ final periodListProvider =
 final editHistoryProvider = StateNotifierProvider.autoDispose<
     EditHistoryStateNotifier, EditHistoryState>(
   (ref) => EditHistoryStateNotifier(
+    historyRepository: ref.read(historyRepositoryProvider),
+  ),
+);
+
+final addImageProvider = StateNotifierProvider.autoDispose<
+    AddImageHistoryStateNotifier, AddImageHistoryState>(
+  (ref) => AddImageHistoryStateNotifier(
     historyRepository: ref.read(historyRepositoryProvider),
   ),
 );

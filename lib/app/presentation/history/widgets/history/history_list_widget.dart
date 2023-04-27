@@ -52,10 +52,8 @@ class _HistoryListWidgetState extends ConsumerState<HistoryListWidget> {
                 const Space.x6(),
                 Flexible(
                   child: ListView.separated(
-                    itemBuilder: (context, index) => HistoryItemButtonWidget(
-                      index: index,
-                      history: history[index],
-                    ),
+                    itemBuilder: (context, index) =>
+                        HistoryItemButtonWidget(history: history[index]),
                     separatorBuilder: (context, index) => const Space.x3(),
                     itemCount: history.length,
                   ),

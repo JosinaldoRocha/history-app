@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:hive/hive.dart';
 import 'package:my_history_app/app/presentation/authentication/data/repositories/user_repository.dart';
 import 'package:my_history_app/app/presentation/history/data/models/history_model.dart';
@@ -6,6 +9,7 @@ import 'package:my_history_app/app/presentation/history/data/models/history_mode
 class HistoryRepository {
   final box = Hive.box<HistoryModel>('history');
   final _firestore = FirebaseFirestore.instance;
+  final FirebaseStorage _storage = FirebaseStorage.instance;
 
   Future<List<HistoryModel>> getAll(String id) async {
     final getDocuments = await _firestore
@@ -38,6 +42,15 @@ class HistoryRepository {
   Future<void> editHistory(HistoryModel history) async {
     final document = _firestore.collection('history').doc(history.id);
     await document.update(history.updateToMap());
+  }
+
+  Future<String> addImage(String image) async {
+    final Reference reference =
+        _storage.ref().child('historyImage/').child(image);
+    final UploadTask task = reference.putFile(File(image));
+    await task.whenComplete(() => null);
+    final imageUrl = await reference.getDownloadURL();
+    return imageUrl;
   }
 
   Future<List<String>> getCivilStatusList() async {

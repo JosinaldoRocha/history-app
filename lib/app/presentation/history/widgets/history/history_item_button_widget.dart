@@ -7,10 +7,8 @@ import '../../../../shared/widgets/texts/box_text.dart';
 class HistoryItemButtonWidget extends ConsumerWidget {
   const HistoryItemButtonWidget({
     super.key,
-    required this.index,
     required this.history,
   });
-  final int index;
   final HistoryModel history;
 
   @override
@@ -21,14 +19,19 @@ class HistoryItemButtonWidget extends ConsumerWidget {
         color: const Color.fromARGB(26, 146, 141, 141),
       ),
       padding: const EdgeInsets.only(
-        left: 20,
+        left: 10,
         top: 3,
         bottom: 3,
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          BoxText.bodyBold('${index + 1}'),
+          (history.image.isEmpty)
+              ? const CircleAvatar(
+                  backgroundColor: Colors.grey,
+                  child: Icon(Icons.person),
+                )
+              : CircleAvatar(backgroundImage: NetworkImage(history.image)),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
               elevation: 0,

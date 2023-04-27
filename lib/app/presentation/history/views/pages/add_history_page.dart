@@ -1,17 +1,18 @@
 import 'package:dropdown_textfield/dropdown_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:my_history_app/app/presentation/history/views/states/add_image/add_image_history_state.dart';
 import 'package:my_history_app/app/presentation/history/views/states/edit_history/edit_history_state.dart';
+import 'package:my_history_app/app/shared/widgets/spacing/space_widget.dart';
 import '../../data/models/history_model.dart';
 import '../../dependencies/dependencies.dart';
 import '../../widgets/add_item/period_list_widget.dart';
 import '../states/add-history-state/add_history_state.dart';
-import '../../views/states/period_list_state/period_list_state.dart';
 import '../../widgets/add_item/civil_status_list_widget.dart';
 import '../../widgets/add_item/list_of_times_widget.dart';
 import '../../widgets/add_item/list_what_happened_widget.dart';
 import '../../widgets/add_item/relationship_list_widget.dart';
-import '../../widgets/drop-down-text-field/drop_down_text_field_widget.dart';
 import 'package:my_history_app/app/shared/widgets/button/button_widget.dart';
 import 'package:my_history_app/app/shared/widgets/input/info_text_field_widget.dart';
 import 'package:my_history_app/app/shared/widgets/texts/box_text.dart';
@@ -35,6 +36,7 @@ class _AddHistoryPageState extends ConsumerState<AddHistoryPage> {
   var whatHappenedController = SingleValueDropDownController();
   var amountTimesController = SingleValueDropDownController();
   var amountPeriodsController = SingleValueDropDownController();
+  String image = '';
 
   void _listenAddHistory() {
     ref.listen<AddHistoryState>(
@@ -64,6 +66,23 @@ class _AddHistoryPageState extends ConsumerState<AddHistoryPage> {
           Navigator.pop(context);
         }
         if (next is FailureEditHistoryState) {
+          showDialog(
+            context: context,
+            builder: (context) => AlertDialog(
+              content: BoxText.body(next.errorMessage),
+            ),
+          );
+        }
+      },
+    );
+  }
+
+  void _listenAddImage() {
+    ref.listen<AddImageHistoryState>(
+      addImageProvider,
+      (previous, next) {
+        if (next is SuccessAddImageHistoryState) {}
+        if (next is FailureAddImageHistoryState) {
           showDialog(
             context: context,
             builder: (context) => AlertDialog(
@@ -111,6 +130,7 @@ class _AddHistoryPageState extends ConsumerState<AddHistoryPage> {
       whatHappenedController = whatHappened;
       amountTimesController = amountTimes;
       amountPeriodsController = amountPeriods;
+      image = history.image;
     }
   }
 
@@ -120,14 +140,20 @@ class _AddHistoryPageState extends ConsumerState<AddHistoryPage> {
   Widget build(BuildContext context) {
     final addHistoryState = ref.watch(addHistoryProvider);
     final editHistoryState = ref.watch(editHistoryProvider);
+    final addImageState = ref.watch(addImageProvider);
     _listenAddHistory();
     _listenEditHistory();
+    _listenAddImage();
 
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(30),
         child: Center(
-          child: _buildContext(addHistoryState, editHistoryState),
+          child: _buildContext(
+            addHistoryState,
+            editHistoryState,
+            addImageState,
+          ),
         ),
       ),
     );
@@ -136,6 +162,7 @@ class _AddHistoryPageState extends ConsumerState<AddHistoryPage> {
   Widget _buildContext(
     AddHistoryState addHistoryState,
     EditHistoryState editHistoryState,
+    AddImageHistoryState addImageState,
   ) {
     return Form(
       key: _formKey,
@@ -171,7 +198,42 @@ class _AddHistoryPageState extends ConsumerState<AddHistoryPage> {
                 ListWhatHappenedWidget(controller: whatHappenedController),
                 ListOfTimesWidget(controller: amountTimesController),
                 PeriodListWidget(controller: amountPeriodsController),
-                //_buildPeriodList(),
+                const Space.x3(),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    BoxText.bodyBold('Adicionar foto'),
+                    const SizedBox(width: 20),
+                    Container(
+                      width: 40,
+                      height: 40,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5),
+                        color: const Color.fromARGB(255, 212, 210, 210),
+                      ),
+                      child: IconButton(
+                        onPressed: () async {
+                          final pickedFile = await ImagePicker()
+                              .pickImage(source: ImageSource.gallery);
+                          if (pickedFile != null) {
+                            ref
+                                .read(addImageProvider.notifier)
+                                .addImage(pickedFile.path);
+                          }
+                        },
+                        icon: (addImageState is LoadingAddImageHistoryState)
+                            ? const Padding(
+                                padding: EdgeInsets.all(2),
+                                child: CircularProgressIndicator(),
+                              )
+                            : (addImageState is SuccessAddImageHistoryState)
+                                ? const Icon(Icons.check_rounded)
+                                : const Icon(Icons.camera_alt_outlined),
+                      ),
+                    ),
+                  ],
+                ),
+                const Space.x3(),
               ],
             ),
           ),
@@ -184,6 +246,9 @@ class _AddHistoryPageState extends ConsumerState<AddHistoryPage> {
               final validadeForm = _formKey.currentState!.validate();
               if (validadeForm) {
                 if (widget.args != null) {
+                  if (addImageState is SuccessAddImageHistoryState) {
+                    image = addImageState.data;
+                  }
                   final history = HistoryModel(
                     name: nameController.text,
                     reference: referenceController.text,
@@ -194,9 +259,13 @@ class _AddHistoryPageState extends ConsumerState<AddHistoryPage> {
                     amountPeriod: amountPeriodsController.dropDownValue!.name,
                     id: widget.args!.id,
                     userId: widget.args!.userId,
+                    image: image,
                   );
                   ref.read(editHistoryProvider.notifier).editHistory(history);
                 } else {
+                  if (addImageState is SuccessAddImageHistoryState) {
+                    image = addImageState.data;
+                  }
                   final history = HistoryModel(
                     name: nameController.text,
                     reference: referenceController.text,
@@ -205,6 +274,7 @@ class _AddHistoryPageState extends ConsumerState<AddHistoryPage> {
                     whatHappened: whatHappenedController.dropDownValue!.name,
                     amountTimes: amountTimesController.dropDownValue!.name,
                     amountPeriod: amountPeriodsController.dropDownValue!.name,
+                    image: image,
                   );
                   ref.read(addHistoryProvider.notifier).addHistory(history);
                 }
@@ -214,31 +284,5 @@ class _AddHistoryPageState extends ConsumerState<AddHistoryPage> {
         ],
       ),
     );
-  }
-
-  Widget _buildPeriodList() {
-    final state = ref.watch(periodListProvider);
-    if (state is LoadingPeriodListState) {
-      return const Padding(
-        padding: EdgeInsets.all(8.0),
-        child: Center(child: CircularProgressIndicator()),
-      );
-    } else if (state is FailurePeriodListState) {
-      return Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Center(child: BoxText.body(state.errorMessage)),
-      );
-    } else if (state is SuccessPeriodListState) {
-      return DropDownTextFieldWidget(
-        controller: amountPeriodsController,
-        list: state.data
-            .map((e) => DropDownValueModel(name: e, value: e))
-            .toList(),
-        label: 'Em quantos perídos se relacionaram:',
-        hintText: 'Selecione uma opção',
-      );
-    } else {
-      return Container();
-    }
   }
 }

@@ -22,6 +22,8 @@ class HistoryModel extends HiveObject {
   String? id;
   @HiveField(8)
   String? userId;
+  @HiveField(9)
+  String image;
 
   HistoryModel({
     required this.name,
@@ -33,6 +35,7 @@ class HistoryModel extends HiveObject {
     required this.amountPeriod,
     this.id,
     this.userId,
+    required this.image,
   });
 
   Map<String, dynamic> toMap(String userId) {
@@ -45,6 +48,7 @@ class HistoryModel extends HiveObject {
       'amount-times': amountTimes,
       'amount-period': amountPeriod,
       'user-id': userId,
+      'image': image,
     };
   }
 
@@ -59,6 +63,7 @@ class HistoryModel extends HiveObject {
       'amount-period': amountPeriod,
       'id': id,
       'user-id': userId,
+      'image': image,
     };
   }
 
@@ -74,6 +79,7 @@ class HistoryModel extends HiveObject {
       amountPeriod: (data.data()["amount-period"] ?? '') as String,
       id: data.id,
       userId: (data.data()["user-id"] ?? '') as String,
+      image: (data.data()["image"] ?? '') as String,
     );
   }
 }
