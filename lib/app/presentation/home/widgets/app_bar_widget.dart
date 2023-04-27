@@ -19,10 +19,10 @@ class AppBarWidget extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return ListTile(
       contentPadding: const EdgeInsets.all(0),
-      horizontalTitleGap: 0,
+      horizontalTitleGap: -5,
       leading: (updateProfilePictureState is LoadingUpdateProfilePictureState)
           ? const Padding(
-              padding: EdgeInsets.all(10),
+              padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
               child: CircularProgressIndicator(),
             )
           : IconButton(
