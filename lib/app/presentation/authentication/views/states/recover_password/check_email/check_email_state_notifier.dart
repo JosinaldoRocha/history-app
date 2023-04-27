@@ -11,8 +11,8 @@ class CheckEmailStateNotifier extends StateNotifier<CheckEmailState> {
     state = LoadingCheckEmailState();
 
     try {
-      final result = await authenticationRepository.recoverPassword(email);
-      state = SuccessCheckEmailState(data: result);
+      await authenticationRepository.resetPassword(email);
+      state = SuccessCheckEmailState();
     } catch (e) {
       state = FailureCheckEmailState(errorMessage: 'Erro ao carregar dados');
     }

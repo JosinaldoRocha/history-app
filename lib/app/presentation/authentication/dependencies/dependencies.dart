@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:my_history_app/app/presentation/authentication/data/repositories/authentication_repository.dart';
 import 'package:my_history_app/app/presentation/authentication/views/states/sign_in_state/sign_in_state_notifier.dart';
@@ -44,7 +45,7 @@ final logoutProvider =
 final recoverPasswordProvider = StateNotifierProvider.autoDispose<
     RecoverPasswordStateNotifier, RecoverPasswordState>(
   (ref) => RecoverPasswordStateNotifier(
-    userRepository: ref.read(userRepositoryProvider),
+    userRepository: ref.read(authenticationRepository),
   ),
 );
 

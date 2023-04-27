@@ -35,12 +35,8 @@ class AuthenticationRepository {
     return user?.uid;
   }
 
-  Future<UserModel> recoverPassword(String email) async {
-    await Future.delayed(const Duration(seconds: 3));
-    final values = box.values.toList();
-    final currentUser = values.firstWhere((element) => element.eMail == email);
-
-    return currentUser;
+  Future<void> resetPassword(String email) async {
+    await _auth.sendPasswordResetEmail(email: email);
   }
 
   void logout() async {

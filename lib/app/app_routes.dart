@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_history_app/app/presentation/authentication/views/pages/recover_password_page.dart';
+import 'package:my_history_app/app/presentation/authentication/views/pages/recover_password/recover_password_page.dart';
 import 'package:my_history_app/app/presentation/authentication/views/pages/sign_up/sign_up_page.dart';
 import 'presentation/splash/views/pages/splash_page.dart';
 import 'presentation/history/views/pages/add_history_page.dart';
