@@ -41,43 +41,76 @@ class HistoryReportWidget extends ConsumerWidget {
             ],
           ),
           const Space.x1(),
-          Container(
-            decoration: BoxDecoration(
-              border: Border.all(),
-              borderRadius: BorderRadius.circular(3),
-            ),
-            child: ListView(
-              shrinkWrap: true,
-              padding: const EdgeInsets.symmetric(
-                vertical: 10,
-                horizontal: 10,
+          Expanded(
+            child: Container(
+              decoration: BoxDecoration(
+                border: Border.all(),
+                borderRadius: BorderRadius.circular(5),
               ),
-              children: [
-                BoxText.bodyBold('Nome:'),
-                BoxText.body(history.name),
-                const Divider(height: 5, thickness: 1),
-                BoxText.bodyBold('Referência:'),
-                BoxText.body(history.reference),
-                const Divider(height: 5, thickness: 1),
-                BoxText.bodyBold('Estado civil:'),
-                BoxText.body(history.civilStatus),
-                const Divider(height: 5, thickness: 1),
-                BoxText.bodyBold('Relação que tivemos:'),
-                BoxText.body(history.relationship),
-                const Divider(height: 5, thickness: 1),
-                BoxText.bodyBold('O que rolou:'),
-                BoxText.body(history.whatHappened),
-                const Divider(height: 5, thickness: 1),
-                BoxText.bodyBold('Quantas vezes:'),
-                BoxText.body(history.amountTimes),
-                const Divider(height: 5, thickness: 1),
-                BoxText.bodyBold('Em quantos períodos:'),
-                BoxText.body(history.amountPeriod),
-              ],
+              child: ListView(
+                shrinkWrap: true,
+                padding: const EdgeInsets.symmetric(
+                  vertical: 10,
+                  horizontal: 10,
+                ),
+                children: [
+                  Center(
+                    child: (history.image.isEmpty)
+                        ? const Icon(
+                            Icons.person,
+                            size: 40,
+                          )
+                        : _buildGestureDetector(context),
+                  ),
+                  const Space.x3(),
+                  BoxText.bodyBold('Nome:'),
+                  BoxText.body(history.name),
+                  const Divider(height: 5, thickness: 1),
+                  BoxText.bodyBold('Referência:'),
+                  BoxText.body(history.reference),
+                  const Divider(height: 5, thickness: 1),
+                  BoxText.bodyBold('Estado civil:'),
+                  BoxText.body(history.civilStatus),
+                  const Divider(height: 5, thickness: 1),
+                  BoxText.bodyBold('Relação que tivemos:'),
+                  BoxText.body(history.relationship),
+                  const Divider(height: 5, thickness: 1),
+                  BoxText.bodyBold('O que rolou:'),
+                  BoxText.body(history.whatHappened),
+                  const Divider(height: 5, thickness: 1),
+                  BoxText.bodyBold('Quantas vezes:'),
+                  BoxText.body(history.amountTimes),
+                  const Divider(height: 5, thickness: 1),
+                  BoxText.bodyBold('Em quantos períodos:'),
+                  BoxText.body(history.amountPeriod),
+                ],
+              ),
             ),
           ),
         ],
       ),
+    );
+  }
+
+  GestureDetector _buildGestureDetector(BuildContext context) {
+    return GestureDetector(
+      child: SizedBox(
+        width: 80,
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(5),
+          child: Image.network(history.image),
+        ),
+      ),
+      onTap: () {
+        showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            actions: [
+              Image.network(history.image),
+            ],
+          ),
+        );
+      },
     );
   }
 }

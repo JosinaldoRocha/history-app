@@ -3,11 +3,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:my_history_app/app/presentation/authentication/data/models/user_model.dart';
 import 'package:my_history_app/app/presentation/authentication/dependencies/dependencies.dart';
 import 'package:my_history_app/app/presentation/authentication/views/states/logout_state/logout_state.dart';
-import 'package:my_history_app/app/presentation/home/widgets/alert_dialog_update_profile_picture.dart';
-import 'package:my_history_app/app/presentation/home/widgets/drawer_widget.dart';
 import 'package:my_history_app/app/presentation/home/widgets/home_body_widget.dart';
 import 'package:my_history_app/app/shared/widgets/texts/box_text.dart';
 import '../../../authentication/views/states/update_user/update_profile_picture_state.dart';
+import '../../widgets/app_bar_widget.dart';
 
 class HomePage extends ConsumerStatefulWidget {
   const HomePage({super.key, required this.args});
@@ -64,55 +63,19 @@ class _HomePageState extends ConsumerState<HomePage> {
     logoutListen();
     updateProfilePictureListen();
     return Scaffold(
-      appBar: AppBar(
-        leading: (updateProfilePictureState is LoadingUpdateProfilePictureState)
-            ? const Padding(
-                padding: EdgeInsets.all(15),
-                child: CircularProgressIndicator(color: Colors.white),
-              )
-            : IconButton(
-                onPressed: () async {
-                  showDialog(
-                    context: context,
-                    builder: (context) =>
-                        AlertDialogUpdateProfilePictureWidget(user: user),
-                  );
-                },
-                icon: (user.image.isEmpty)
-                    ? const CircleAvatar(
-                        backgroundColor: Colors.grey,
-                        child: Icon(Icons.person),
-                      )
-                    : CircleAvatar(
-                        backgroundColor: Theme.of(context).primaryColor,
-                        backgroundImage: NetworkImage(user.image),
-                      ),
-              ),
-        title: BoxText.body(
-          'Olá, ${user.name}!',
-          color: Colors.white,
-        ),
-        actions: [
-          IconButton(
-            onPressed: () {
-              showModalBottomSheet(
-                context: context,
-                builder: (context) => const DrawerWidget(),
-                shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(10.0),
-                    topRight: Radius.circular(10.0),
-                  ),
-                ),
-              );
-            },
-            icon: const Icon(Icons.menu_rounded),
-          ),
-          const SizedBox(width: 10),
-        ],
+      appBar: AppBarWidget(
+        updateProfilePictureState: updateProfilePictureState,
+        user: user,
+        context: context,
       ),
       body: Container(
-        color: const Color.fromARGB(255, 181, 214, 181),
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('assets/images/book.jpg'),
+            fit: BoxFit.cover,
+            opacity: 1.1,
+          ),
+        ),
         child: Padding(
           padding: const EdgeInsets.all(10),
           child: HomeBodyWidget(user: user),
