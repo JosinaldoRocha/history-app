@@ -23,7 +23,9 @@ class _RecoverPasswordPageState extends ConsumerState<RecoverPasswordPage> {
           showDialog(
             context: context,
             builder: (context) => AlertDialog(
-              content: Center(),
+              content: Center(
+                child: Text('Email enviado com sucesso'),
+              ),
             ),
           );
         }
