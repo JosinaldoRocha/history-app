@@ -15,7 +15,7 @@ class HistoryItemButtonWidget extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Container(
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(15),
         color: const Color.fromARGB(26, 146, 141, 141),
       ),
       padding: const EdgeInsets.only(
