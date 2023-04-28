@@ -47,7 +47,10 @@ class _RecoverPasswordPageState extends ConsumerState<RecoverPasswordPage> {
         ),
       ),
       body: Container(
-        padding: const EdgeInsets.all(30),
+        padding: const EdgeInsets.symmetric(
+          vertical: 30,
+          horizontal: 10,
+        ),
         child: const Center(
           child: FormRecoverPasswordWidget(),
         ),

@@ -61,9 +61,10 @@ class _SignInPageState extends ConsumerState<SignInPage> {
                     radius: 60,
                     backgroundImage: AssetImage('assets/images/logo.png'),
                   ),
+                  const Space.x4(),
                   BoxText.bodyBold(
                     'Login',
-                    size: 30,
+                    size: 25,
                   ),
                   const Space.x7(),
                   TextFieldLoginWidget(

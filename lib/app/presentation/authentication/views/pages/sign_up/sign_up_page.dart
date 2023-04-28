@@ -53,7 +53,10 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
         title: const Text('Cadastre-se'),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(20),
+        padding: const EdgeInsets.symmetric(
+          vertical: 20,
+          horizontal: 10,
+        ),
         child: Form(
           key: _formKey,
           child: ListView(
@@ -97,7 +100,7 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
               TextFieldWidget(
                 controller: _eMailController,
                 label: 'E-mail:',
-                hintText: 'Ex: seuemail@.com',
+                hintText: 'Ex: seuemail@email.com',
                 validator: (p0) => Validators.email(_eMailController.text),
               ),
               TextFieldWidget(

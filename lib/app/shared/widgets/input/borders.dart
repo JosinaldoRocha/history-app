@@ -15,8 +15,9 @@ class InputBorderType {
   }
 
   static InputBorder get borderAll {
-    return const OutlineInputBorder(
-      borderSide: BorderSide(color: Color(0xff989494)),
+    return OutlineInputBorder(
+      borderRadius: BorderRadius.circular(10),
+      borderSide: const BorderSide(color: Color(0xff989494)),
     );
   }
 }

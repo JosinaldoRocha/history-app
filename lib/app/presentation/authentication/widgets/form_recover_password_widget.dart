@@ -29,7 +29,7 @@ class FormRecoverPasswordWidget extends ConsumerWidget {
             hintText: '',
             validator: (p0) => Validators.email(emailController.text),
           ),
-          const Space.x4(),
+          const Spacer(),
           ButtonWidget(
             isLoading: state is LoadingRecoverPasswordState,
             title: 'Verificar',

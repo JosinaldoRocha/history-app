@@ -11,7 +11,6 @@ class AuthenticationStateNotifier extends StateNotifier<AuthenticationState> {
     state = LoadingAuthenticationState();
 
     try {
-      await Future.delayed(const Duration(seconds: 1));
       final user = await userRepository.checkUser();
       if (user != null) {
         final result = await userRepository.getCurrentUser();
