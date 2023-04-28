@@ -78,9 +78,7 @@ class _AddHistoryPageState extends ConsumerState<AddHistoryPage>
     final addImageState = ref.watch(addImageProvider);
 
     listenAddHistory();
-    if (widget.args != null) {
-      listenEditHistory(widget.args!);
-    }
+    listenEditHistory(widget.args);
     listenAddImage();
 
     return Scaffold(

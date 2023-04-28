@@ -42,6 +42,12 @@ class _HomePageState extends ConsumerState<HomePage> {
       (previous, next) {
         if (next is SuccessUpdateProfilePictureState) {
           widget.args.image = next.data.image;
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              backgroundColor: Colors.red,
+              content: Text('Imagem de perfil atualiza, com sucesso!'),
+            ),
+          );
         }
         if (next is FailureUpdateProfilePictureState) {
           showDialog(

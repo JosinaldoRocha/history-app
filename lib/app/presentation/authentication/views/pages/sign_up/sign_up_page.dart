@@ -30,6 +30,12 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
       <SignUpState>(previous, next) {
         if (next is SuccessSignUpState) {
           Navigator.pushReplacementNamed(context, '/');
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              backgroundColor: Colors.red,
+              content: Text('Cadastro realizado, com sucesso!'),
+            ),
+          );
         }
         if (next is FailureSignUpState) {
           ScaffoldMessenger.of(context).showSnackBar(

@@ -25,6 +25,12 @@ class AlertDialogDeleteItemWidget extends ConsumerWidget {
           ref.read(historyProvider.notifier).load(history.userId!);
           Navigator.pop(context);
           Navigator.pop(context);
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              backgroundColor: Colors.red,
+              content: Text('História excluída, com sucesso!'),
+            ),
+          );
         }
         if (next is FailureDeleteItemState) {
           showDialog(

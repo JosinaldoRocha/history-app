@@ -26,6 +26,12 @@ mixin AddHistoryMixin<T extends ConsumerStatefulWidget> on ConsumerState<T> {
       (previous, next) {
         if (next is SuccessAddHistoryState) {
           Navigator.pop(context);
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              backgroundColor: Colors.red,
+              content: Text('História criada, com sucesso!'),
+            ),
+          );
         }
         if (next is FailureAddHistoryState) {
           showDialog(
@@ -39,13 +45,21 @@ mixin AddHistoryMixin<T extends ConsumerStatefulWidget> on ConsumerState<T> {
     );
   }
 
-  void listenEditHistory(HistoryModel history) {
+  void listenEditHistory(HistoryModel? history) {
     ref.listen<EditHistoryState>(
       editHistoryProvider,
       (previous, next) {
         if (next is SuccessEditHistoryState) {
-          ref.read(historyProvider.notifier).load(history.userId!);
+          if (history != null) {
+            ref.read(historyProvider.notifier).load(history.userId!);
+          }
           Navigator.pop(context);
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              backgroundColor: Colors.red,
+              content: Text('História editada, com sucesso!'),
+            ),
+          );
         }
         if (next is FailureEditHistoryState) {
           showDialog(
@@ -63,7 +77,6 @@ mixin AddHistoryMixin<T extends ConsumerStatefulWidget> on ConsumerState<T> {
     ref.listen<AddImageHistoryState>(
       addImageProvider,
       (previous, next) {
-        if (next is SuccessAddImageHistoryState) {}
         if (next is FailureAddImageHistoryState) {
           showDialog(
             context: context,

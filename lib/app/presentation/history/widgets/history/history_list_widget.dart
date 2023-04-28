@@ -58,6 +58,11 @@ class _HistoryListWidgetState extends ConsumerState<HistoryListWidget> {
                     itemCount: history.length,
                   ),
                 ),
+                const Space.x3(),
+                Text(
+                  '${history.length}',
+                  style: const TextStyle(fontSize: 10),
+                ),
               ],
             );
     } else {
