@@ -14,8 +14,7 @@ class RecoverPasswordStateNotifier extends StateNotifier<RecoverPasswordState> {
       await userRepository.resetPassword(email);
       state = SuccessRecoverPasswordState();
     } catch (e) {
-      state =
-          FailureRecoverPasswordState(errorMessage: 'Erro ao carregar dados');
+      state = FailureRecoverPasswordState(errorMessage: 'Erro ao enviar email');
     }
   }
 }

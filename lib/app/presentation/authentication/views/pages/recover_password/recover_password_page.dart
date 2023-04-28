@@ -4,6 +4,7 @@ import 'package:my_history_app/app/presentation/authentication/dependencies/depe
 import 'package:my_history_app/app/presentation/authentication/views/states/recover_password/check_email/check_email_state.dart';
 import 'package:my_history_app/app/presentation/authentication/views/states/recover_password/recover_password/recover_password_state.dart';
 import 'package:my_history_app/app/presentation/authentication/widgets/form_recover_password_widget.dart';
+import 'package:my_history_app/app/presentation/authentication/views/pages/sent_email/sent_email_page.dart';
 import 'package:my_history_app/app/shared/widgets/texts/box_text.dart';
 
 class RecoverPasswordPage extends ConsumerStatefulWidget {
@@ -20,14 +21,7 @@ class _RecoverPasswordPageState extends ConsumerState<RecoverPasswordPage> {
       recoverPasswordProvider,
       (previous, next) {
         if (next is SuccessRecoverPasswordState) {
-          showDialog(
-            context: context,
-            builder: (context) => AlertDialog(
-              content: Center(
-                child: Text('Email enviado com sucesso'),
-              ),
-            ),
-          );
+          Navigator.pushNamed(context, '/sent-email');
         }
 
         if (next is FailureRecoverPasswordState) {
