@@ -23,6 +23,15 @@ final _passwordController = TextEditingController();
 final _confirmPasswordController = TextEditingController();
 final _formKey = GlobalKey<FormState>();
 
+void _clearTexts() {
+  _nameController.clear();
+  _surnameController.clear();
+  _userNameController.clear();
+  _eMailController.clear();
+  _passwordController.clear();
+  _confirmPasswordController.clear();
+}
+
 class _SignUpPageState extends ConsumerState<SignUpPage> {
   void _signUpListen() {
     ref.listen(
@@ -30,6 +39,7 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
       <SignUpState>(previous, next) {
         if (next is SuccessSignUpState) {
           Navigator.pushReplacementNamed(context, '/');
+          _clearTexts();
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
               backgroundColor: Colors.red,
