@@ -43,7 +43,7 @@ dependencies:
   hive_generator: ^2.0.0
   build_runner: ^2.3.3
   flutter_provider: ^2.1.0
-  dropdown_textfield: ^1.0.7
+  dropdown_textfield: ^1.0.8
   flutter_launcher_icons: ^0.11.0
   firebase_core: ^2.6.0
   firebase_auth: ^4.3.0

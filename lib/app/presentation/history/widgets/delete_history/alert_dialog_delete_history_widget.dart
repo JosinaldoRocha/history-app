@@ -4,11 +4,11 @@ import 'package:my_history_app/app/presentation/history/data/models/history_mode
 import 'package:my_history_app/app/shared/widgets/alert_dialog/alert_dialog_loading_widget.dart';
 import '../../../../shared/widgets/spacing/space_widget.dart';
 import '../../../../shared/widgets/texts/box_text.dart';
-import '../../dependencies/dependencies.dart';
-import '../../views/states/delete-item-state/delete_item_state.dart';
+import '../../providers/history_providers.dart';
+import '../../views/states/delete-item-state/delete_history_state.dart';
 
-class AlertDialogDeleteItemWidget extends ConsumerWidget {
-  const AlertDialogDeleteItemWidget({
+class AlertDialogDeleteHistoryWidget extends ConsumerWidget {
+  const AlertDialogDeleteHistoryWidget({
     super.key,
     required this.history,
   });
@@ -16,13 +16,13 @@ class AlertDialogDeleteItemWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(deleteItemProvider);
+    final state = ref.watch(deleteHistoryProvider);
 
-    ref.listen<DeleteItemState>(
-      deleteItemProvider,
+    ref.listen<DeleteHistoryState>(
+      deleteHistoryProvider,
       (previous, next) {
-        if (next is SuccessDeleteItemState) {
-          ref.read(historyProvider.notifier).load(history.userId!);
+        if (next is SuccessDeleteHistoryState) {
+          ref.read(historyListProvider.notifier).load(history.userId!);
           Navigator.pop(context);
           Navigator.pop(context);
           ScaffoldMessenger.of(context).showSnackBar(
@@ -32,7 +32,7 @@ class AlertDialogDeleteItemWidget extends ConsumerWidget {
             ),
           );
         }
-        if (next is FailureDeleteItemState) {
+        if (next is FailureDeleteHistoryState) {
           showDialog(
             context: context,
             builder: (context) => AlertDialog(
@@ -42,7 +42,7 @@ class AlertDialogDeleteItemWidget extends ConsumerWidget {
         }
       },
     );
-    return (state is LoadinglDeleteItemState)
+    return (state is LoadinglDeleteHistoryState)
         ? const AlertDialogLoadingWidget()
         : AlertDialog(
             actions: [
@@ -66,8 +66,8 @@ class AlertDialogDeleteItemWidget extends ConsumerWidget {
                         elevation: 0, backgroundColor: Colors.transparent),
                     onPressed: () {
                       ref
-                          .read(deleteItemProvider.notifier)
-                          .deleteItem(history.id!);
+                          .read(deleteHistoryProvider.notifier)
+                          .deleteHistory(history.id!);
                     },
                     child: BoxText.bodyBold('Sim'),
                   ),

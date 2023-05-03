@@ -6,7 +6,7 @@ import 'package:my_history_app/app/shared/widgets/spacing/space_widget.dart';
 import 'package:my_history_app/app/shared/widgets/validators/validators.dart';
 import '../../../../../shared/widgets/input/info_text_field_widget.dart';
 import '../../../data/models/user_model.dart';
-import '../../../dependencies/dependencies.dart';
+import '../../../providers/authentication_providers.dart';
 
 class SignUpPage extends ConsumerStatefulWidget {
   const SignUpPage({super.key});

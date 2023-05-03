@@ -8,10 +8,10 @@ import '../views/states/add-history-state/add_history_state.dart';
 import '../views/states/add-history-state/add_history_state_notifier.dart';
 import '../views/states/civil_status_state/civil_status_list_state.dart';
 import '../views/states/civil_status_state/civil_status_list_state_notifier.dart';
-import '../views/states/delete-item-state/delete_item_state.dart';
-import '../views/states/delete-item-state/delete_item_state_notifier.dart';
-import '../views/states/history-list-state/history_state.dart';
-import '../views/states/history-list-state/history_state_notifier.dart';
+import '../views/states/delete-item-state/delete_history_state.dart';
+import '../views/states/delete-item-state/delete_history_state_notifier.dart';
+import '../views/states/history-list-state/history_list_state.dart';
+import '../views/states/history-list-state/history_list_state_notifier.dart';
 import '../views/states/list_of_times_state/list_of_times_state.dart';
 import '../views/states/list_of_times_state/list_of_times_state_notifier.dart';
 import '../views/states/list_what_happened_state/list_what_happened_state.dart';
@@ -25,9 +25,9 @@ final historyRepositoryProvider = Provider(
   (ref) => HistoryRepository(),
 );
 
-final historyProvider =
-    StateNotifierProvider.autoDispose<HistoryStateNotifier, HistoryState>(
-  (ref) => HistoryStateNotifier(
+final historyListProvider = StateNotifierProvider.autoDispose<
+    HistoryListStateNotifier, HistoryListState>(
+  (ref) => HistoryListStateNotifier(
     historyRepository: ref.read(historyRepositoryProvider),
   ),
 );
@@ -39,9 +39,9 @@ final addHistoryProvider =
   ),
 );
 
-final deleteItemProvider =
-    StateNotifierProvider<DeleteItemStateNotifier, DeleteItemState>(
-  (ref) => DeleteItemStateNotifier(
+final deleteHistoryProvider =
+    StateNotifierProvider<DeleteHistoryStateNotifier, DeleteHistoryState>(
+  (ref) => DeleteHistoryStateNotifier(
     historyRepository: ref.read(historyRepositoryProvider),
   ),
 );
@@ -88,7 +88,7 @@ final editHistoryProvider = StateNotifierProvider.autoDispose<
   ),
 );
 
-final addImageProvider = StateNotifierProvider.autoDispose<
+final addImageHistoryProvider = StateNotifierProvider.autoDispose<
     AddImageHistoryStateNotifier, AddImageHistoryState>(
   (ref) => AddImageHistoryStateNotifier(
     historyRepository: ref.read(historyRepositoryProvider),

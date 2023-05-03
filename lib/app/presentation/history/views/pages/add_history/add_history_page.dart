@@ -5,15 +5,15 @@ import 'package:image_picker/image_picker.dart';
 import 'package:my_history_app/app/presentation/history/views/states/add_image/add_image_history_state.dart';
 import 'package:my_history_app/app/presentation/history/views/states/edit_history/edit_history_state.dart';
 import 'package:my_history_app/app/shared/widgets/spacing/space_widget.dart';
-import '../../data/models/history_model.dart';
-import '../../dependencies/dependencies.dart';
-import '../../mixins/add_history_mixin.dart';
-import '../../widgets/add_item/period_list_widget.dart';
-import '../states/add-history-state/add_history_state.dart';
-import '../../widgets/add_item/civil_status_list_widget.dart';
-import '../../widgets/add_item/list_of_times_widget.dart';
-import '../../widgets/add_item/list_what_happened_widget.dart';
-import '../../widgets/add_item/relationship_list_widget.dart';
+import '../../../data/models/history_model.dart';
+import '../../../providers/history_providers.dart';
+import '../../../mixins/add_history_mixin.dart';
+import '../../../widgets/add_history/period_list_widget.dart';
+import '../../states/add-history-state/add_history_state.dart';
+import '../../../widgets/add_history/civil_status_list_widget.dart';
+import '../../../widgets/add_history/list_of_times_widget.dart';
+import '../../../widgets/add_history/list_what_happened_widget.dart';
+import '../../../widgets/add_history/relationship_list_widget.dart';
 import 'package:my_history_app/app/shared/widgets/button/button_widget.dart';
 import 'package:my_history_app/app/shared/widgets/input/info_text_field_widget.dart';
 import 'package:my_history_app/app/shared/widgets/texts/box_text.dart';
@@ -75,7 +75,7 @@ class _AddHistoryPageState extends ConsumerState<AddHistoryPage>
   Widget build(BuildContext context) {
     final addHistoryState = ref.watch(addHistoryProvider);
     final editHistoryState = ref.watch(editHistoryProvider);
-    final addImageState = ref.watch(addImageProvider);
+    final addImageState = ref.watch(addImageHistoryProvider);
 
     listenAddHistory();
     listenEditHistory(widget.args);
@@ -83,7 +83,10 @@ class _AddHistoryPageState extends ConsumerState<AddHistoryPage>
 
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.all(30),
+        padding: const EdgeInsets.symmetric(
+          vertical: 20,
+          horizontal: 10,
+        ),
         child: Center(
           child: Form(
             key: formKey,
@@ -141,7 +144,7 @@ class _AddHistoryPageState extends ConsumerState<AddHistoryPage>
                                     .pickImage(source: ImageSource.gallery);
                                 if (pickedFile != null) {
                                   ref
-                                      .read(addImageProvider.notifier)
+                                      .read(addImageHistoryProvider.notifier)
                                       .addImage(pickedFile.path);
                                 }
                               },

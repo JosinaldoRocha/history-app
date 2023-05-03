@@ -65,7 +65,6 @@ class _DropDownTextFieldWidgetState extends State<DropDownTextFieldWidget> {
                 ),
               ),
             ),
-
             readOnly: true,
             controller: widget.controller,
             clearOption: true,

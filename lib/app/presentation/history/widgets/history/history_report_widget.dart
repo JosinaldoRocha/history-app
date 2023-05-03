@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:my_history_app/app/presentation/history/data/models/history_model.dart';
-import 'package:my_history_app/app/presentation/history/widgets/delete_item/alert_dialog_delete_item_widget.dart';
+import 'package:my_history_app/app/presentation/history/widgets/delete_history/alert_dialog_delete_history_widget.dart';
 import '../../../../shared/widgets/spacing/space_widget.dart';
 import '../../../../shared/widgets/texts/box_text.dart';
 
@@ -33,7 +33,7 @@ class HistoryReportWidget extends ConsumerWidget {
                   showDialog(
                     context: context,
                     builder: (context) =>
-                        AlertDialogDeleteItemWidget(history: history),
+                        AlertDialogDeleteHistoryWidget(history: history),
                   );
                 },
                 icon: const Icon(Icons.delete),

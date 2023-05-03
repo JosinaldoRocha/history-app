@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:my_history_app/app/presentation/authentication/data/models/user_model.dart';
 import '../../../shared/widgets/texts/box_text.dart';
-import '../../authentication/dependencies/dependencies.dart';
+import '../../authentication/providers/authentication_providers.dart';
 
 class AlertDialogUpdateProfilePictureWidget extends ConsumerStatefulWidget {
   const AlertDialogUpdateProfilePictureWidget({

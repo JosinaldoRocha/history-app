@@ -1,8 +1,6 @@
-import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 import 'package:my_history_app/app/shared/widgets/button/button_widget.dart';
-import 'package:my_history_app/app/shared/widgets/picture_widget.dart';
-
+import 'package:my_history_app/app/shared/widgets/picture_widget/picture_widget.dart';
 import '../../../../../shared/widgets/spacing/space_widget.dart';
 import '../../../../../shared/widgets/texts/box_text.dart';
 

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:my_history_app/app/presentation/authentication/dependencies/dependencies.dart';
+import 'package:my_history_app/app/presentation/authentication/providers/authentication_providers.dart';
 import 'package:my_history_app/app/presentation/authentication/views/states/sign_in_state/sign_in_state.dart';
 import 'package:my_history_app/app/presentation/authentication/widgets/text_fild_login_widget.dart';
 import 'package:my_history_app/app/shared/widgets/button/button_widget.dart';

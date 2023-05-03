@@ -1,23 +1,13 @@
 import 'dart:io';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:hive/hive.dart';
-import 'package:my_history_app/app/presentation/history/data/models/history_model.dart';
 import '../models/user_model.dart';
 
 class UserRepository {
-  final box = Hive.box<UserModel>('users');
-  final historyBox = Hive.box<HistoryModel>('history');
   final _auth = FirebaseAuth.instance;
   final _firestore = FirebaseFirestore.instance;
-  final FirebaseStorage _storage = FirebaseStorage.instance;
-
-  Future<List<UserModel>> getAll() async {
-    final values = box.values.toList();
-    return values;
-  }
+  final _storage = FirebaseStorage.instance;
 
   Future<UserModel> getCurrentUser() async {
     final docRef = _firestore.collection('users').doc(_auth.currentUser!.uid);

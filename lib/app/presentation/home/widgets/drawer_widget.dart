@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:my_history_app/app/presentation/authentication/dependencies/dependencies.dart';
+import 'package:my_history_app/app/presentation/authentication/providers/authentication_providers.dart';
 import 'package:my_history_app/app/presentation/authentication/views/states/delete_user/delete_user_state.dart';
 import 'package:my_history_app/app/presentation/home/widgets/alert_dialog_delete_account_widget.dart';
 import 'package:my_history_app/app/presentation/home/widgets/alert_dialog_logout_widget.dart';

@@ -1,15 +1,12 @@
 import 'dart:io';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:hive/hive.dart';
 import 'package:my_history_app/app/presentation/authentication/data/repositories/user_repository.dart';
 import 'package:my_history_app/app/presentation/history/data/models/history_model.dart';
 
 class HistoryRepository {
-  final box = Hive.box<HistoryModel>('history');
   final _firestore = FirebaseFirestore.instance;
-  final FirebaseStorage _storage = FirebaseStorage.instance;
+  final _storage = FirebaseStorage.instance;
 
   Future<List<HistoryModel>> getAll(String id) async {
     final getDocuments = await _firestore
@@ -34,7 +31,7 @@ class HistoryRepository {
     await collection.add(history.toMap(userId.id!));
   }
 
-  Future<void> deleteItem(String id) async {
+  Future<void> deleteHistory(String id) async {
     final document = _firestore.collection('history').doc(id);
     await document.delete();
   }
@@ -61,31 +58,45 @@ class HistoryRepository {
       'Saindo com alguém',
       'Mais de um estado civil',
       'Não fui informado',
+      'Não lembro'
     ];
   }
 
   Future<List<String>> getRelationshipList() async {
-    return ['Paqueramos', 'Ficamos', 'Namoramos'];
+    return ['Pré-paqueramos', 'Paqueramos', 'Ficamos', 'Namoramos'];
   }
 
   Future<List<String>> getListWhatHappened() async {
     return [
       'Selinho(s)',
       'Beijo(s)',
+      'Amassos',
       'Beijos e amassos',
       'Beijos e sexo oral',
+      'Amassos e sexo oral',
+      'Beijos, amassos e sexo oral',
       'Beijos e sexo vaginal',
+      'Amassos e sexo vaginal',
+      'Beijos, amassos e sexo vaginal',
       'Beijos e sexo anal',
+      'Amassos e sexo anal',
+      'Beijos, amassos e sexo anal',
       'Beijos, sexo vaginal e oral',
+      'Amassos, sexo vaginal e oral',
       'Beijos, sexo vaginal e anal',
+      'Amassos, sexo vaginal e anal',
       'Beijos, sexo oral e anal',
+      'Amassos, sexo oral e anal',
       'Beijos, sexo vaginal, anal e oral',
+      'Amassos, sexo vaginal, anal e oral',
       'Sexo vaginal',
       'Sexo oral',
       'Sexo anal',
       'Sexo vaginal e oral',
       'Sexo vaginal e anal',
+      'Sexo oral e anal',
       'Sexo vaginal, anal e oral',
+      'Não lembro detalhes',
     ];
   }
 
@@ -93,9 +104,8 @@ class HistoryRepository {
     return [
       '1 vez',
       '2 vezes',
-      '3 vezes',
-      'Acima de 3 vezes',
-      'Inúmeras vezes',
+      'Acima de 2 vezes',
+      'Várias vezes',
       'Não lembro',
     ];
   }
@@ -104,8 +114,8 @@ class HistoryRepository {
     return [
       '1 período',
       '2 períodos',
-      '3 períodos',
-      'Acima de 3 períodos',
+      'Acima de 2 períodos',
+      'Vários períodos',
       'Não lembro',
     ];
   }

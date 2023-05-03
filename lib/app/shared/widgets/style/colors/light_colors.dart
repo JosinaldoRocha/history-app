@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'colors_interface.dart';
 
 class LightColors implements ColorsInterface {

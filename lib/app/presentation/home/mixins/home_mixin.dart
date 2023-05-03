@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:my_history_app/app/presentation/authentication/data/models/user_model.dart';
-import '../../authentication/dependencies/dependencies.dart';
+import '../../authentication/providers/authentication_providers.dart';
 import '../../authentication/views/states/delete_user/delete_user_state.dart';
 import '../../authentication/views/states/logout_state/logout_state.dart';
 import '../../authentication/views/states/update_user/update_profile_picture_state.dart';

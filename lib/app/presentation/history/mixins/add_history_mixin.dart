@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:my_history_app/app/presentation/history/data/models/history_model.dart';
 import '../../../shared/widgets/texts/box_text.dart';
-import '../dependencies/dependencies.dart';
+import '../providers/history_providers.dart';
 import '../views/states/add-history-state/add_history_state.dart';
 import '../views/states/add_image/add_image_history_state.dart';
 import '../views/states/edit_history/edit_history_state.dart';
@@ -34,10 +34,10 @@ mixin AddHistoryMixin<T extends ConsumerStatefulWidget> on ConsumerState<T> {
           );
         }
         if (next is FailureAddHistoryState) {
-          showDialog(
-            context: context,
-            builder: (context) => AlertDialog(
-              content: BoxText.body(next.errorMessage),
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              backgroundColor: Colors.red,
+              content: Text(next.errorMessage),
             ),
           );
         }
@@ -51,21 +51,21 @@ mixin AddHistoryMixin<T extends ConsumerStatefulWidget> on ConsumerState<T> {
       (previous, next) {
         if (next is SuccessEditHistoryState) {
           if (history != null) {
-            ref.read(historyProvider.notifier).load(history.userId!);
+            ref.read(historyListProvider.notifier).load(history.userId!);
           }
           Navigator.pop(context);
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
               backgroundColor: Colors.red,
-              content: Text('História editada, com sucesso!'),
+              content: Text('Sua história foi atualizada!'),
             ),
           );
         }
         if (next is FailureEditHistoryState) {
-          showDialog(
-            context: context,
-            builder: (context) => AlertDialog(
-              content: BoxText.body(next.errorMessage),
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              backgroundColor: Colors.red,
+              content: Text(next.errorMessage),
             ),
           );
         }
@@ -75,7 +75,7 @@ mixin AddHistoryMixin<T extends ConsumerStatefulWidget> on ConsumerState<T> {
 
   void listenAddImage() {
     ref.listen<AddImageHistoryState>(
-      addImageProvider,
+      addImageHistoryProvider,
       (previous, next) {
         if (next is FailureAddImageHistoryState) {
           showDialog(

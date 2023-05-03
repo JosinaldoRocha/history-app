@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../shared/widgets/spacing/space_widget.dart';
 import '../../../shared/widgets/texts/box_text.dart';
-import '../../authentication/dependencies/dependencies.dart';
+import '../../authentication/providers/authentication_providers.dart';
 
 class AlertDialogLogoutWidget extends ConsumerWidget {
   const AlertDialogLogoutWidget({super.key});

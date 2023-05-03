@@ -1,12 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:hive/hive.dart';
 import '../models/user_model.dart';
 
 class AuthenticationRepository {
-  final box = Hive.box<UserModel>('users');
-  final boxCurrentUser = Hive.box<UserModel>('currentUser');
   final _auth = FirebaseAuth.instance;
+  final _firestore = FirebaseFirestore.instance;
 
   Future<User?> signIn(String email, String password) async {
     UserCredential userCredential = await _auth.signInWithEmailAndPassword(
@@ -44,7 +42,7 @@ class AuthenticationRepository {
   }
 
   Future<void> saveUser(UserModel user, String userId) async {
-    final collection = FirebaseFirestore.instance.collection('users');
+    final collection = _firestore.collection('users');
     await collection.doc(userId).set(user.toMap(userId));
   }
 
@@ -53,7 +51,6 @@ class AuthenticationRepository {
   }
 
   Future<void> deleteUserData(String id) async {
-    final firestore = FirebaseFirestore.instance;
-    await firestore.collection('users').doc(id).delete();
+    await _firestore.collection('users').doc(id).delete();
   }
 }

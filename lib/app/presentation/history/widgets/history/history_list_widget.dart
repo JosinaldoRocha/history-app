@@ -4,8 +4,8 @@ import 'package:my_history_app/app/presentation/history/widgets/history/history_
 import '../../../../shared/widgets/alert_dialog/alert_dialog_loading_widget.dart';
 import '../../../../shared/widgets/spacing/space_widget.dart';
 import '../../../../shared/widgets/texts/box_text.dart';
-import '../../dependencies/dependencies.dart';
-import '../../views/states/history-list-state/history_state.dart';
+import '../../providers/history_providers.dart';
+import '../../views/states/history-list-state/history_list_state.dart';
 
 class HistoryListWidget extends ConsumerStatefulWidget {
   const HistoryListWidget({
@@ -23,20 +23,21 @@ class _HistoryListWidgetState extends ConsumerState<HistoryListWidget> {
   @override
   void initState() {
     super.initState();
-    Future.microtask(() => ref.read(historyProvider.notifier).load(widget.id));
+    Future.microtask(
+        () => ref.read(historyListProvider.notifier).load(widget.id));
   }
 
   @override
   Widget build(BuildContext context) {
-    final state = ref.watch(historyProvider);
+    final state = ref.watch(historyListProvider);
 
-    if (state is LoadingHistoryState) {
+    if (state is LoadingHistoryListState) {
       return const AlertDialogLoadingWidget();
-    } else if (state is FailureHistoryState) {
+    } else if (state is FailureHistoryListState) {
       return AlertDialog(
         content: BoxText.body(state.errorMessage),
       );
-    } else if (state is SuccessHistoryState) {
+    } else if (state is SuccessHistoryListState) {
       final history = state.data;
       return history.isEmpty
           ? Center(
