@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:my_history_app/app/presentation/authentication/data/models/user_model.dart';
 import '../../../shared/widgets/spacing/space_widget.dart';
 import '../../../shared/widgets/texts/box_text.dart';
 import '../../authentication/dependencies/dependencies.dart';
 
-class AlertDialogLogoutWidget extends ConsumerWidget {
-  const AlertDialogLogoutWidget({super.key});
+class AlertDialogDeleteAccounttWidget extends ConsumerWidget {
+  const AlertDialogDeleteAccounttWidget({
+    required this.user,
+    super.key,
+  });
+  final UserModel user;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -16,7 +21,10 @@ class AlertDialogLogoutWidget extends ConsumerWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              BoxText.body('Sair do aplicativo?'),
+              BoxText.body(
+                'Excluir conta com todos os seus dados?',
+                textAlign: TextAlign.center,
+              ),
               const Space.x5(),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
@@ -32,9 +40,12 @@ class AlertDialogLogoutWidget extends ConsumerWidget {
                   ),
                   TextButton(
                     onPressed: () {
-                      ref.read(logoutProvider.notifier).logout();
+                      ref
+                          .read(deleteUserProvider.notifier)
+                          .deleteUser(user.id!);
+                      Navigator.pop(context);
                     },
-                    child: const Text('SAIR'),
+                    child: const Text('SIM'),
                   ),
                 ],
               )

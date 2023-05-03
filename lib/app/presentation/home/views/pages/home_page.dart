@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:my_history_app/app/presentation/authentication/data/models/user_model.dart';
 import 'package:my_history_app/app/presentation/authentication/dependencies/dependencies.dart';
+import 'package:my_history_app/app/presentation/authentication/views/states/delete_user/delete_user_state.dart';
 import 'package:my_history_app/app/presentation/authentication/views/states/logout_state/logout_state.dart';
 import 'package:my_history_app/app/presentation/home/widgets/home_body_widget.dart';
 import 'package:my_history_app/app/shared/widgets/texts/box_text.dart';
@@ -25,10 +26,35 @@ class _HomePageState extends ConsumerState<HomePage> {
           Navigator.pushReplacementNamed(context, '/');
         }
         if (next is FailureLogoutState) {
-          showDialog(
-            context: context,
-            builder: (context) => AlertDialog(
-              content: BoxText.body(next.errorMessage),
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              backgroundColor: Colors.red,
+              content: Text(next.errorMessage),
+            ),
+          );
+        }
+      },
+    );
+  }
+
+  void deleteUserListen() {
+    ref.listen<DeleteUserState>(
+      deleteUserProvider,
+      (previous, next) {
+        if (next is DeletedUserState) {
+          Navigator.pushReplacementNamed(context, '/');
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              backgroundColor: Colors.red,
+              content: Text('Conta excluída, com sucesso!'),
+            ),
+          );
+        }
+        if (next is NotDeletedUserState) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              backgroundColor: Colors.red,
+              content: Text(next.errorMessage),
             ),
           );
         }
@@ -45,15 +71,15 @@ class _HomePageState extends ConsumerState<HomePage> {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
               backgroundColor: Colors.red,
-              content: Text('Imagem de perfil atualiza, com sucesso!'),
+              content: Text('Sua foto de perfil foi atualizada!'),
             ),
           );
         }
         if (next is FailureUpdateProfilePictureState) {
-          showDialog(
-            context: context,
-            builder: (context) => AlertDialog(
-              content: BoxText.body(next.errorMessage),
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              backgroundColor: Colors.red,
+              content: Text(next.errorMessage),
             ),
           );
         }
@@ -68,6 +94,7 @@ class _HomePageState extends ConsumerState<HomePage> {
 
     logoutListen();
     updateProfilePictureListen();
+    deleteUserListen();
     return Scaffold(
       body: Container(
         decoration: const BoxDecoration(

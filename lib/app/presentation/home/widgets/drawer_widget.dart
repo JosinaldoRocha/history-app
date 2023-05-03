@@ -1,14 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:my_history_app/app/presentation/authentication/dependencies/dependencies.dart';
+import 'package:my_history_app/app/presentation/authentication/views/states/delete_user/delete_user_state.dart';
+import 'package:my_history_app/app/presentation/home/widgets/alert_dialog_delete_account_widget.dart';
 import 'package:my_history_app/app/presentation/home/widgets/alert_dialog_logout_widget.dart';
 import '../../../shared/widgets/spacing/space_widget.dart';
 import '../../../shared/widgets/texts/box_text.dart';
+import '../../authentication/data/models/user_model.dart';
 
 class DrawerWidget extends ConsumerWidget {
-  const DrawerWidget({super.key});
+  const DrawerWidget({
+    required this.user,
+    super.key,
+  });
+  final UserModel user;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final state = ref.watch(deleteUserProvider);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
@@ -22,6 +31,19 @@ class DrawerWidget extends ConsumerWidget {
         const ListTile(
           leading: Text('Sobre'),
           trailing: Icon(Icons.info),
+        ),
+        const Divider(),
+        ListTile(
+          leading: const Text('Excluir conta'),
+          trailing: (state is LoadingDeleteUserState)
+              ? const CircularProgressIndicator()
+              : const Icon(Icons.delete),
+          onTap: () {
+            showDialog(
+              context: context,
+              builder: (context) => AlertDialogDeleteAccounttWidget(user: user),
+            );
+          },
         ),
         const Divider(),
         const Spacer(),

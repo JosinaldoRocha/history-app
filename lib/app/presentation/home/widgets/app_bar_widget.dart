@@ -50,7 +50,7 @@ class AppBarWidget extends ConsumerWidget {
         onPressed: () {
           showModalBottomSheet(
             context: context,
-            builder: (context) => const DrawerWidget(),
+            builder: (context) => DrawerWidget(user: user),
             shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(10.0),

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:my_history_app/app/presentation/authentication/data/repositories/authentication_repository.dart';
+import 'package:my_history_app/app/presentation/authentication/views/states/delete_user/delete_user_state.dart';
+import 'package:my_history_app/app/presentation/authentication/views/states/delete_user/delete_user_state_notifier.dart';
 import 'package:my_history_app/app/presentation/authentication/views/states/sign_in_state/sign_in_state_notifier.dart';
 import 'package:my_history_app/app/presentation/authentication/views/states/recover_password/check_email/check_email_state.dart';
 import 'package:my_history_app/app/presentation/authentication/views/states/recover_password/check_email/check_email_state_notifier.dart';
@@ -60,5 +62,12 @@ final updataProfilePictureProvider = StateNotifierProvider<
     UpdateProfilePictureStateNotifier, UpdateProfilePictureState>(
   (ref) => UpdateProfilePictureStateNotifier(
     userRepository: ref.read(userRepositoryProvider),
+  ),
+);
+
+final deleteUserProvider =
+    StateNotifierProvider<DeleteUserStateNotifier, DeleteUserState>(
+  (ref) => DeleteUserStateNotifier(
+    repository: ref.read(authenticationRepository),
   ),
 );

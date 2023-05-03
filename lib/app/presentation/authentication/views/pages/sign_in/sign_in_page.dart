@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:my_history_app/app/presentation/authentication/dependencies/dependencies.dart';
 import 'package:my_history_app/app/presentation/authentication/views/states/sign_in_state/sign_in_state.dart';
 import 'package:my_history_app/app/presentation/authentication/widgets/text_fild_login_widget.dart';
-import 'package:my_history_app/app/presentation/splash/views/states/authentication_state.dart';
 import 'package:my_history_app/app/shared/widgets/button/button_widget.dart';
 import 'package:my_history_app/app/shared/widgets/spacing/space_widget.dart';
 import 'package:my_history_app/app/shared/widgets/texts/box_text.dart';
@@ -134,7 +133,7 @@ class _SignInPageState extends ConsumerState<SignInPage> {
             color: const Color.fromARGB(255, 3, 90, 240),
           ),
           onPressed: () {
-            Navigator.of(context).pushReplacementNamed('/sign-up');
+            Navigator.pushNamed(context, '/sign-up');
           },
         ),
       ],

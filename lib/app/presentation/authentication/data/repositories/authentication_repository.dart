@@ -47,4 +47,13 @@ class AuthenticationRepository {
     final collection = FirebaseFirestore.instance.collection('users');
     await collection.doc(userId).set(user.toMap(userId));
   }
+
+  Future<void> deleteCurrentUser() async {
+    await _auth.currentUser!.delete();
+  }
+
+  Future<void> deleteUserData(String id) async {
+    final firestore = FirebaseFirestore.instance;
+    await firestore.collection('users').doc(id).delete();
+  }
 }
