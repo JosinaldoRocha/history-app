@@ -32,14 +32,6 @@ class ListWhatHappenedWidget extends ConsumerWidget {
         hintText: 'Selecione uma opção',
         labelText: 'O que rolou durante a relação:',
       );
-      // return DropDownTextFieldWidget(
-      //   controller: controller,
-      //   list: state.data
-      //       .map((e) => DropDownValueModel(name: e, value: e))
-      //       .toList(),
-      //   label: 'O que rolou durante a relação:',
-      //   hintText: 'Selecione uma opção',
-      // );
     } else {
       return Container();
     }

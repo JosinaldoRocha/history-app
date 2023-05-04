@@ -50,9 +50,6 @@ class _AddHistoryPageState extends ConsumerState<AddHistoryPage>
       final civilStatus = SingleValueDropDownController(
           data: DropDownValueModel(
               name: history.civilStatus, value: history.civilStatus));
-      // final whatHappened = SingleValueDropDownController(
-      //     data: DropDownValueModel(
-      //         name: history.whatHappened, value: history.whatHappened));
       final amountTimes = SingleValueDropDownController(
           data: DropDownValueModel(
               name: history.amountTimes, value: history.amountTimes));
