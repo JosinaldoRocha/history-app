@@ -56,6 +56,20 @@ class _DropdownButtonFormFieldWidgetState
                 borderRadius: BorderRadius.circular(10),
               ),
             ),
+            icon: (widget.controller.text.isEmpty)
+                ? const Icon(
+                    Icons.arrow_drop_down,
+                    color: Color.fromARGB(255, 134, 133, 133),
+                  )
+                : GestureDetector(
+                    child: const Icon(
+                      Icons.close,
+                      color: Color.fromARGB(255, 134, 133, 133),
+                    ),
+                    onTap: () => setState(() {
+                      widget.controller.clear();
+                    }),
+                  ),
             borderRadius: BorderRadius.circular(10),
             value: (widget.controller.text.isEmpty)
                 ? null
