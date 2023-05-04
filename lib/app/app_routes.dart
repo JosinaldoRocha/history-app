@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_history_app/app/presentation/about/views/pages/about_page.dart';
 import 'package:my_history_app/app/presentation/authentication/views/pages/recover_password/recover_password_page.dart';
 import 'package:my_history_app/app/presentation/authentication/views/pages/sign_up/sign_up_page.dart';
 import 'package:my_history_app/app/presentation/authentication/views/pages/sent_email/sent_email_page.dart';
@@ -24,6 +25,7 @@ class AppRoutes {
             ),
         '/recover-password': (context) => const RecoverPasswordPage(),
         '/sent-email': (context) => const SentEmailPage(),
+        '/about-page': (context) => const AboutPage(),
       };
 
   static dynamic getArgs(context) => ModalRoute.of(context)?.settings.arguments;

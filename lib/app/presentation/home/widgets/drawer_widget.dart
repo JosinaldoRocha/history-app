@@ -28,9 +28,12 @@ class DrawerWidget extends ConsumerWidget {
           onTap: () => Navigator.pop(context),
         ),
         const Divider(),
-        const ListTile(
-          leading: Text('Sobre'),
-          trailing: Icon(Icons.info),
+        ListTile(
+          leading: const Text('Sobre'),
+          trailing: const Icon(Icons.info),
+          onTap: () {
+            Navigator.pushNamed(context, '/about-page');
+          },
         ),
         const Divider(),
         ListTile(
