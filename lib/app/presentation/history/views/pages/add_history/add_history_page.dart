@@ -50,9 +50,9 @@ class _AddHistoryPageState extends ConsumerState<AddHistoryPage>
       final civilStatus = SingleValueDropDownController(
           data: DropDownValueModel(
               name: history.civilStatus, value: history.civilStatus));
-      final whatHappened = SingleValueDropDownController(
-          data: DropDownValueModel(
-              name: history.whatHappened, value: history.whatHappened));
+      // final whatHappened = SingleValueDropDownController(
+      //     data: DropDownValueModel(
+      //         name: history.whatHappened, value: history.whatHappened));
       final amountTimes = SingleValueDropDownController(
           data: DropDownValueModel(
               name: history.amountTimes, value: history.amountTimes));
@@ -64,7 +64,7 @@ class _AddHistoryPageState extends ConsumerState<AddHistoryPage>
       referenceController.text = history.reference;
       relationshipController = relationship;
       civilStatusTypeController = civilStatus;
-      whatHappenedController = whatHappened;
+      whatHappenedController.text = history.whatHappened;
       amountTimesController = amountTimes;
       amountPeriodsController = amountPeriods;
       image = history.image;
@@ -185,8 +185,7 @@ class _AddHistoryPageState extends ConsumerState<AddHistoryPage>
                               civilStatusTypeController.dropDownValue!.name,
                           relationship:
                               relationshipController.dropDownValue!.name,
-                          whatHappened:
-                              whatHappenedController.dropDownValue!.name,
+                          whatHappened: whatHappenedController.text,
                           amountTimes:
                               amountTimesController.dropDownValue!.name,
                           amountPeriod:
@@ -209,8 +208,7 @@ class _AddHistoryPageState extends ConsumerState<AddHistoryPage>
                               civilStatusTypeController.dropDownValue!.name,
                           relationship:
                               relationshipController.dropDownValue!.name,
-                          whatHappened:
-                              whatHappenedController.dropDownValue!.name,
+                          whatHappened: whatHappenedController.text,
                           amountTimes:
                               amountTimesController.dropDownValue!.name,
                           amountPeriod:

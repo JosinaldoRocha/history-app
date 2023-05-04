@@ -49,33 +49,23 @@ class _DropDownTextFieldWidgetState extends State<DropDownTextFieldWidget> {
                 color: Color(0xffc1bcbc),
                 fontSize: 18,
               ),
-              enabledBorder: const OutlineInputBorder(
-                borderSide: BorderSide(
-                  color: Colors.black45,
-                ),
+              enabledBorder: OutlineInputBorder(
+                borderSide: const BorderSide(color: Colors.black45),
+                borderRadius: BorderRadius.circular(10),
               ),
-              focusedBorder: const OutlineInputBorder(
-                borderSide: BorderSide(
-                  color: Colors.grey,
-                ),
+              focusedBorder: OutlineInputBorder(
+                borderSide: const BorderSide(color: Colors.grey),
+                borderRadius: BorderRadius.circular(10),
               ),
-              errorBorder: const OutlineInputBorder(
-                borderSide: BorderSide(
-                  color: Colors.grey,
-                ),
+              errorBorder: OutlineInputBorder(
+                borderSide: const BorderSide(color: Colors.grey),
+                borderRadius: BorderRadius.circular(10),
               ),
             ),
             readOnly: true,
             controller: widget.controller,
             clearOption: true,
             autovalidateMode: AutovalidateMode.onUserInteraction,
-            // validator: (value) {
-            //   if (value == null || value.isEmpty) {
-            //     return "Required field";
-            //   } else {
-            //     return null;
-            //   }
-            // },
             dropDownItemCount: widget.list.length,
             dropDownList: widget.list,
             onChanged: widget.onChanged,

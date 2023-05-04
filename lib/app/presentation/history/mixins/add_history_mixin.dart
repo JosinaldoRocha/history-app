@@ -14,7 +14,7 @@ mixin AddHistoryMixin<T extends ConsumerStatefulWidget> on ConsumerState<T> {
   final referenceController = TextEditingController();
   var relationshipController = SingleValueDropDownController();
   var civilStatusTypeController = SingleValueDropDownController();
-  var whatHappenedController = SingleValueDropDownController();
+  var whatHappenedController = TextEditingController();
   var amountTimesController = SingleValueDropDownController();
   var amountPeriodsController = SingleValueDropDownController();
   final formKey = GlobalKey<FormState>();
