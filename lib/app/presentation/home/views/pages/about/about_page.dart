@@ -48,7 +48,7 @@ class AboutPage extends StatelessWidget {
               ),
               const Space.x2(),
               const Text(
-                'Versão do aplicativo: 1.0.0',
+                'Versão do aplicativo: 1.0.0+1',
               ),
             ],
           ),
