@@ -5,6 +5,7 @@ import 'package:my_history_app/app/presentation/authentication/views/states/dele
 import 'package:my_history_app/app/presentation/authentication/views/states/sign_in_state/sign_in_state_notifier.dart';
 import 'package:my_history_app/app/presentation/authentication/views/states/sign_in_state/sign_in_state.dart';
 import 'package:my_history_app/app/presentation/authentication/views/states/update_user/update_profile_picture_state.dart';
+import 'package:my_history_app/app/presentation/history/data/repositories/history_repository.dart';
 import '../data/repositories/user_repository.dart';
 import '../views/states/recover_password/recover_password_state.dart';
 import '../views/states/recover_password/recover_password_state_notifier.dart';
@@ -20,6 +21,10 @@ final authRepositoryProvider = Provider(
 
 final userRepositoryProvider = Provider(
   (ref) => UserRepository(),
+);
+
+final historyRepositoryProvider = Provider(
+  (ref) => HistoryRepository(),
 );
 
 final signUpProvider = StateNotifierProvider<SignUpStateNotifier, SignUpState>(
@@ -59,5 +64,6 @@ final deleteUserProvider =
     StateNotifierProvider<DeleteUserStateNotifier, DeleteUserState>(
   (ref) => DeleteUserStateNotifier(
     repository: ref.read(authRepositoryProvider),
+    historyRepository: ref.read(historyRepositoryProvider),
   ),
 );

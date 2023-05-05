@@ -50,6 +50,15 @@ class HistoryRepository {
     return imageUrl;
   }
 
+  Future<void> deleteUserHistory(String id) async {
+    final getDocuments = _firestore.collection('history');
+    final document = await getDocuments.where('user-id', isEqualTo: id).get();
+
+    for (var doc in document.docs) {
+      await doc.reference.delete();
+    }
+  }
+
   Future<List<String>> getCivilStatusList() async {
     return [
       'Solteira',
