@@ -40,7 +40,7 @@ class _SplashPageState extends ConsumerState<SplashPage> {
 
   @override
   Widget build(BuildContext context) {
-    String image = 'assets/images/logo1.png';
+    String image = 'assets/images/logo5.png';
     _listen();
 
     return Scaffold(
