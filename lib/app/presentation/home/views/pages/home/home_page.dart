@@ -4,7 +4,7 @@ import 'package:my_history_app/app/presentation/authentication/data/models/user_
 import 'package:my_history_app/app/presentation/authentication/providers/authentication_providers.dart';
 import 'package:my_history_app/app/presentation/home/mixins/home_mixin.dart';
 import 'package:my_history_app/app/presentation/home/widgets/home_body_widget.dart';
-import '../../widgets/app_bar_widget.dart';
+import '../../../widgets/app_bar_widget.dart';
 
 class HomePage extends ConsumerStatefulWidget {
   const HomePage({super.key, required this.args});
