@@ -17,7 +17,7 @@ class AppThemes {
         dividerColor: colors.kcGrey,
         highlightColor: const Color(0x40cccccc),
         splashColor: const Color(0x40cccccc),
-        selectedRowColor: const Color(0xfff5f5f5),
+        //selectedRowColor: const Color(0xfff5f5f5),
         unselectedWidgetColor: colors.kcLightGrey,
         disabledColor: colors.kcMediumGrey,
         toggleableActiveColor: colors.kcSecondary,
