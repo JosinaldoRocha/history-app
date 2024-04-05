@@ -7,9 +7,9 @@ import '../../../../shared/widgets/texts/box_text.dart';
 
 class HistoryReportWidget extends ConsumerWidget {
   const HistoryReportWidget({
-    Key? key,
+    super.key,
     required this.history,
-  }) : super(key: key);
+  });
   final HistoryModel history;
 
   @override

@@ -3,7 +3,7 @@ import 'package:my_history_app/app/shared/widgets/texts/box_text.dart';
 import '../../../../../shared/widgets/spacing/space_widget.dart';
 
 class AboutPage extends StatelessWidget {
-  const AboutPage({Key? key}) : super(key: key);
+  const AboutPage({super.key});
 
   @override
   Widget build(BuildContext context) {

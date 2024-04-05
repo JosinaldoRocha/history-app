@@ -4,13 +4,13 @@ import 'package:my_history_app/app/shared/widgets/texts/box_text.dart';
 
 class DropDownTextFieldWidget extends StatefulWidget {
   const DropDownTextFieldWidget({
-    Key? key,
+    super.key,
     required this.controller,
     required this.list,
     required this.label,
     required this.hintText,
     this.onChanged,
-  }) : super(key: key);
+  });
   final SingleValueDropDownController controller;
   final List<DropDownValueModel> list;
   final String label;

@@ -3,11 +3,11 @@ import 'package:my_history_app/app/shared/widgets/texts/box_text.dart';
 
 class HomeButtonWidget extends StatelessWidget {
   const HomeButtonWidget({
-    Key? key,
+    super.key,
     required this.title,
     required this.icon,
     required this.onTap,
-  }) : super(key: key);
+  });
   final String title;
   final IconData icon;
   final Function() onTap;

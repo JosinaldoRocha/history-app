@@ -3,12 +3,12 @@ import '../texts/box_text.dart';
 
 class DropdownButtonFormFieldWidget extends StatefulWidget {
   const DropdownButtonFormFieldWidget({
-    Key? key,
+    super.key,
     required this.items,
     required this.controller,
     required this.hintText,
     required this.labelText,
-  }) : super(key: key);
+  });
   final List<String> items;
   final TextEditingController controller;
   final String hintText;

@@ -4,7 +4,7 @@ import 'package:my_history_app/app/shared/widgets/texts/box_text.dart';
 
 class TextFieldWidget extends StatelessWidget {
   const TextFieldWidget({
-    Key? key,
+    super.key,
     required this.controller,
     required this.label,
     required this.hintText,
@@ -14,7 +14,7 @@ class TextFieldWidget extends StatelessWidget {
     this.validator,
     this.keyboardType = TextInputType.text,
     this.onTap,
-  }) : super(key: key);
+  });
 
   final TextEditingController controller;
   final String label;

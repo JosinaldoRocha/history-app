@@ -30,7 +30,7 @@ class ButtonWidget extends StatelessWidget {
   /// [color] is a background color of button
 
   const ButtonWidget({
-    Key? key,
+    super.key,
     required this.title,
     this.disabled = false,
     this.isLoading = false,
@@ -40,11 +40,10 @@ class ButtonWidget extends StatelessWidget {
     this.color,
     this.textColor = Colors.white,
     this.width,
-  })  : outline = false,
-        super(key: key);
+  }) : outline = false;
 
   const ButtonWidget.outline({
-    Key? key,
+    super.key,
     required this.title,
     this.onTap,
     this.leading,
@@ -54,8 +53,7 @@ class ButtonWidget extends StatelessWidget {
     this.width,
   })  : disabled = false,
         isLoading = false,
-        outline = true,
-        super(key: key);
+        outline = true;
 
   @override
   Widget build(BuildContext context) {
@@ -71,12 +69,12 @@ class ButtonWidget extends StatelessWidget {
             ),
       color: color ?? Theme.of(context).primaryColor,
       disabledColor: Theme.of(context).primaryColor,
+      onPressed: !isLoading ? onTap : null,
       child: !isLoading
           ? _buildContent()
           : const CircularProgressIndicator(
               color: Colors.white,
             ),
-      onPressed: !isLoading ? onTap : null,
     );
   }
 

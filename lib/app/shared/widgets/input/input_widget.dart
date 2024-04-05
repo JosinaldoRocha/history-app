@@ -61,8 +61,8 @@ class InputWidget extends StatelessWidget {
     this.autoValidate,
     this.align = TextAlign.left,
     this.hasPadding = false,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
   @override
   Widget build(BuildContext context) {
     return TextFormField(
