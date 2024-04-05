@@ -3,11 +3,11 @@ import '../../../../shared/widgets/texts/box_text.dart';
 
 class EditItemContentWidget extends StatelessWidget {
   const EditItemContentWidget({
-    Key? key,
+    super.key,
     required this.title,
     required this.textField,
     required this.widgetFunction,
-  }) : super(key: key);
+  });
 
   final String title;
   final Widget textField;

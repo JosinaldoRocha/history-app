@@ -11,27 +11,22 @@ class AppThemes {
         primaryColorDark: Colors.black,
         canvasColor: const Color(0xff303030),
         scaffoldBackgroundColor: colors.kcScafoldBackground,
-        bottomAppBarColor: colors.kcCardBackground,
         cardColor: colors.kcCardBackground,
         fontFamily: GoogleFonts.lato().fontFamily,
         dividerColor: colors.kcGrey,
         highlightColor: const Color(0x40cccccc),
         splashColor: const Color(0x40cccccc),
-        //selectedRowColor: const Color(0xfff5f5f5),
         unselectedWidgetColor: colors.kcLightGrey,
         disabledColor: colors.kcMediumGrey,
-        toggleableActiveColor: colors.kcSecondary,
         appBarTheme: AppBarTheme(
           backgroundColor: colors.kcPrimary,
           elevation: 0,
           titleTextStyle: const TextStyle(color: Colors.white),
         ),
         secondaryHeaderColor: colors.kcSecondary,
-        backgroundColor: colors.kcScafoldBackground,
         dialogBackgroundColor: colors.kcCardBackground,
         indicatorColor: LightColors().kcBlue,
         hintColor: const Color(0x80ffffff),
-        errorColor: colors.kcError,
         outlinedButtonTheme: OutlinedButtonThemeData(
           style: ButtonStyle(
             shape: MaterialStateProperty.all(
@@ -417,8 +412,54 @@ class AppThemes {
           selectionColor: Color(0xffff5722),
           selectionHandleColor: Color(0xffff5722),
         ),
+        checkboxTheme: CheckboxThemeData(
+          fillColor: MaterialStateProperty.resolveWith<Color?>(
+              (Set<MaterialState> states) {
+            if (states.contains(MaterialState.disabled)) {
+              return null;
+            }
+            if (states.contains(MaterialState.selected)) {
+              return colors.kcSecondary;
+            }
+            return null;
+          }),
+        ),
+        radioTheme: RadioThemeData(
+          fillColor: MaterialStateProperty.resolveWith<Color?>(
+              (Set<MaterialState> states) {
+            if (states.contains(MaterialState.disabled)) {
+              return null;
+            }
+            if (states.contains(MaterialState.selected)) {
+              return colors.kcSecondary;
+            }
+            return null;
+          }),
+        ),
+        switchTheme: SwitchThemeData(
+          thumbColor: MaterialStateProperty.resolveWith<Color?>(
+              (Set<MaterialState> states) {
+            if (states.contains(MaterialState.disabled)) {
+              return null;
+            }
+            if (states.contains(MaterialState.selected)) {
+              return colors.kcSecondary;
+            }
+            return null;
+          }),
+          trackColor: MaterialStateProperty.resolveWith<Color?>(
+              (Set<MaterialState> states) {
+            if (states.contains(MaterialState.disabled)) {
+              return null;
+            }
+            if (states.contains(MaterialState.selected)) {
+              return colors.kcSecondary;
+            }
+            return null;
+          }),
+        ),
         colorScheme: ColorScheme.fromSwatch(
-            primarySwatch: const MaterialColor(
+                primarySwatch: const MaterialColor(
           4280361249,
           {
             50: Color(0xfff2f2f2),
@@ -432,6 +473,10 @@ class AppThemes {
             800: Color(0xff333333),
             900: Color(0xff191919)
           },
-        )).copyWith(secondary: Colors.white),
+        ))
+            .copyWith(secondary: Colors.white)
+            .copyWith(background: colors.kcScafoldBackground)
+            .copyWith(error: colors.kcError),
+        bottomAppBarTheme: BottomAppBarTheme(color: colors.kcCardBackground),
       );
 }

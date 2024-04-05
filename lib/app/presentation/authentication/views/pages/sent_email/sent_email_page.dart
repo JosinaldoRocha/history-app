@@ -5,7 +5,7 @@ import '../../../../../shared/widgets/spacing/space_widget.dart';
 import '../../../../../shared/widgets/texts/box_text.dart';
 
 class SentEmailPage extends StatelessWidget {
-  const SentEmailPage({Key? key}) : super(key: key);
+  const SentEmailPage({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -13,6 +13,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           primarySwatch: MyTheme.myColor,
+          useMaterial3: false,
         ),
         routes: AppRoutes.all,
       ),

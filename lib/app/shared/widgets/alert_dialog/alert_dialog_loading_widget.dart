@@ -1,22 +1,30 @@
 import 'package:flutter/material.dart';
 
 class AlertDialogLoadingWidget extends StatelessWidget {
-  const AlertDialogLoadingWidget({Key? key}) : super(key: key);
+  const AlertDialogLoadingWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return AlertDialog(
+    return const AlertDialog(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(100)),
+      ),
+      shadowColor: Colors.white,
       actions: [
-        Center(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
-                Text('Carregando...'),
-                CircularProgressIndicator(),
-              ],
-            ),
+        Padding(
+          padding: EdgeInsets.symmetric(
+            horizontal: 10,
+            vertical: 5,
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'Carregando...',
+                style: TextStyle(fontSize: 16),
+              ),
+              CircularProgressIndicator(),
+            ],
           ),
         ),
       ],

@@ -29,25 +29,28 @@ class _HomePageState extends ConsumerState<HomePage> with HomeMixin {
           image: DecorationImage(
             image: AssetImage('assets/images/book.jpg'),
             fit: BoxFit.cover,
-            opacity: 1.1,
+            opacity: 0.1,
           ),
         ),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(
-            vertical: 40,
-            horizontal: 10,
-          ),
-          child: Column(
-            children: [
-              AppBarWidget(
-                updateProfilePictureState: updateProfilePictureState,
-                user: user,
+        child: Column(
+          children: [
+            AppBarWidget(
+              updateProfilePictureState: updateProfilePictureState,
+              user: user,
+            ),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 24),
+                child: Column(
+                  children: [
+                    const Spacer(),
+                    HomeBodyWidget(user: user),
+                    const Spacer(),
+                  ],
+                ),
               ),
-              const Spacer(),
-              HomeBodyWidget(user: user),
-              const Spacer(),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

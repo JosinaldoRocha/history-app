@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 
 class EyePasswordWidget extends StatelessWidget {
   const EyePasswordWidget({
-    Key? key,
+    super.key,
     this.isObscure = false,
     required this.onChanged,
-  }) : super(key: key);
+  });
 
   final bool isObscure;
   final Function() onChanged;
